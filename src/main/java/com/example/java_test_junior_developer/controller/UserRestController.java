@@ -1,10 +1,8 @@
 package com.example.java_test_junior_developer.controller;
 
 import com.example.java_test_junior_developer.entity.User;
-import com.example.java_test_junior_developer.repository.UserRepository;
 import com.example.java_test_junior_developer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
