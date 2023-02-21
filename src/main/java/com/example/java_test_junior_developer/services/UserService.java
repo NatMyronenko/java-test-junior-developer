@@ -1,6 +1,6 @@
-package com.example.java_test_junior_developer.service;
+package com.example.java_test_junior_developer.services;
 
-import com.example.java_test_junior_developer.entity.User;
+import com.example.java_test_junior_developer.model.User;
 
 import java.util.List;
 

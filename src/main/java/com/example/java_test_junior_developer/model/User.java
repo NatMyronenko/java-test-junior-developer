@@ -1,4 +1,4 @@
-package com.example.java_test_junior_developer.entity;
+package com.example.java_test_junior_developer.model;
 
 import jakarta.persistence.*;
 
