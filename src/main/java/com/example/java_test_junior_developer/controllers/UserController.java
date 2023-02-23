@@ -3,12 +3,9 @@ package com.example.java_test_junior_developer.controllers;
 import com.example.java_test_junior_developer.model.User;
 import com.example.java_test_junior_developer.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,14 +13,23 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/api")
+    @GetMapping("/main")
     public String api(@RequestParam(name="name", required=false, defaultValue="Natalia") String name, Model model) {
         model.addAttribute("name", name);
-        return "api";
+        //TODO добавить сколько раз был пройден тест
+        return "main";
     }
-    @GetMapping("/index")
-    public String index(Model model){
-        return "index";
+
+    @GetMapping("/last")
+    public String lastPage(Model model){
+        //TODO add users data name , result of test and bals
+        return "last";
+    }
+    @GetMapping("/main/new_user")
+    public String addNewUser(Model model){
+      //  Iterable<User> users = userService.getAllUsers();
+      //  model.addAttribute("users",users);
+        return "new_user";
     }
 
 //    @GetMapping("/users")
