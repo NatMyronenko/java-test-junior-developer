@@ -2,6 +2,7 @@ package com.example.java_test_junior_developer.controllers;
 
 import com.example.java_test_junior_developer.model.User;
 import com.example.java_test_junior_developer.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     @GetMapping("/api")
     public String api(@RequestParam(name="name", required=false, defaultValue="Natalia") String name, Model model) {
@@ -23,6 +25,7 @@ public class UserController {
     public String index(Model model){
         return "index";
     }
+
 //    @GetMapping("/users")
 //    public List<User> showAllUsers(){
 //        List<User> users = userService.getAllUsers();
