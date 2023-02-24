@@ -19,7 +19,8 @@ public class UserController {
 
     //  1 page
     @GetMapping("/ask-details")
-    public String askUserDetails() {
+    public String askUserDetails(Model model) {
+        model.addAttribute("user", new User());
         return "ask-details";
     }
 // 2 page
@@ -33,22 +34,21 @@ public class UserController {
 //  last page
 //TODO add users data name,surname , result of test and bals
 
-    //    @GetMapping("/last")
-    //    public String lastPage(HttpServletRequest request, Model model) {
-    //    String userName = request.getParameter("userName");
-    //     String userSurname= request.getParameter("userSurname");
-    //     userName = "Пан(i)" + userName + userSurname;
-    //     model.addAttribute("nameAttribute",userName);
-    //      model.addAttribute("bals",getBals);
-    //      return "last";
     @GetMapping("/last")
-    public String lastPage(@RequestParam("userName") String userName, @RequestParam("userSurname")
-    String userSurname, Model model) {
+    public String lastPage(HttpServletRequest request, Model model) {
+        String userName = request.getParameter("userName");
+        String userSurname = request.getParameter("userSurname");
         userName = "Пан(i)" + userName + userSurname;
         model.addAttribute("nameAttribute", userName);
+        //     model.addAttribute("bals",getBals);
         return "last";
+//    @GetMapping("/last")
+//    public String lastPage(@RequestParam("userName") String userName, @RequestParam("userSurname")
+//    String userSurname, Model model) {
+//        userName = "Пан(i)" + userName + userSurname;
+//        model.addAttribute("nameAttribute", userName);
+//        return "last";
     }
-
 
     // page for admin
     @GetMapping("/users")
