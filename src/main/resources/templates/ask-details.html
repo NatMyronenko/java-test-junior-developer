@@ -25,7 +25,7 @@
 <!--</body>-->
 <!--</html>-->
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
 <head>
     <title th:text="${name}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -46,17 +46,15 @@
             <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
             </nav>
         </div>
-        <!--        <div class="container mt-5">-->
-        <!--            <h1>Конец теста</h1>-->
         <div class="h-100 p-5 bg-light border rounded-3">
-            <h2>Введите пожалуйста свои данные!</h2>
-            <form action="main" modelAttribute="user">
-                Name  <input path="name" placeholder="Введите имя"/>
+            <h2>Будь ласка, введіть Вашi дані!</h2>
+            <form action="last" modelAttribute="user">
+                Name  <input path="name" placeholder="Введiть iм'я"/>
                 <br><br>
-                Surname  <input path="surname" placeholder="Введите фамилию"/>
+                Surname  <input path="surname" placeholder="Введiть прiзвище"/>
                 <br><br>
             </form>
-            <a class="btn btn-outline-secondary" href="/java-test/main">Далее</a>
+            <a class="btn btn-outline-secondary" href="/java-test/main">Далi</a>
 
         </div>
     </header>

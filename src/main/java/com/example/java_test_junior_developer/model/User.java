@@ -21,14 +21,19 @@ public class User {
         @Column(name = "bals")
         private int bals;
 
+        private String languages;
+        private String answer;
+
     public User() {
     }
 
-    public User(int id, String name, String surname, int bals) {
+    public User(int id, String name, String surname, int bals,String languages,String answer) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.bals = bals;
+        this.languages = languages;
+        this.answer = answer;
     }
 
     public int getId() {
@@ -61,5 +66,31 @@ public class User {
 
     public void setBals(int bals) {
         this.bals = bals;
+    }
+
+    public String getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(String languages) {
+        this.languages = languages;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", bals=" + bals +
+                '}';
     }
 }

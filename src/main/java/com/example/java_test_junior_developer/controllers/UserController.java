@@ -27,7 +27,6 @@ public class UserController {
 
     @GetMapping("/main")
     public String api(Model model) {
-        //   model.addAttribute("name", name);
         //TODO добавить сколько раз был пройден тест
         return "main";
     }
@@ -44,6 +43,10 @@ public class UserController {
 //        return "last";
     @GetMapping("/last")
     public String lastPage(@ModelAttribute("user") User user) {
+//        String name = user.getName();
+//        user.setName("Mr "+ name);
+//        String surname = user.getSurname();
+//        user.setSurname(surname + ".");;
         return "last";
     }
 
