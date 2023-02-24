@@ -34,20 +34,17 @@ public class UserController {
 //  last page
 //TODO add users data name,surname , result of test and bals
 
-    @GetMapping("/last")
-    public String lastPage(HttpServletRequest request, Model model) {
-        String userName = request.getParameter("userName");
-        String userSurname = request.getParameter("userSurname");
-        userName = "Пан(i)" + userName + userSurname;
-        model.addAttribute("nameAttribute", userName);
-        //     model.addAttribute("bals",getBals);
-        return "last";
 //    @GetMapping("/last")
-//    public String lastPage(@RequestParam("userName") String userName, @RequestParam("userSurname")
-//    String userSurname, Model model) {
+//    public String lastPage(HttpServletRequest request, Model model) {
+//        String userName = request.getParameter("userName");
+//        String userSurname = request.getParameter("userSurname");
 //        userName = "Пан(i)" + userName + userSurname;
 //        model.addAttribute("nameAttribute", userName);
+//        //     model.addAttribute("bals",getBals);
 //        return "last";
+    @GetMapping("/last")
+    public String lastPage(@ModelAttribute("user") User user) {
+        return "last";
     }
 
     // page for admin

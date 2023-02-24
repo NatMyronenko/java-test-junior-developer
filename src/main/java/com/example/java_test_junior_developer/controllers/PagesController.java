@@ -3,13 +3,12 @@ package com.example.java_test_junior_developer.controllers;
 import ch.qos.logback.core.model.Model;
 import com.example.java_test_junior_developer.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class TestController {
+public class PagesController {
 
 
     private  final UserRepository userRepository;
