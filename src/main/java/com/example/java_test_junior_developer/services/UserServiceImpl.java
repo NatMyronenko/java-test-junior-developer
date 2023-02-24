@@ -5,6 +5,7 @@ import com.example.java_test_junior_developer.repo.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +14,15 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private  final  UserRepository userRepository;
+    private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+
 
     @Override
     public void saveUser(User user) {
