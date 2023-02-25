@@ -1,8 +1,7 @@
 package com.example.java_test_junior_developer.controllers;
 
-import com.example.java_test_junior_developer.model.User;
+import com.example.java_test_junior_developer.models.User;
 import com.example.java_test_junior_developer.services.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

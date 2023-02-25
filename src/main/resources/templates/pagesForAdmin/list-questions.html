@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<hr><h1>List of all questions</h1><hr>
+<h4>page visible only for admin</h4>
+<#list questions as question>
+    <div>
+        <p><b>${question.title}</b> ${question.description} |<a href="/question/${question.id}">детальнiше</a> </p>
+    </div>
+</#list>
+<hr>
+<h3> створити нове питання</h3>
+<form action="/question/create" method="post">
+    Назва питання: <input type="text", name="title"/><br><br>
+    Опис питання: <input type="text", name="description"/><br><br>
+    <input type="submit" value="Додати питання"/>
+
+</form>
+</body>
+</html>
