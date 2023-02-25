@@ -20,6 +20,9 @@ public class Question {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "answer")
+    private boolean answer;
+
     @Column(name = "bal")
     private int bal;
 

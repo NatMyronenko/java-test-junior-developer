@@ -21,11 +21,11 @@ public class User {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "bals")
-    private int bals;
+    @Column(name = "totalBals")
+    private int totalBals;
 
     private String languages;
-    private String answer;
+
 
     public User() {
 
