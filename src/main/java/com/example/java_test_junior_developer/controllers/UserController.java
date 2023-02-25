@@ -1,6 +1,5 @@
 package com.example.java_test_junior_developer.controllers;
 
-import com.example.java_test_junior_developer.models.Question;
 import com.example.java_test_junior_developer.models.User;
 import com.example.java_test_junior_developer.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +26,7 @@ public class UserController {
         //TODO добавить сколько раз был пройден тест
         return "main";
     }
+
     @PostMapping("/user/create")
     public String createUser(User user) {
         userService.saveUser(user);
@@ -35,7 +35,6 @@ public class UserController {
 
     @GetMapping("/last")
     public String lastPage(@ModelAttribute("user") User user) {
-        ;
         return "last";
     }
 
