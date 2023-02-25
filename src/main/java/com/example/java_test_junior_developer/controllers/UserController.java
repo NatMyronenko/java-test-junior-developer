@@ -32,7 +32,7 @@ public class UserController {
 //  last page
 //TODO add users data name,surname , result of test and bals
 
-//    @GetMapping("/last")
+    //    @GetMapping("/last")
 //    public String lastPage(HttpServletRequest request, Model model) {
 //        String userName = request.getParameter("userName");
 //        String userSurname = request.getParameter("userSurname");
@@ -56,52 +56,4 @@ public class UserController {
         model.addAttribute("allUsers", showAllUsers);
         return "users";
     }
-
-//
-//    @GetMapping("/main/new_user")
-//    public String addNewUser(Model model) {
-//        //  Iterable<User> users = userService.getAllUsers();
-//        //  model.addAttribute("users",users);
-//        return "new_user";
-//    }
-
-//    @GetMapping("/show-details")
-//    public String showUserDetails(){
-//        return "show-user-details";
-//    }
 }
-//@RestController
-//@RequestMapping("/api")
-//public class UserRestController {
-//    @Autowired
-//    private UserService userService;
-//
-//    @GetMapping("/users")
-//    public List<User> showAllUsers(){
-//        List<User> users = userService.getAllUsers();
-//        return users;
-//    }
-//    @PostMapping("/users")
-//    public User addNewUser(@RequestBody User user) {
-//        userService.saveUser(user);
-//        return user;
-//    }
-//    @PutMapping("/users")
-//    public User updateUser(@RequestBody User user) {
-//        userService.saveUser(user);
-//        return user;
-//    }
-//
-//    @DeleteMapping("/users/{id}")
-//    public String deleteUser(@PathVariable int id) {
-//        userService.deleteUser(id);
-//        return "Employee with ID =" + id + "  was deleted";
-//    }
-//    //------------------
-////    @PutMapping("/page/{page}")
-////    public String User updateBals(@RequestBody User bals){
-////        userService.saveUser(bals);
-////        return "page_2";
-//
-//
-//}
