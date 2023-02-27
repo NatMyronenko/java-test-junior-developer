@@ -21,7 +21,13 @@ public class Question {
     private String description;
 
     @Column(name = "answer")
-    private boolean answer;
+    private boolean answer1;
+
+    @Column(name = "answer2")
+    private boolean answer2;
+
+    @Column(name = "answer3")
+    private boolean answer3;
 
     @Column(name = "bal")
     private int bal;
