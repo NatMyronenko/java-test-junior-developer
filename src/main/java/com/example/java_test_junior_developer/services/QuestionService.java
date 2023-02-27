@@ -11,7 +11,7 @@ public class QuestionService {
     private List<Question> questions = new  ArrayList();
     private long ID =0;
     {
-        questions.add(new Question(++ID,"Що таке полiморфiзм?","саме питання",true,1));
+        questions.add(new Question(++ID,"Tom","саме питання",true,1));
         questions.add(new Question(++ID,"Що таке перегрузка?","саме питання",true,1));
     }
  //получение списка всех вопросов

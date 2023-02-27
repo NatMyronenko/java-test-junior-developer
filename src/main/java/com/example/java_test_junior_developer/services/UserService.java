@@ -1,23 +1,38 @@
 package com.example.java_test_junior_developer.services;
 
-import com.example.java_test_junior_developer.models.User;
 
+import com.example.java_test_junior_developer.models.User;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public interface UserService {
 
-    /**
-     * This function returns a list of all users.
-     *
-     * @return A list of all users in the database.
-     */
-    List<User> getAllUsers();
+@Service
+public class UserService  {
 
-    void saveUser(User user);
-
-    User getUser(int id);
-
-    void deleteUser(int id);
-
-
+    private List<User> users = new ArrayList<>();
+    private long ID =0;
+    {
+        users.add(new User(++ID,"Tom","Ivanov",80));
+        users.add(new User(++ID,"Ivan","Karpenko",90));
+    }
+    //получение списка всех вопросов
+    public List<User> listUsers(){
+        return users ;
+    }
+    public void saveUser(User user){
+        user.setId(++ID);
+        users.add(user);
+    }
+//    public void deleteUsers(Long id){
+//        users.removeIf(question -> question.getId().equals(id));
+//    }
+//
+//    public User getUserById(Long id) {
+//        for (User users : users) {
+//            if (users.getId().equals(id)) return users;
+//        }
+//        return null;
+ //   }
 }
