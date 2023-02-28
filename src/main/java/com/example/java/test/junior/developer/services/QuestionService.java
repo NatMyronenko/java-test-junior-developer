@@ -1,6 +1,6 @@
-package com.example.java_test_junior_developer.services;
+package com.example.java.test.junior.developer.services;
 
-import com.example.java_test_junior_developer.models.Question;
+import com.example.java.test.junior.developer.models.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

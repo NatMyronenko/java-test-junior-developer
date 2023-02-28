@@ -1,7 +1,7 @@
-package com.example.java_test_junior_developer.controllers;
+package com.example.java.test.junior.developer.controllers;
 
-import com.example.java_test_junior_developer.models.User;
-import com.example.java_test_junior_developer.services.UserService;
+import com.example.java.test.junior.developer.models.User;
+import com.example.java.test.junior.developer.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

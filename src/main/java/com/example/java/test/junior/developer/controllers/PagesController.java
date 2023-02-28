@@ -1,4 +1,4 @@
-package com.example.java_test_junior_developer.controllers;
+package com.example.java.test.junior.developer.controllers;
 
 import ch.qos.logback.core.model.Model;
 

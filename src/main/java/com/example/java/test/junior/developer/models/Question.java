@@ -1,4 +1,4 @@
-package com.example.java_test_junior_developer.models;
+package com.example.java.test.junior.developer.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

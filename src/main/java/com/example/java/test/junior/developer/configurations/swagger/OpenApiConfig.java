@@ -1,4 +1,4 @@
-package com.example.java_test_junior_developer.configurations.swagger;
+package com.example.java.test.junior.developer.configurations.swagger;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
