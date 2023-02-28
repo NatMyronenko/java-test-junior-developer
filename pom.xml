@@ -14,7 +14,7 @@
     <name>java_test_junior_developer</name>
     <description>java_test_junior_developer</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>11.0.16</java.version>
     </properties>
     <dependencies>
 <!--                <dependency>-->
