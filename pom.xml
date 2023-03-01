@@ -10,10 +10,10 @@
 
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>java_test_junior_developer</artifactId>
+    <artifactId>java.test.junior.developer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>java_test_junior_developer</name>
-    <description>java_test_junior_developer</description>
+    <description>java.test.junior.developer</description>
     <properties>
         <java.version>17</java.version>
 
