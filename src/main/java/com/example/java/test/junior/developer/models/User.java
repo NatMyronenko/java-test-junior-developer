@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "useers")
 public class User {
 
     @Id
