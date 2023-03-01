@@ -1,4 +1,4 @@
-# java_test_junior_developer
+# java.test.junior.developer
 
 # Read Me First
 
