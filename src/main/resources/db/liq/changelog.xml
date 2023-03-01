@@ -103,8 +103,8 @@
     </changeSet>
     <!--> <-->
     <changeSet id="9" author="aleksdenni">
-        <createTable tableName="passed_test">
-            <column name="passed_test_id" type="int" autoIncrement="true">
+        <createTable tableName="user_passed_test">
+            <column name="user_passed_test_id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="user_id" type="int">
@@ -130,15 +130,15 @@
     <!--> <-->
     <changeSet  author="aleksdenni"  id="10">
         <addForeignKeyConstraint  baseColumnNames="user_id"
-                                  baseTableName="passed_test"
-                                  constraintName="fk_passed_test_users"
+                                  baseTableName="user_passed_test"
+                                  constraintName="fk_user_passed_test_users"
                                   referencedColumnNames="user_id"
                                   referencedTableName="users"/>
     </changeSet>
     <changeSet  author="aleksdenni"  id="11">
         <addForeignKeyConstraint  baseColumnNames="category_id"
-                                  baseTableName="passed_test"
-                                  constraintName="fk_passed_test_categories"
+                                  baseTableName="user_passed_test"
+                                  constraintName="fk_user_passed_test_categories"
                                   referencedColumnNames="category_id"
                                   referencedTableName="categories"/>
     </changeSet>
