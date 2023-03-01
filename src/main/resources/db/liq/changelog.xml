@@ -76,7 +76,7 @@
                                   referencedColumnNames="category_id"
                                   referencedTableName="categories"/>
     </changeSet>
-    <!--> answer ? structure <-->
+    <!-->  <-->
     <changeSet id="7" author="aleksdenni">
         <createTable tableName="options">
             <column name="option_id" type="int" autoIncrement="true">
@@ -101,7 +101,7 @@
                                   referencedColumnNames="question_id"
                                   referencedTableName="questions"/>
     </changeSet>
-    <!--> successful? name column? <-->
+    <!--> <-->
     <changeSet id="9" author="aleksdenni">
         <createTable tableName="passed_test">
             <column name="passed_test_id" type="int" autoIncrement="true">
@@ -113,7 +113,7 @@
             <column name="category_id" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="timestamp" type="int">
+            <column name="timestamp" type="timestamp">
                 <constraints nullable="false"/>
             </column>
             <column name="score" type="int">
@@ -141,23 +141,6 @@
                                   constraintName="fk_passed_test_categories"
                                   referencedColumnNames="category_id"
                                   referencedTableName="categories"/>
-    </changeSet>
-    <!--> <-->
-    <changeSet id="12" author="aleksdenni">
-        <createTable tableName="keycloak">
-            <column name="keycloak_id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="password" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="role" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
     </changeSet>
 
 </databaseChangeLog>
