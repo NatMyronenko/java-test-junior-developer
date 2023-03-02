@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.configurations;
+package com.example.java.test.junior.developer.configurations.mvc;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
