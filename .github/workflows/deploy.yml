@@ -1,12 +1,12 @@
 name: Build and Deploy
 
-on:
-  workflow_dispatch: {}
+on: push
+  #workflow_dispatch: {}
 
 env:
-  applicationfolder: spring-boot-hello-world-example
-  AWS_REGION: ##region##
-  S3BUCKET: ##s3-bucket## 
+  applicationfolder: java-test-junior-developer
+  AWS_REGION: us-east-2
+  S3BUCKET: codedeploystack-webappdeploymentbucket-s8ellgo36zsw	 
 
 
 jobs:
