@@ -1,4 +1,5 @@
 package com.example.java.test.junior.developer.configurations.swagger;
+
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -18,3 +19,4 @@ public class OpenApiConfig {
                         .version("v0.0.1"));
     }
 }
+
