@@ -520,7 +520,7 @@ Outputs:
       - ''
       - - http://
         - !GetAtt ApplicationLoadBalancer.DNSName
-        - ':8080/Example'
+        - ':8080/SpringBootHelloWorldExampleApplication' 
   DeploymentGroup:
     Description: Webapp Deployment Group
     Value: !Ref WebappDeploymentGroup
