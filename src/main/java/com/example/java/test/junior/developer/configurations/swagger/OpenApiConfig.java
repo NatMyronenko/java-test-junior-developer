@@ -9,14 +9,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenApiConfig {
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .components(new Components())
-                .info(new Info()
-                        .title("Employee CRUD API")
-                        .description(" Spring Boot RESTful service using springdoc-openapi and OpenAPI 3.")
-                        .version("v0.0.1"));
+//    @Bean
+//    public OpenAPI customOpenAPI() {
+//        return new OpenAPI()
+//                .components(new Components())
+//                .info(new Info()
+//                        .title("Employee CRUD API")
+//                        .description(" Spring Boot RESTful service using springdoc-openapi and OpenAPI 3.")
+//                        .version("v0.0.1"));
+
     }
 }
 
