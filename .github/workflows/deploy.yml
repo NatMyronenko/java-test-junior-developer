@@ -47,15 +47,6 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Upload Artifact to s3
-          - name: chmod
-            run: chmod -R +x ./.github
-
-          - name: Build and Package Maven
-            id: package
-            working-directory: ${{ env.applicationfolder }}
-            run: $GITHUB_WORKSPACE/.github/scripts/build.sh
-
-          - name: Upload Artifact to s3
         working-directory: ${{ env.applicationfolder }}/target
         run: aws s3 cp *.jar s3://${{ env.S3BUCKET }}/
 
