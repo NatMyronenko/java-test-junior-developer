@@ -20,8 +20,8 @@ jobs:
         with:
           distribution: 'corretto'
           java-version: '17'
-      - name: Run build with Gradle Wrapper
-        run: ./gradlew clean build
+      - name: Build and Package Maven
+        run: mvn -B clean package
       - name: Copy files
         run: |
           mkdir artifactDir
