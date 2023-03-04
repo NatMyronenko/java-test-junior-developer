@@ -9,9 +9,8 @@ on:
 
 
 env:
-  applicationfolder: java-test-junior-developer
   AWS_REGION: us-east-2
-  S3BUCKET: codedeploystack-webappdeploymentbucket-s8ellgo36zsw
+  S3BUCKET: java-test-junior-developer-artefacts
 
 
 jobs:
