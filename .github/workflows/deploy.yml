@@ -10,7 +10,7 @@ on:
 
 env:
   AWS_REGION: us-east-2
-  S3BUCKET: java-test-junior-developer-artefacts
+  S3BUCKET: java-junior-backend-artefacts
 
 
 jobs:
