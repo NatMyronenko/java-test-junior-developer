@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
-@RequestMapping("/apii")
+@RequestMapping("/api")
 public class UserController {
     ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>();
 
