@@ -9,15 +9,14 @@ on:
 
 
 env:
-  applicationfolder: java-test-junior-developer
-  AWS_REGION: us-east-2
-  S3BUCKET: codedeploystack-webappdeploymentbucket-s8ellgo36zsw
+  AWS_REGION: eu-central-1
+  S3BUCKET: java-junior-backend-artefacts
 
 
 jobs:
   build:
     name: Build and Package
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
@@ -27,28 +26,22 @@ jobs:
 
       - uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
-          role-session-name: GitHub-Action-Role
+          aws-access-key-id: ${{ secrets.PIPELINE_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PIPELINE_AWS_SECRET_KEY_ID }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: 'corretto'
           cache: maven
 
-      - name: chmod
-        run: chmod -R +x ./.github
-
       - name: Build and Package Maven
-#        id: package
-#        working-directory: ${{ env.applicationfolder }}
-        run: mvn -B package --file pom.xml
+        run: mvn -B clean package
 
       - name: Upload Artifact to s3
-        working-directory: ${{ env.applicationfolder }}/target
-        run: aws s3 cp *.jar s3://${{ env.S3BUCKET }}/
+        run: aws s3 cp target/*.jar s3://${{ env.S3BUCKET }}/
 
   deploy:
     needs: build
@@ -61,10 +54,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ secrets.IAMROLE_GITHUB }}
-          role-session-name: GitHub-Action-Role
+          aws-access-key-id: ${{ secrets.PIPELINE_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PIPELINE_AWS_SECRET_KEY_ID }}
           aws-region: ${{ env.AWS_REGION }}
       - run: |
-          echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
           commit_hash=`git rev-parse HEAD`
-          aws deploy create-deployment --application-name CodeDeployAppNameWithASG --deployment-group-name CodeDeployGroupName --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
+          aws deploy create-deployment --application-name JavaTestJuniorDeveloper --deployment-group-name JavaTestJuniorGroup --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
