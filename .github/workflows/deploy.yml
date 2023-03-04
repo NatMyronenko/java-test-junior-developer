@@ -8,33 +8,46 @@ on:
     branches: [ "master" ]
 
 
+env:
+  applicationfolder: java-test-junior-developer
+  AWS_REGION: us-east-2
+  S3BUCKET: codedeploystack-webappdeploymentbucket-s8ellgo36zsw
+
+
 jobs:
   build:
+    name: Build and Package
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
-      - name: Checkout project sources
-        uses: actions/checkout@v2
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - uses: actions/setup-java@v3
+      - uses: actions/checkout@v3
+        name: Checkout Repository
+
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
-          distribution: 'corretto'
+          aws-access-key-id: ${{ secrets.PIPELINE_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PIPELINE_AWS_SECRET_KEY_ID }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
           java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
       - name: Build and Package Maven
-        run: mvn -B clean package
-      - name: Copy files
-        run: |
-          mkdir artifactDir
-          cp target/*.jar artifactDir/
-      - name: Save artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: artifact
-          path: artifactDir
-          retention-days: 1
+        #        id: package
+        #        working-directory: ${{ env.applicationfolder }}
+        run: mvn -B package --file pom.xml
+
+      - name: Upload Artifact to s3
+        working-directory: ${{ env.applicationfolder }}/target
+        run: aws s3 cp *.jar s3://${{ env.S3BUCKET }}/
 
   deploy:
-    if: github.ref == 'refs/heads/alex-setup-aws'
     needs: build
     runs-on: ubuntu-latest
     environment: Dev
@@ -47,7 +60,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.PIPELINE_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.PIPELINE_AWS_SECRET_KEY_ID }}
-          aws-region: eu-central-1
+          aws-region: ${{ env.AWS_REGION }}
       - run: |
           echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
           commit_hash=`git rev-parse HEAD`
