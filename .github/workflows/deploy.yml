@@ -9,7 +9,7 @@ on:
 
 
 env:
-  AWS_REGION: us-east-2
+  AWS_REGION: eu-central-1
   S3BUCKET: java-junior-backend-artefacts
 
 
@@ -58,6 +58,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.PIPELINE_AWS_SECRET_KEY_ID }}
           aws-region: ${{ env.AWS_REGION }}
       - run: |
-          echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
           commit_hash=`git rev-parse HEAD`
           aws deploy create-deployment --application-name JavaTestJuniorDeveloper --deployment-group-name JavaTestJuniorGroup --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
