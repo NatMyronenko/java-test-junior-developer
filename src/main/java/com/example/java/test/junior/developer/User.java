@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.models;
+package com.example.java.test.junior.developer;
 
 
 import lombok.AllArgsConstructor;
@@ -19,13 +19,13 @@ public class User {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "surname")
-    private String surname;
-
-    @Column(name = "totalBals")
-    private int totalBals;
-
+//
+//    @Column(name = "surname")
+//    private String surname;
+//
+//    @Column(name = "totalBals")
+//    private int totalBals;
+//
 
 
 
