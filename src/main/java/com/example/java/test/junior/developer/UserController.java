@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.controllers;
+package com.example.java.test.junior.developer;
 
 import com.example.java.test.junior.developer.User;
 import org.springframework.web.bind.annotation.*;
