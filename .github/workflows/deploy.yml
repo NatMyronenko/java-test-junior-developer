@@ -39,8 +39,8 @@ jobs:
           cache: maven
 
       - name: Build and Package Maven
-        #        id: package
-        #        working-directory: ${{ env.applicationfolder }}
+        id: package
+        working-directory: ${{ env.applicationfolder }}
         run: mvn -B package --file pom.xml
 
       - name: Upload Artifact to s3
