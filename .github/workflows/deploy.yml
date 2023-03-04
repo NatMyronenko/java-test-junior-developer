@@ -35,13 +35,11 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: 'corretto'
           cache: maven
 
       - name: Build and Package Maven
-        id: package
-        working-directory: ${{ env.applicationfolder }}
-        run: mvn -B package --file pom.xml
+        run: mvn -B clean package
 
       - name: Upload Artifact to s3
         working-directory: ${{ env.applicationfolder }}/target
