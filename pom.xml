@@ -10,7 +10,7 @@
 
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>java.test.junior.developer</artifactId>
+    <artifactId>java-test-junior-developer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>java.test.junior.developer</name>
     <description>java.test.junior.developer</description>
