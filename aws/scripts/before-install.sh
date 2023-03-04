@@ -1,3 +1,3 @@
 #!/bin/bash
 yum update -y
-amazon-linux-extras install -y java-openjdk17
+amazon-linux-extras install -y java-openjdk11
