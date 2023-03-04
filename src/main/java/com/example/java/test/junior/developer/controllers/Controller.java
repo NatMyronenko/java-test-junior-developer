@@ -1,6 +1,5 @@
 package com.example.java.test.junior.developer.controllers;
 
-import com.example.java.test.junior.developer.services.UserService;
 import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 @Configuration
 public class Controller {
 
-    private final UserService userService = new UserService();
 
     /**
      *
