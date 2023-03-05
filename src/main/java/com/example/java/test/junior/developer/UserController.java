@@ -1,6 +1,5 @@
 package com.example.java.test.junior.developer;
 
-import com.example.java.test.junior.developer.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,6 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @RestController
 @RequestMapping("/api")
 public class UserController {
+
+    //відповідає за обробку даних, які вносить юзер
+
     ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>();
 
     @GetMapping("/{id}")
@@ -17,13 +19,13 @@ public class UserController {
         return users.get(id);
     }
 
-    @GetMapping("/")
+    @GetMapping("/users")
     public List<User> getAllUsers() {
         return new ArrayList<User>(users.values());
     }
 
-    @PostMapping("/")
-    public User getUsers(@RequestBody User user) {
+    @PostMapping("/new_user")
+    public User createUser(@RequestBody User user) {
         users.put(user.getId(), user);
         return user;
     }

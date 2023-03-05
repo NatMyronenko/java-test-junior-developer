@@ -24,12 +24,14 @@ public class KeycloakProperties {
      */
 
     @Bean
-    Keycloak getKeycloakConfiguration () {
+    Keycloak keycloakConfiguration() {
         return KeycloakBuilder.builder()
                 .serverUrl("http://localhost:8080")
                 .realm("Test_Realm")
                 .clientId("test_client")
                 .clientSecret("f3wVWQmvwQF8dM2wC96brWLMpQbiQLV1")
+                .username("service-account-test_client")
+                .password("")
                 .build();
     }
 }
