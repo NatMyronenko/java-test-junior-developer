@@ -1,34 +1,26 @@
 package com.example.java.test.junior.developer;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.logging.LogRecord;
 
-@Component
-public class CorsFilter implements Filter {
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-            throws IOException, ServletException {
-        HttpServletResponse response = (HttpServletResponse) res;
-        HttpServletRequest request = (HttpServletRequest) req;
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Headers", "accept,content-type,content-length,authorization");
-        chain.doFilter(req, res);
+public class CorsFilter {
+    public CorsFilter(UrlBasedCorsConfigurationSource source) {
     }
 
-    @Override
-    public void init(FilterConfig filterConfig) {
-    }
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-    @Override
-    public void destroy() {
-    }
+        // Allow anyone and anything access. Probably ok for Swagger spec
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
 
+        source.registerCorsConfiguration("/v2/api-docs", config);
+        return new CorsFilter(source);
+    }
 }
