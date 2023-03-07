@@ -22,39 +22,18 @@ import java.util.Arrays;
 @Configuration
 @EnableSwagger2
 public class OpenApiConfigSwagger extends WebMvcConfigurerAdapter {
-//    @Bean
-//    public Docket swaggerApiConfig() {
-//        return new Docket(DocumentationType.SWAGGER_2)
-////                .select()
-////                .paths(PathSelectors.any())
-////                .apis(RequestHandlerSelectors.basePackage("com.example"))
-////                .build();
+    @Bean
+    public Docket swaggerApiConfig() {
+        return new Docket(DocumentationType.SWAGGER_2)
 //                .select()
-//                .apis(RequestHandlerSelectors.any())
 //                .paths(PathSelectors.any())
+//                .apis(RequestHandlerSelectors.basePackage("com.example"))
 //                .build();
-//    }
-@Bean
-public Docket swaggerApiConfig() {
-    return new Docket(DocumentationType.SWAGGER_2)
-            .select()
-            .apis(RequestHandlerSelectors.any())
-            .paths(PathSelectors.any())
-            .build()
-            .enableUrlTemplating(true)
-            .ignoredParameterTypes(HttpServletRequest.class) // ignore HttpServletRequest parameter types
-            .useDefaultResponseMessages(false)
-            .globalResponseMessage(RequestMethod.GET, Arrays.asList(
-                    new ResponseMessageBuilder()
-                            .code(500)
-                            .message("500 message")
-                            .responseModel(new ModelRef("Error"))
-                            .build(),
-                    new ResponseMessageBuilder()
-                            .code(403)
-                            .message("Forbidden!")
-                            .build()));
-}
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+    }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
