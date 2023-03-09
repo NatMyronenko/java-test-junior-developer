@@ -1,36 +1,67 @@
 package com.example.java.test.junior.developer.controller;
 
-import com.example.java.test.junior.developer.entity.User;
+import com.example.java.test.junior.developer.exception.UserNotFoundException;
+import com.example.java.test.junior.developer.model.User;
+import com.example.java.test.junior.developer.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
-@RequestMapping("/api")
+@RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
-    ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>();
 
-    @CrossOrigin
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
-        return users.get(id);
+    private final UserRepository userRepository;
+
+
+    // Create a new user
+    @PostMapping("/")
+    public User createUser(@RequestBody User user) {
+        return userRepository.save(user);
     }
 
-    @CrossOrigin
+    // Get all users
     @GetMapping("/")
     public List<User> getAllUsers() {
-        return new ArrayList<User>(users.values());
+        return userRepository.findAll();
     }
 
-    @CrossOrigin
-    @PostMapping("/")
-    public User getUsers(@RequestBody User user) {
-        users.put(user.getId(), user);
-        return user;
+    // Retrieve a user by id
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable("id") int id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    }
+
+    // Update a user
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable("id") int id, @RequestBody User user) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+        existingUser.setName(user.getName());
+        existingUser.setSurname(user.getSurname());
+        existingUser.setEmail(user.getEmail());
+
+        return userRepository.save(existingUser);
+    }
+
+    // Delete a user
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable("id") int id) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+        userRepository.delete(existingUser);
+
+        return ResponseEntity.ok().build();
     }
 }
+
+
 
 
 

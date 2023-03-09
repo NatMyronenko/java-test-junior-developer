@@ -1,6 +1,4 @@
-package com.example.java.test.junior.developer.entity;
-
-
+package com.example.java.test.junior.developer.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,21 +12,17 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "user_id")
+    private int id;
 
-    @Column(name = "name")
+    @Column(name = "first_name")
     private String name;
-//
-//    @Column(name = "surname")
-//    private String surname;
-//
-//    @Column(name = "totalBals")
-//    private int totalBals;
-//
 
+    @Column(name = "last_name")
+    private String surname;
 
-
+    @Column(name = "email")
+    private String email;
 
     public User() {
 
