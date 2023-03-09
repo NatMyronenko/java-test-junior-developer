@@ -1,11 +1,10 @@
 package com.example.java.test.junior.developer.service;
-
-import com.example.java.test.junior.developer.exception.UserNotFoundException;
 import com.example.java.test.junior.developer.model.User;
 import com.example.java.test.junior.developer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import javax.persistence.EntityNotFoundException;
 
 import javax.management.relation.Role;
 import java.util.List;
@@ -21,6 +20,10 @@ public class UserService {
         log.info("Saving new {}", user);
         userRepository.save(user);
     }
+    public User getUserById(int id) {
+        return userRepository.findById(id).orElseThrow(()->
+                new EntityNotFoundException("User not found with id " + id));
+    }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -33,7 +36,7 @@ public class UserService {
             updatedUser.setName(user.getName());
             return userRepository.save(updatedUser);
         } else {
-            throw new UserNotFoundException("User not found with id " + id);
+            throw new EntityNotFoundException("User not found with id " + id);
         }
     }
 
@@ -42,9 +45,11 @@ public class UserService {
         if (existUser.isPresent()) {
             userRepository.deleteById(id);
         } else {
-            throw new UserNotFoundException("User not found with id " + id);
+            throw new EntityNotFoundException("User not found with id " + id);
         }
     }
+
+
 }
 
 

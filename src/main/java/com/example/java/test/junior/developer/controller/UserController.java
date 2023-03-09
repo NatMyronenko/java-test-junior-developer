@@ -1,10 +1,9 @@
 package com.example.java.test.junior.developer.controller;
 
-import com.example.java.test.junior.developer.exception.UserNotFoundException;
 import com.example.java.test.junior.developer.model.User;
-import com.example.java.test.junior.developer.repository.UserRepository;
 import com.example.java.test.junior.developer.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,45 +14,38 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
+        private final UserService userService;
 
+    @PostMapping
+        public ResponseEntity<User> createUser(@RequestBody User user) {
+            userService.saveUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        }
 
-    // Create a new user
-    @PostMapping("/")
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+        @GetMapping("/get/{id}")
+        public ResponseEntity <User> getUserById(@PathVariable int id) {
+            User user = userService.getUserById(id);
+            return ResponseEntity.ok(user);
+        }
+
+        @GetMapping
+        public ResponseEntity<List<User>> getAllUsers() {
+            List<User> users = userService.getAllUsers();
+            return ResponseEntity.ok(users);
+        }
+
+        @PutMapping("/update/{id}")
+        public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
+            User updatedUser = userService.updateUser(id, user);
+            return ResponseEntity.ok(updatedUser);
+        }
+
+        @DeleteMapping("/delete/{id}")
+        public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+            userService.deleteUser(id);
+            return ResponseEntity.noContent().build();
+        }
     }
-
-    // Get all users
-    @GetMapping("/")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    // Update a user
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable("id") int id, @RequestBody User user) {
-        User existUser = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
-
-        existUser.setName(user.getName());
-        existUser.setSurname(user.getSurname());
-        existUser.setEmail(user.getEmail());
-
-        return userRepository.save(existUser);
-    }
-
-    // Get a user by id
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") int id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
-    }
-
-
-
-}
-
 
 
 
