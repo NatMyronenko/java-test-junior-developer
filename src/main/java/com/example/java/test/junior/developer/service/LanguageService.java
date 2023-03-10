@@ -1,44 +1,47 @@
 package com.example.java.test.junior.developer.service;
 
-import com.example.java.test.junior.developer.model.Language;
+import com.example.java.test.junior.developer.dto.LanguageDto;
+import com.example.java.test.junior.developer.mapper.LanguageMapper;
 import com.example.java.test.junior.developer.repository.LanguageRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class LanguageService{
+@RequiredArgsConstructor
+public class LanguageService {
 
+    private final LanguageMapper languageMapper;
     private final LanguageRepository languageRepository;
 
-    @Autowired
-    public LanguageService(LanguageRepository languageRepository) {
-        this.languageRepository = languageRepository;
+    @Transactional
+    public LanguageDto createLanguage(LanguageDto dto) {
+        final var language = languageMapper.toEntity(dto);
+        final var saved = languageRepository.save(language);
+        return languageMapper.toDto(saved);
     }
 
-    public Language createLanguage(Language language) {
-        return languageRepository.save(language);
+    @Transactional(readOnly = true)
+    public List<LanguageDto> getAllLanguages() {
+        final var languages = languageRepository.findAll();
+        return languages.stream()
+            .map(languageMapper::toDto)
+            .collect(Collectors.toList());
     }
 
-    public List<Language> getAllLanguages() {
-        return languageRepository.findAll();
+
+    @Transactional
+    public LanguageDto updateLanguage(Long id, LanguageDto dto) {
+        final var language = languageMapper.toEntity(dto);
+        language.setId(id);
+        final var saved = languageRepository.save(language);
+        return languageMapper.toDto(saved);
     }
 
-
-    public Language updateLanguage(Long id, Language language) {
-        Language existingLanguage = languageRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Language not found with id " + id));
-        existingLanguage.setName(language.getName());
-
-        return languageRepository.save(existingLanguage);
-    }
-
+    @Transactional
     public void deleteLanguage(Long id) {
-        languageRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Language not found with id " + id));
         languageRepository.deleteById(id);
     }
 
