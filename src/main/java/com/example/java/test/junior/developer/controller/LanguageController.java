@@ -1,43 +1,41 @@
 package com.example.java.test.junior.developer.controller;
 
-import com.example.java.test.junior.developer.exception.LanguageNotFoundException;
 import com.example.java.test.junior.developer.model.Language;
-import com.example.java.test.junior.developer.repository.LanguageRepository;
+import com.example.java.test.junior.developer.service.LanguageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/languages")
 public class LanguageController {
-    private final LanguageRepository languageRepository;
+
+    private final LanguageService languageService;
+
+    @Autowired
+    public LanguageController(LanguageService languageService) {
+        this.languageService = languageService;
+    }
 
     @PostMapping
     public Language createLanguage(@RequestBody Language language) {
-        return languageRepository.save(language);
+        return languageService.createLanguage(language);
     }
 
     @GetMapping
     public List<Language> getLanguages() {
-        return languageRepository.findAll();
+        return languageService.getAllLanguages();
     }
 
     @PutMapping("/{id}")
-    public Language updateLanguage(@PathVariable Long id, @RequestBody Language languageRequest) {
-        return languageRepository.findById(id).map(language -> {
-            language.setName(languageRequest.getName());
-            return languageRepository.save(language);
-        }).orElseThrow(() -> new LanguageNotFoundException("Language not found with id " + id));
+    public Language updateLanguage(Long id, Language language) {
+        return languageService.updateLanguage(id, language);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteLanguage(@PathVariable Long id) {
-        return languageRepository.findById(id).map(language -> {
-            languageRepository.delete(language);
-            return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new LanguageNotFoundException("Language not found with id " + id));
+    public void deleteLanguage(Long id) {
+        deleteLanguage(id);
     }
 }
