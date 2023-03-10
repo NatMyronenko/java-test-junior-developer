@@ -26,10 +26,6 @@ public class User {
 //    @Column(name = "totalBals")
 //    private int totalBals;
 //
-
-
-
-
     public User() {
 
     }
