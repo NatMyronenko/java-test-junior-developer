@@ -19,6 +19,7 @@ import java.util.List;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
@@ -27,7 +28,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
 
 
-@WebMvcTest(controllers = LanguageController.class)
+@WebMvcTest(
+    controllers = LanguageController.class,
+    excludeAutoConfiguration = SecurityAutoConfiguration.class
+)
 class LanguageControllerTest {
 
     @Autowired
@@ -54,7 +58,8 @@ class LanguageControllerTest {
         mockMvc.perform(post("/api/v1/languages")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
-            .andExpect(jsonPath("$.id", equalTo(1L)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id", equalTo(1)))
             .andExpect(jsonPath("$.name",  equalTo("Java")));
     }
 
@@ -71,7 +76,7 @@ class LanguageControllerTest {
         mockMvc.perform(get("/api/v1/languages"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.length()", equalTo(1)))
-            .andExpect(jsonPath("$[0].id", equalTo(1L)))
+            .andExpect(jsonPath("$[0].id", equalTo(1)))
             .andExpect(jsonPath("$[0].name",  equalTo("Java")));
     }
 
@@ -95,7 +100,7 @@ class LanguageControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", equalTo(1L)))
+            .andExpect(jsonPath("$.id", equalTo(1)))
             .andExpect(jsonPath("$.name",  equalTo("Java")));
     }
 
