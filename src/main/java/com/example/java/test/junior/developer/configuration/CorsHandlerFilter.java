@@ -28,7 +28,6 @@ public class CorsHandlerFilter extends OncePerRequestFilter {
     chain.doFilter(request, response);
     handleCors(request, response, false);
   }
-
   private boolean handleCors(
       HttpServletRequest request, HttpServletResponse response, boolean options) {
     response.setHeader(
