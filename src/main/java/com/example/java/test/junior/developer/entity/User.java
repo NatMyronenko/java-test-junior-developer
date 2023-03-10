@@ -21,11 +21,7 @@ public class User {
     private String name;
 //
 //    @Column(name = "surname")
-//    private String surname;
-//
-//    @Column(name = "totalBals")
-//    private int totalBals;
-//
+//    private String
     public User() {
 
     }
