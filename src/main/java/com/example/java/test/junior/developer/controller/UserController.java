@@ -1,6 +1,6 @@
-package com.example.java.test.junior.developer;
+package com.example.java.test.junior.developer.controller;
 
-import com.example.java.test.junior.developer.User;
+import com.example.java.test.junior.developer.entity.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
