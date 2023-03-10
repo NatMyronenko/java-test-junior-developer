@@ -42,7 +42,6 @@ public class CorsHandlerFilter extends OncePerRequestFilter {
         HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,
         "accept,content-type,content-length,authorization");
     response.setStatus(HttpStatus.OK.value());
-
     return options && request.getMethod().equalsIgnoreCase(HttpMethod.OPTIONS.name());
   }
 
