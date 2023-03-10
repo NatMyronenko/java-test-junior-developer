@@ -31,7 +31,6 @@ public class LanguageService {
             .collect(Collectors.toList());
     }
 
-
     @Transactional
     public LanguageDto updateLanguage(Long id, LanguageDto dto) {
         final var language = languageMapper.toEntity(dto);
