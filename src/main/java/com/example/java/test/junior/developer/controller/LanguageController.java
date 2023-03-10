@@ -41,4 +41,5 @@ public class LanguageController {
     public void deleteLanguage(@PathVariable Long id) {
         languageService.deleteLanguage(id);
     }
+
 }

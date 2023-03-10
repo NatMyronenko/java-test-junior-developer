@@ -11,5 +11,4 @@ import java.lang.annotation.Target;
 @Repository
 public interface LanguageRepository extends JpaRepository<Language, Long> {
 
-
 }
