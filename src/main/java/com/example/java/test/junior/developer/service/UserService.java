@@ -16,10 +16,10 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public void saveUser(User user) {
-        log.info("Saving new {}", user);
-        userRepository.save(user);
+    public User saveUser(User user) {
+        return  userRepository.save(user);
     }
+
     public User getUserById(int id) {
         return userRepository.findById(id).orElseThrow(()->
                 new EntityNotFoundException("User not found with id " + id));

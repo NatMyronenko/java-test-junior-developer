@@ -11,17 +11,17 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id",nullable = false)
     private int id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name",nullable = false)
     private String name;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name",nullable = false)
     private String surname;
 
-    @Column(name = "email")
+    @Column(name = "email",nullable = false)
     private String email;
 
     public User() {
