@@ -44,7 +44,7 @@ class CategoryControllerTest {
                 .name("Java core")
                 .build();
         final var response = CategoryDto.builder()
-                .id(1)
+                .id(4)
                 .name("Java core")
                 .build();
 
@@ -89,9 +89,9 @@ class CategoryControllerTest {
                 .name("Java core")
                 .build();
 
-        when(categoryService.updateCategory(1, dto)).thenReturn(response);
+        when(categoryService.updateCategory(4, dto)).thenReturn(response);
 
-        mockMvc.perform(put("/api/v1/categories/1")
+        mockMvc.perform(put("/api/v1/categories/4")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -103,10 +103,10 @@ class CategoryControllerTest {
     @SneakyThrows
     @Test
     void testDeleteCategory() {
-        mockMvc.perform(delete("/api/v1/categories/1"))
+        mockMvc.perform(delete("/api/v1/categories/4"))
                 .andExpect(status().isOk());
 
-        verify(categoryService).deleteCategory(1);
+        verify(categoryService).deleteCategory(4);
     }
 
 }
