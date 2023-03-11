@@ -21,7 +21,7 @@ public class Category {
     private int id;
 
     @Column(name = "category", nullable = false)
-    public String category_name;
+    public String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "language_id")

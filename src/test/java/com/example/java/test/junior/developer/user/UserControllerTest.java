@@ -54,7 +54,7 @@ class UserControllerTest {
 
         when(userService.createUser(dto)).thenReturn(response);
 
-        mockMvc.perform(post("/user/save")
+        mockMvc.perform(post("/api/v1/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -76,7 +76,7 @@ class UserControllerTest {
                 .build();
         when(userService.getAllUsers()).thenReturn(List.of(response));
 
-        mockMvc.perform(get("/user/get/all"))
+        mockMvc.perform(get("/api/v1/users"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", equalTo(1)))
                 .andExpect(jsonPath("$[0].id", equalTo(1)))
@@ -105,7 +105,7 @@ class UserControllerTest {
 
         when(userService.updateUser(1, dto)).thenReturn(response);
 
-        mockMvc.perform(put("/user/update/1")
+        mockMvc.perform(put("/api/v1/users1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -119,7 +119,7 @@ class UserControllerTest {
     @SneakyThrows
     @Test
     void testDeleteUser() {
-        mockMvc.perform(delete("/user/delete/1"))
+        mockMvc.perform(delete("/api/v1/users1"))
                 .andExpect(status().isOk());
 
         verify(userService).deleteUser(1);

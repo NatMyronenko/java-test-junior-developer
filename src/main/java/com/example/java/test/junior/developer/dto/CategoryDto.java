@@ -16,8 +16,7 @@ public class CategoryDto {
 
     int id;
 
-    @NotBlank String category_name;
+    @NotBlank String name;
 
-  //  @NotNull  Long id;
 
 }
