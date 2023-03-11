@@ -28,7 +28,6 @@ public class CorsHandlerFilter extends OncePerRequestFilter {
     chain.doFilter(request, response);
     handleCors(request, response, false);
   }
-
   private boolean handleCors(
       HttpServletRequest request, HttpServletResponse response, boolean options) {
     response.setHeader(
@@ -43,7 +42,6 @@ public class CorsHandlerFilter extends OncePerRequestFilter {
         HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,
         "accept,content-type,content-length,authorization");
     response.setStatus(HttpStatus.OK.value());
-
     return options && request.getMethod().equalsIgnoreCase(HttpMethod.OPTIONS.name());
   }
 
