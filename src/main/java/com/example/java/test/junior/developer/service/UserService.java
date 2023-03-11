@@ -1,17 +1,12 @@
 package com.example.java.test.junior.developer.service;
-import com.example.java.test.junior.developer.dto.LanguageDto;
 import com.example.java.test.junior.developer.dto.UserDto;
-import com.example.java.test.junior.developer.mapper.LanguageMapper;
 import com.example.java.test.junior.developer.mapper.UserMapper;
-import com.example.java.test.junior.developer.model.User;
-import com.example.java.test.junior.developer.repository.LanguageRepository;
 import com.example.java.test.junior.developer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.Optional;

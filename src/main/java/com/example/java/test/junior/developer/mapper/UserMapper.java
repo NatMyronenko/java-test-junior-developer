@@ -1,8 +1,6 @@
 package com.example.java.test.junior.developer.mapper;
 
-import com.example.java.test.junior.developer.dto.LanguageDto;
 import com.example.java.test.junior.developer.dto.UserDto;
-import com.example.java.test.junior.developer.model.Language;
 import com.example.java.test.junior.developer.model.User;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +19,8 @@ public class UserMapper {
         return UserDto.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .surname(user.getEmail())
+                .surname(user.getSurname())
+                .email(user.getEmail())
                 .build();
     }
 
