@@ -25,9 +25,11 @@ public class Language {
     @Column(name = "language", nullable = false)
     public String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "language")
-    private List<Category> category = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "language",
+            fetch = FetchType.EAGER)
+    private List<Category> list_categories;
 
 }
+
 

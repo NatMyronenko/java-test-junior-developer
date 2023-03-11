@@ -23,8 +23,8 @@ public class Category {
     @Column(name = "category", nullable = false)
     public String category_name;
 
-    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
-    @JoinColumn
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "language_id")
     private Language language;
 
 }
