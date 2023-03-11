@@ -49,7 +49,7 @@ class LanguageControllerTest {
             .name("Java")
             .build();
         final var response = LanguageDto.builder()
-            .id(1L)
+            .language_id(1)
             .name("Java")
             .build();
 
@@ -68,7 +68,7 @@ class LanguageControllerTest {
     @Test
     void testGetAllLanguages() {
         final var response = LanguageDto.builder()
-            .id(1L)
+            .language_id(1)
             .name("Java")
             .build();
         when(languageService.getAllLanguages()).thenReturn(List.of(response));
@@ -90,11 +90,11 @@ class LanguageControllerTest {
             .name("Java")
             .build();
         final var response = LanguageDto.builder()
-            .id(1L)
+            .language_id(1)
             .name("Java")
             .build();
 
-        when(languageService.updateLanguage(1L, dto)).thenReturn(response);
+        when(languageService.updateLanguage(1, dto)).thenReturn(response);
 
         mockMvc.perform(put("/api/v1/languages/1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -110,7 +110,7 @@ class LanguageControllerTest {
         mockMvc.perform(delete("/api/v1/languages/1"))
             .andExpect(status().isOk());
 
-        verify(languageService).deleteLanguage(1L);
+        verify(languageService).deleteLanguage(1);
     }
 
 }
