@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer;
+package com.example.java.test.junior.developer.user;
 
 import com.example.java.test.junior.developer.controller.UserController;
 import com.example.java.test.junior.developer.dto.UserDto;
