@@ -9,28 +9,28 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/category")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @PostMapping("/save")
+    @PostMapping
     public CategoryDto createCategory(@RequestBody @Valid CategoryDto category){
         return categoryService.createCategory(category);
     }
 
-    @GetMapping("/get/all")
+    @GetMapping
     public List<CategoryDto> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public CategoryDto updateCategory(@PathVariable int id,
                               @RequestBody @Valid CategoryDto category) {
         return categoryService.updateCategory(id, category);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable int id) {
         categoryService.deleteCategory(id);
     }
