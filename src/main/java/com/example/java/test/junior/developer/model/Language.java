@@ -28,7 +28,7 @@ public class Language {
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "language",
             fetch = FetchType.EAGER)
-    private List<Category> list_categories;
+    private List<Category> listCategories;
 
 }
 
