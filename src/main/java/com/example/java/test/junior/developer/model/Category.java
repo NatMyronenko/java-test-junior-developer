@@ -23,7 +23,7 @@ public class Category {
     @Column(name = "category", nullable = false)
     public String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "language_id")
     private Language language;
 
