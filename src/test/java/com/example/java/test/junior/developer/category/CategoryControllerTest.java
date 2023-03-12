@@ -41,11 +41,11 @@ class CategoryControllerTest {
                 new ClassPathResource("controller/category-request.json").getInputStream();
         final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
         final var dto = CategoryDto.builder()
-                .name("Java core")
+                .name("Сore")
                 .build();
         final var response = CategoryDto.builder()
-                .id(4)
-                .name("Java core")
+                .id(1)
+                .name("Сore")
                 .build();
 
         when(categoryService.createCategory(dto)).thenReturn(response);
@@ -55,7 +55,7 @@ class CategoryControllerTest {
                         .content(requestBody))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.name", equalTo("Java core")));
+                .andExpect(jsonPath("$.name", equalTo("Сore")));
     }
 
 
@@ -64,7 +64,7 @@ class CategoryControllerTest {
     void testGetAllCategories() {
         final var response = CategoryDto.builder()
                 .id(1)
-                .name("Java core")
+                .name("Сore")
                 .build();
         when(categoryService.getAllCategories()).thenReturn(List.of(response));
 
@@ -72,7 +72,7 @@ class CategoryControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", equalTo(1)))
                 .andExpect(jsonPath("$[0].id", equalTo(1)))
-                .andExpect(jsonPath("$[0].name", equalTo("Java core")));
+                .andExpect(jsonPath("$[0].name", equalTo("Сore")));
     }
 
     @SneakyThrows
@@ -89,24 +89,24 @@ class CategoryControllerTest {
                 .name("Java core")
                 .build();
 
-        when(categoryService.updateCategory(4, dto)).thenReturn(response);
+        when(categoryService.updateCategory(1, dto)).thenReturn(response);
 
-        mockMvc.perform(put("/api/v1/categories/4")
+        mockMvc.perform(put("/api/v1/categories/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.name", equalTo("Java core")));
+                .andExpect(jsonPath("$.name", equalTo("Сore")));
 
     }
 
     @SneakyThrows
     @Test
     void testDeleteCategory() {
-        mockMvc.perform(delete("/api/v1/categories/4"))
+        mockMvc.perform(delete("/api/v1/categories/1"))
                 .andExpect(status().isOk());
 
-        verify(categoryService).deleteCategory(4);
+        verify(categoryService).deleteCategory(1);
     }
 
 }

@@ -1,12 +1,12 @@
 package com.example.java.test.junior.developer.dto;
 
-import io.smallrye.common.constraint.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Value;
-
-import javax.validation.constraints.NotBlank;
 
 @Value
 @Builder
@@ -14,9 +14,10 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CategoryDto {
 
+    @NotNull
     int id;
 
     @NotBlank String name;
 
-
 }
+
