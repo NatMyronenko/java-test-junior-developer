@@ -18,7 +18,6 @@ public class CategoryController {
     public CategoryDto createCategory(@RequestBody @Valid CategoryDto category){
         return categoryService.createCategory(category);
     }
-
     @GetMapping
     public List<CategoryDto> getAllCategories() {
         return categoryService.getAllCategories();
