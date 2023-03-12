@@ -105,7 +105,7 @@ class UserControllerTest {
 
         when(userService.updateUser(1, dto)).thenReturn(response);
 
-        mockMvc.perform(put("/api/v1/users1")
+        mockMvc.perform(put("/api/v1/users/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -119,7 +119,7 @@ class UserControllerTest {
     @SneakyThrows
     @Test
     void testDeleteUser() {
-        mockMvc.perform(delete("/api/v1/users1"))
+        mockMvc.perform(delete("/api/v1/users/1"))
                 .andExpect(status().isOk());
 
         verify(userService).deleteUser(1);

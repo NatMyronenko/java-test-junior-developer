@@ -14,7 +14,6 @@ import lombok.Value;
 @AllArgsConstructor
 public class CategoryDto {
 
-    @NotNull
     int id;
 
     @NotBlank String name;

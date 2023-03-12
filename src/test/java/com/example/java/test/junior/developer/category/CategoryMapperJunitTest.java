@@ -1,47 +1,34 @@
 package com.example.java.test.junior.developer.category;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.mapper.CategoryMapper;
 import com.example.java.test.junior.developer.model.Category;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-class CategoryMapperTest {
+public class CategoryMapperJunitTest {
 
     private final CategoryMapper categoryMapper = new CategoryMapper();
 
     @Test
-    void shouldMapToEntity() {
-        // given
-        CategoryDto dto = CategoryDto.builder()
-                .id(1)
-                .name("Сore")
-                .build();
+    public void toEntity_ValidDto_ReturnsEntity() {
+        CategoryDto categoryDto = new CategoryDto(1, "SpringBoot");
 
-        // when
-        Category category = categoryMapper.toEntity(dto);
+        Category result = categoryMapper.toEntity(categoryDto);
 
-        // then
-        assertThat(category).isNotNull();
-        assertThat(category.getId()).isEqualTo(dto.getId());
-        assertThat(category.getName()).isEqualTo(dto.getName());
+        assertEquals(categoryDto.getName(), result.getName());
     }
 
     @Test
-    void shouldMapToDto() {
-        // given
+    public void toDto_ValidEntity_ReturnsDto() {
         Category category = Category.builder()
                 .id(1)
-                .name("Сore")
+                .name("SpringBoot")
                 .build();
 
-        // when
-        CategoryDto dto = categoryMapper.toDto(category);
+        CategoryDto result = categoryMapper.toDto(category);
 
-        // then
-        assertThat(dto).isNotNull();
-        assertThat(dto.getId()).isEqualTo(category.getId());
-        assertThat(dto.getName()).isEqualTo(category.getName());
+        assertEquals(category.getId(), result.getId());
+        assertEquals(category.getName(), result.getName());
     }
 }

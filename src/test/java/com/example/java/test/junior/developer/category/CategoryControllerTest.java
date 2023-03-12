@@ -41,11 +41,11 @@ class CategoryControllerTest {
                 new ClassPathResource("controller/category-request.json").getInputStream();
         final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
         final var dto = CategoryDto.builder()
-                .name("Сore")
+                .name("SpringBoot")
                 .build();
         final var response = CategoryDto.builder()
                 .id(1)
-                .name("Сore")
+                .name("SpringBoot")
                 .build();
 
         when(categoryService.createCategory(dto)).thenReturn(response);
@@ -55,8 +55,9 @@ class CategoryControllerTest {
                         .content(requestBody))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.name", equalTo("Сore")));
+                .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
     }
+
 
 
     @SneakyThrows
@@ -64,7 +65,7 @@ class CategoryControllerTest {
     void testGetAllCategories() {
         final var response = CategoryDto.builder()
                 .id(1)
-                .name("Сore")
+                .name("SpringBoot")
                 .build();
         when(categoryService.getAllCategories()).thenReturn(List.of(response));
 
@@ -72,7 +73,7 @@ class CategoryControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", equalTo(1)))
                 .andExpect(jsonPath("$[0].id", equalTo(1)))
-                .andExpect(jsonPath("$[0].name", equalTo("Сore")));
+                .andExpect(jsonPath("$[0].name", equalTo("SpringBoot")));
     }
 
     @SneakyThrows
@@ -82,11 +83,11 @@ class CategoryControllerTest {
                 new ClassPathResource("controller/category-request.json").getInputStream();
         final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
         final var dto = CategoryDto.builder()
-                .name("Java core")
+                .name("SpringBoot")
                 .build();
         final var response = CategoryDto.builder()
                 .id(1)
-                .name("Java core")
+                .name("SpringBoot")
                 .build();
 
         when(categoryService.updateCategory(1, dto)).thenReturn(response);
@@ -96,7 +97,7 @@ class CategoryControllerTest {
                         .content(requestBody))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.name", equalTo("Сore")));
+                .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
 
     }
 
