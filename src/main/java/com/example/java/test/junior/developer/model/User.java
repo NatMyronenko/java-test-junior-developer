@@ -1,11 +1,14 @@
 package com.example.java.test.junior.developer.model;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @Entity
 @Table(name = "users")
 public class User {
@@ -24,7 +27,7 @@ public class User {
     @Column(name = "email",nullable = false)
     private String email;
 
-    public User() {
+    @Column(name = "email",nullable = false)
+    private String password;
 
-    }
 }
