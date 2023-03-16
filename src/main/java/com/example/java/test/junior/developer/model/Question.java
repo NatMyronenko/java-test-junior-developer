@@ -6,32 +6,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
+@Entity
 @Data
 @Builder
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
-@Table(name = "categories")
-@Entity
-public class Category {
-
+@Table(name = "questions")
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id", nullable = false)
+    @Column(name = "question_id", nullable = false)
     private int id;
 
-    @Column(name = "category", nullable = false)
+    @Column(name = "question", nullable = false)
     public String name;
 
     @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "language_id")
-    private Language language;
-
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "question",
-            fetch = FetchType.EAGER)
-    private List<Question> listQuestions;
-
+    @JoinColumn(name = "category_id")
+    private Question question;
 }
-
