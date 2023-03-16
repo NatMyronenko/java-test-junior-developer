@@ -1,8 +1,6 @@
 package com.example.java.test.junior.developer.mapper;
 
-import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.dto.QuestionDto;
-import com.example.java.test.junior.developer.model.Category;
 import com.example.java.test.junior.developer.model.Question;
 import org.springframework.stereotype.Component;
 

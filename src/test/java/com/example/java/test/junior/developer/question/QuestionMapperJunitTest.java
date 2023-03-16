@@ -1,10 +1,7 @@
 package com.example.java.test.junior.developer.question;
 
-import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.dto.QuestionDto;
-import com.example.java.test.junior.developer.mapper.CategoryMapper;
 import com.example.java.test.junior.developer.mapper.QuestionMapper;
-import com.example.java.test.junior.developer.model.Category;
 import com.example.java.test.junior.developer.model.Question;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

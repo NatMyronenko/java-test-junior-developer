@@ -1,11 +1,7 @@
 package com.example.java.test.junior.developer.controller;
-import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.dto.QuestionDto;
-import com.example.java.test.junior.developer.model.Question;
-import com.example.java.test.junior.developer.service.CategoryService;
 import com.example.java.test.junior.developer.service.QuestionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

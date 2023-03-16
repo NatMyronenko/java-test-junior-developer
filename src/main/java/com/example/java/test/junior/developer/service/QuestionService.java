@@ -1,12 +1,8 @@
 package com.example.java.test.junior.developer.service;
 
 
-import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.dto.QuestionDto;
-import com.example.java.test.junior.developer.mapper.CategoryMapper;
 import com.example.java.test.junior.developer.mapper.QuestionMapper;
-import com.example.java.test.junior.developer.model.Question;
-import com.example.java.test.junior.developer.repository.CategoryRepository;
 import com.example.java.test.junior.developer.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
