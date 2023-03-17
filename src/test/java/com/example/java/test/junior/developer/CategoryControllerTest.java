@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.category;
+package com.example.java.test.junior.developer;
 
 import com.example.java.test.junior.developer.controller.CategoryController;
 import com.example.java.test.junior.developer.dto.CategoryDto;

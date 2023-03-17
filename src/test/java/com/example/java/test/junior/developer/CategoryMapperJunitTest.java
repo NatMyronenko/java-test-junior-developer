@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.category;
+package com.example.java.test.junior.developer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
