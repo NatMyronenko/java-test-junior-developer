@@ -5,7 +5,6 @@ import com.example.java.test.junior.developer.mapper.QuestionMapper;
 import com.example.java.test.junior.developer.model.Question;
 import com.example.java.test.junior.developer.repository.QuestionRepository;
 import com.example.java.test.junior.developer.service.QuestionService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
