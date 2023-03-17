@@ -22,7 +22,7 @@ public class Question {
     @Column(name = "question", nullable = false)
     public String name;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "category_id")
-    private Question question;
+  //  @ManyToOne(cascade = CascadeType.DETACH)
+  //  @JoinColumn(name = "category_id")
+  //  private Category catrgoty;
 }

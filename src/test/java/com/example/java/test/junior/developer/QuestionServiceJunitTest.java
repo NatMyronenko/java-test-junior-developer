@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.question;
+package com.example.java.test.junior.developer;
 
 import com.example.java.test.junior.developer.dto.QuestionDto;
 import com.example.java.test.junior.developer.mapper.QuestionMapper;
