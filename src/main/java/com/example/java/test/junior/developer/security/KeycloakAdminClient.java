@@ -7,8 +7,11 @@ import org.keycloak.representations.idm.UserRepresentation;
 
 import java.util.Arrays;
 
-public class KeycloakUserCreator {
+public class KeycloakAdminClient {
+    private Keycloak keycloak;
+
     public void createUser() {
+
         /* Параметри підключення до Keycloak сервера - створені для візуалізацї
          *(будуть предаватись аргументами в білдер) Спробую їх імпортувати з пропертей
          * використовуючи @Component та @Value
@@ -21,7 +24,7 @@ public class KeycloakUserCreator {
         String password = "mypassword";
 
         // Створення Keycloak клієнта
-        Keycloak keycloak = KeycloakBuilder.builder()
+        keycloak = KeycloakBuilder.builder()
                 .serverUrl(serverUrl)  // Ще не придумав як краще брати налаштування з properties
                 .realm(realm)          // те саме (налаштовується в Keycloak наскільки я зрозумів)
                 .clientId(clientId)    // можливо непотрібне поле =)
@@ -30,12 +33,8 @@ public class KeycloakUserCreator {
                 .password(password)    // пароль від нього ж
                 .build();              // створити
 
-        // Створення user-а
-        UserRepresentation user = new UserRepresentation();
-        user.setFirstName("Aleks");         // В ці поля будуть підставлятись дані юзвірів
-        user.setLastName("aleksdenni");
-        user.setEmail("aleksdenni@example.com");
-        user.setEnabled(true);
+        // Створення user-а виніс в UserMapper
+        UserRepresentation user ;
 
         // Встановлення пароля для user
         CredentialRepresentation credential = new CredentialRepresentation();
