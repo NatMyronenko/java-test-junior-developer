@@ -25,4 +25,7 @@ public class Question {
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public Question(int i, String s) {
+    }
 }
