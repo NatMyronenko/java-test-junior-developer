@@ -37,20 +37,20 @@ public class UserMapper {
                 .build();
     }
 
-
-    public void toUserRepresentation(UserRequestDto userRequestDto) {
-        // Чи потрібно повертати звідси user-a ? mapper він же для конвертування в щось інше.
+    public UserRepresentation toUserRepresentation(UserRequestDto userRequestDto) {
+        // Чи потрібно повертати звідси UserRepresentation ?
         var user = new UserRepresentation();
         user.setId(user.getId());
         user.setFirstName(userRequestDto.getFirstName());
         user.setLastName(userRequestDto.getLastName());
         user.setEmail(userRequestDto.getEmail());
         user.setEnabled(true);
-        // Чи правильно вносити присвоєння паролю в mapper?
+        // Чи правильно вносити присвоєння паролю в mapper-і ?
         var credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
         credential.setValue(userRequestDto.getPassword());
         credential.setTemporary(false);
         user.setCredentials(Arrays.asList(credential));
+        return user;
     }
 }
