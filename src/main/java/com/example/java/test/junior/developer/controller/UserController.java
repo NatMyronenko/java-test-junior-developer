@@ -1,5 +1,7 @@
 package com.example.java.test.junior.developer.controller;
 
+import com.example.java.test.junior.developer.dto.UserDto;
+import com.example.java.test.junior.developer.dto.UserRequestDto;
 import com.example.java.test.junior.developer.model.User;
 import com.example.java.test.junior.developer.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +17,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody @Valid User user) {
-        return userService.createUser(user);
+    public UserDto createUser(@RequestBody @Valid UserRequestDto userRequestDto) {
+        return userService.createUser(userRequestDto);
     }
 
     @GetMapping("/{id}")
