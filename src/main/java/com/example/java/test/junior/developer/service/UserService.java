@@ -10,35 +10,47 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-//TODO: Перепишу нормально під мапер коли посплю )
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+
     @Transactional
-    public UserDto createUser(UserRequestDto userRequestDto){
+    public UserDto createUser(UserRequestDto userRequestDto) {
         userMapper.toUserRepresentation(userRequestDto);
         final UserDto userDto = userMapper.toDto(userRequestDto);
-        userRepository.save(userMapper.toModel(userDto));
-        return userDto;
+        User savedUser = userRepository.save(userMapper.toModel(userDto));
+        return userMapper.toDto(savedUser);
     }
+
     @Transactional
-    public User updateUser(Long id, User user) {
+    public UserDto updateUser(Long id, UserDto userDto) {
+        final User user = userMapper.toModel(userDto);
         user.setId(id);
-        return userRepository.save(user);
+        final User savedUser = userRepository.save(user);  // Не зовсім розумію логіку такого написання/ Для перевірки чи зберегли в репо?
+        return userMapper.toDto(savedUser);
     }
+
     @Transactional
-    public User getUser(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserDto getUser(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        assert user != null;
+        return userMapper.toDto(user);
     }
+
     @Transactional
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(userMapper::toDto)
+                .collect(Collectors.toList());
     }
+
     @Transactional
-    public void deleteUser(Long id){
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 }

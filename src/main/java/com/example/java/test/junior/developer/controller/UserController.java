@@ -2,14 +2,13 @@ package com.example.java.test.junior.developer.controller;
 
 import com.example.java.test.junior.developer.dto.UserDto;
 import com.example.java.test.junior.developer.dto.UserRequestDto;
-import com.example.java.test.junior.developer.model.User;
 import com.example.java.test.junior.developer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-//TODO: перероблю під DTO і mapper завтра
+
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -17,18 +16,18 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public UserDto createUser(@RequestBody @Valid UserRequestDto userRequestDto) {
-        return userService.createUser(userRequestDto);
+    public UserDto createUser(@RequestBody @Valid UserRequestDto userRequest) {
+        return userService.createUser(userRequest);
     }
 
     @GetMapping("/{id}")
-    public User getUser(@Valid @PathVariable Long id) {
+    public UserDto getUser(@Valid @PathVariable Long id) {
         return userService.getUser(id);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id,
-                                      @RequestBody @Valid User user) {
+    public UserDto updateUser(@PathVariable Long id,
+                              @RequestBody @Valid UserDto user) {
         return userService.updateUser(id, user);
     }
 
@@ -38,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<UserDto> getUsers() {
         return userService.getAllUsers();
     }
 }
