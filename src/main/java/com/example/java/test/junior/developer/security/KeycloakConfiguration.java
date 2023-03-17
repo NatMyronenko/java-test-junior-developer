@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-//TODO: Розібратись з ConfigurationProperties (як діставати дані)
+//TODO: Розібратись з ConfigurationProperties (як діставати дані). username ?
 @Configuration
-@ConfigurationProperties(prefix = "keycloak")
+@ConfigurationProperties(prefix = "keycloak")   // не зовсім розібрався як ця штука працює (атоматично підставляє?), витягнув дані з keycloakProperties
 public class KeycloakConfiguration {
     @Autowired
     private KeycloakSpringBootProperties keycloakProperties;
@@ -18,11 +18,11 @@ public class KeycloakConfiguration {
     public Keycloak keycloak() {
         return KeycloakBuilder.builder()
                 .serverUrl(keycloakProperties.getAuthServerUrl())  // Ще не придумав як краще брати налаштування з properties
-                .realm(keycloakProperties.getRealmKey())          // те саме (налаштовується в Keycloak наскільки я зрозумів)
+                .realm(keycloakProperties.getRealm())          // те саме (налаштовується в Keycloak наскільки я зрозумів)
                 .clientId(keycloakProperties.getResource())    // можливо непотрібне поле =)
-                .clientSecret("ggg") // також з пропертя
-                .username("admin")    // логін від Keycloak
-                .password("admin")    // пароль від нього ж
+               // .clientSecret() // Думаю що це не потрібно
+                .username("admin")    // логін від Keycloak. Поки не знайшов де він вноситься
+                .password(keycloakProperties.getClientKeyPassword())    // пароль від нього ж
                 .build();
     }
 }
