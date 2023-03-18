@@ -1,17 +1,18 @@
 package com.example.java.test.junior.developer.security;
 
-import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.keycloak.adapters.springboot.KeycloakSpringBootProperties;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
-@Data
+@Component
+@RequiredArgsConstructor
 public class KeycloakAdminClient {
+    private final KeycloakSpringBootProperties keycloakProperties;
     private final Keycloak keycloak;
 
-    @Bean
-    public void createUser(String realm, UserRepresentation user) {
-        // Додавання user до Keycloak
-        keycloak.realm(realm).users().create(user);
+    public void createUser(UserRepresentation user) {
+        keycloak.realm(keycloakProperties.getRealm()).users().create(user).close(); //should this be closed?
     }
 }

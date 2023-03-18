@@ -3,29 +3,23 @@ package com.example.java.test.junior.developer.dto;
 import lombok.*;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
 @Builder
+@Value
+@RequiredArgsConstructor
 public class UserRequestDto {
+    @NotEmpty
+    @Pattern(regexp = "[a-zA-Zа-яА-Яіїє]+")
+    @NonNull String firstName;
 
-    @NonNull
-    private final Long id;
+    @Pattern(regexp = "[a-zA-Zа-яА-Яіїє]+")
+    @NonNull String lastName;
 
-    @NonNull
-    private final String firstName;
+    @Email(regexp = "[\\S]+@[a-z0-9.\\-]+\\.[a-z]{2,6}", message = "Email should be valid")
+    @NonNull String email;
 
-    @NonNull
-    private final String lastName;
-
-    @Email(message = "Email should be valid")   // Використовувати javax.validation для верифікації ?
-    @NotNull
-    private final String email;
-
-    @NonNull
-    private final String password;  // Чи можна зберігати тут тимчасово пароль, чи безпечно це?
+    @NotEmpty
+    @NonNull String password;
 }

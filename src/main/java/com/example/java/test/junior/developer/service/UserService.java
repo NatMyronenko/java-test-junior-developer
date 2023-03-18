@@ -7,7 +7,6 @@ import com.example.java.test.junior.developer.model.User;
 import com.example.java.test.junior.developer.repository.UserRepository;
 import com.example.java.test.junior.developer.security.KeycloakAdminClient;
 import lombok.RequiredArgsConstructor;
-import org.keycloak.adapters.springboot.KeycloakSpringBootProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +19,11 @@ public class UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final KeycloakAdminClient keycloakAdminClient;
-    private KeycloakSpringBootProperties keycloakProperties;
 
     @Transactional
     public UserDto createUser(UserRequestDto userRequestDto) {
         var user = userMapper.toUserRepresentation(userRequestDto);
-        keycloakAdminClient.createUser(keycloakProperties.getRealm(), user);// Не можу зрозуміти як "правильно" передати realm при створенні юзера.
+        keycloakAdminClient.createUser(user);
         final UserDto userDto = userMapper.toDto(userRequestDto);
         User savedUser = userRepository.save(userMapper.toModel(userDto));
         return userMapper.toDto(savedUser);
@@ -35,14 +33,14 @@ public class UserService {
     public UserDto updateUser(Long id, UserDto userDto) {
         final User user = userMapper.toModel(userDto);
         user.setId(id);
-        final User savedUser = userRepository.save(user);  // Не зовсім розумію логіку такого написання/ Для перевірки чи зберегли в репо?
+        final User savedUser = userRepository.save(user);
         return userMapper.toDto(savedUser);
     }
 
     @Transactional
     public UserDto getUser(Long id) {
         User user = userRepository.findById(id).orElse(null);
-        return user != null ? userMapper.toDto(user) : null;   // Не придумав як краще зробити якщо користувач не існує. Повертаю null
+        return user != null ? userMapper.toDto(user) : null;
     }
 
     @Transactional

@@ -30,7 +30,6 @@ public class UserMapper {
 
     public UserDto toDto(UserRequestDto userRequestDto) {
         return UserDto.builder()
-                .id(userRequestDto.getId())    // Чи потрібно вносити id з запиту ?
                 .firstName(userRequestDto.getFirstName())
                 .lastName(userRequestDto.getLastName())
                 .email(userRequestDto.getEmail())
@@ -38,14 +37,12 @@ public class UserMapper {
     }
 
     public UserRepresentation toUserRepresentation(UserRequestDto userRequestDto) {
-        // Чи потрібно повертати звідси UserRepresentation ?
         var user = new UserRepresentation();
-        user.setId(user.getId());
         user.setFirstName(userRequestDto.getFirstName());
         user.setLastName(userRequestDto.getLastName());
         user.setEmail(userRequestDto.getEmail());
         user.setEnabled(true);
-        // Чи правильно вносити присвоєння паролю в mapper-і ?
+
         var credential = new CredentialRepresentation();
         credential.setType(CredentialRepresentation.PASSWORD);
         credential.setValue(userRequestDto.getPassword());
