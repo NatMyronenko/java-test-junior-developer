@@ -1,5 +1,6 @@
 package com.example.java.test.junior.developer.security;
 
+import lombok.Getter;
 import lombok.Setter;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Setter
+@Getter
 @Configuration
 @ConfigurationProperties(prefix = "keycloak")
 public class KeycloakConfiguration {
