@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer;
+package com.example.java.test.junior.developer.controller;
 
 
 import static org.hamcrest.Matchers.equalTo;

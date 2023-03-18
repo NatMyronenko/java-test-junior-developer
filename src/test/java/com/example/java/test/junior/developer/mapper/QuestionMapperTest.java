@@ -1,7 +1,6 @@
-package com.example.java.test.junior.developer;
+package com.example.java.test.junior.developer.mapper;
 
 import com.example.java.test.junior.developer.dto.QuestionDto;
-import com.example.java.test.junior.developer.mapper.QuestionMapper;
 import com.example.java.test.junior.developer.model.Question;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ public class QuestionMapperTest {
 
     @Test
     public void toEntity_ValidDto_ReturnsEntity() {
-        QuestionDto questionDto = new QuestionDto(0, "What is polymorphism?");
+        QuestionDto questionDto = new QuestionDto(1, "What is polymorphism?");
 
         Question result = questionMapper.toEntity(questionDto);
 

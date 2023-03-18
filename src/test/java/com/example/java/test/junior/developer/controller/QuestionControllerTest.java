@@ -1,8 +1,7 @@
-package com.example.java.test.junior.developer;
-
-import com.example.java.test.junior.developer.controller.CategoryController;
-import com.example.java.test.junior.developer.dto.CategoryDto;
-import com.example.java.test.junior.developer.service.CategoryService;
+package com.example.java.test.junior.developer.controller;
+import com.example.java.test.junior.developer.controller.QuestionController;
+import com.example.java.test.junior.developer.dto.QuestionDto;
+import com.example.java.test.junior.developer.service.QuestionService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,89 +24,89 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@WebMvcTest(controllers = CategoryController.class,
+@WebMvcTest(controllers = QuestionController.class,
         excludeAutoConfiguration = SecurityAutoConfiguration.class)
-class CategoryControllerTest {
+class QuestionControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private CategoryService categoryService;
+    private QuestionService questionService;
 
     @SneakyThrows
     @Test
-    void testCreateCategory() {
+    void testCreateQuestion() {
         final var inputStream =
-                new ClassPathResource("controller/category-request.json").getInputStream();
+                new ClassPathResource("controller/question-request.json").getInputStream();
         final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
-        final var dto = CategoryDto.builder()
-                .name("SpringBoot")
+        final var dto = QuestionDto.builder()
+                .name("What is polymorphism?")
                 .build();
-        final var response = CategoryDto.builder()
+        final var response = QuestionDto.builder()
                 .id(1)
-                .name("SpringBoot")
+                .name("What is polymorphism?")
                 .build();
 
-        when(categoryService.createCategory(dto)).thenReturn(response);
+        when(questionService.createQuestion(dto)).thenReturn(response);
 
-        mockMvc.perform(post("/api/v1/categories")
+        mockMvc.perform(post("/api/v1/questions")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
+                .andExpect(jsonPath("$.name", equalTo("What is polymorphism?")));
     }
 
 
 
     @SneakyThrows
     @Test
-    void testGetAllCategories() {
-        final var response = CategoryDto.builder()
+    void testGetAllQuestions() {
+        final var response = QuestionDto.builder()
                 .id(1)
-                .name("SpringBoot")
+                .name("What is polymorphism?")
                 .build();
-        when(categoryService.getAllCategories()).thenReturn(List.of(response));
+        when(questionService.getAllQuestions()).thenReturn(List.of(response));
 
-        mockMvc.perform(get("/api/v1/categories"))
+        mockMvc.perform(get("/api/v1/questions"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", equalTo(1)))
                 .andExpect(jsonPath("$[0].id", equalTo(1)))
-                .andExpect(jsonPath("$[0].name", equalTo("SpringBoot")));
+                .andExpect(jsonPath("$[0].name", equalTo("What is polymorphism?")));
     }
 
     @SneakyThrows
     @Test
-    void testUpdateCategory() {
+    void testUpdateQuestion() {
         final var inputStream =
-                new ClassPathResource("controller/category-request.json").getInputStream();
+                new ClassPathResource("controller/question-request.json").getInputStream();
         final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
-        final var dto = CategoryDto.builder()
-                .name("SpringBoot")
+        final var dto = QuestionDto.builder()
+                .name("What is polymorphism?")
                 .build();
-        final var response = CategoryDto.builder()
+        final var response = QuestionDto.builder()
                 .id(1)
-                .name("SpringBoot")
+                .name("What is polymorphism?")
                 .build();
 
-        when(categoryService.updateCategory(1, dto)).thenReturn(response);
+        when(questionService.updateQuestion(1, dto)).thenReturn(response);
 
-        mockMvc.perform(put("/api/v1/categories/1")
+        mockMvc.perform(put("/api/v1/questions/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
+                .andExpect(jsonPath("$.name", equalTo("What is polymorphism?")));
 
     }
 
     @SneakyThrows
     @Test
-    void testDeleteCategory() {
-        mockMvc.perform(delete("/api/v1/categories/1"))
+    void testDeleteQuestion() {
+        mockMvc.perform(delete("/api/v1/questions/1"))
                 .andExpect(status().isOk());
 
-        verify(categoryService).deleteCategory(1);
+        verify(questionService).deleteQuestion(1);
     }
 
 }

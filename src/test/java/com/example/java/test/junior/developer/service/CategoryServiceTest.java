@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer;
+package com.example.java.test.junior.developer.service;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.mapper.CategoryMapper;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class CategoryServiceJunitTest {
+public class CategoryServiceTest {
     private final CategoryRepository categoryRepository = Mockito.mock(CategoryRepository.class);
     private final CategoryMapper categoryMapper = new CategoryMapper();
     private final CategoryService categoryService = new CategoryService(categoryRepository, categoryMapper);

@@ -26,6 +26,4 @@ public class Question {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Question(int i, String s) {
-    }
 }
