@@ -42,8 +42,7 @@ public class UserService {
     @Transactional
     public UserDto getUser(Long id) {
         User user = userRepository.findById(id).orElse(null);
-        assert user != null;
-        return userMapper.toDto(user);
+        return user != null ? userMapper.toDto(user) : null;   // Не придумав як краще зробити якщо користувач не існує. Повертаю null
     }
 
     @Transactional
