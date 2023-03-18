@@ -30,7 +30,7 @@ public class UserMapper {
 
     public UserDto toDto(UserRequestDto userRequestDto) {
         return UserDto.builder()
-                .id(userRequestDto.getId())
+                .id(userRequestDto.getId())    // Чи потрібно вносити id з запиту ?
                 .firstName(userRequestDto.getFirstName())
                 .lastName(userRequestDto.getLastName())
                 .email(userRequestDto.getEmail())
