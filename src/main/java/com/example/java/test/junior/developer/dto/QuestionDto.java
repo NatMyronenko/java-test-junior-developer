@@ -1,5 +1,6 @@
 package com.example.java.test.junior.developer.dto;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;

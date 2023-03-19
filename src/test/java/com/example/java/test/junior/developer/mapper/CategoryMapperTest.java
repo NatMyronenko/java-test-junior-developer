@@ -22,6 +22,7 @@ public class CategoryMapperTest {
 
         Category result = categoryMapper.toEntity(categoryDto);
 
+
         assertEquals(categoryDto.getName(), result.getName());
     }
 
