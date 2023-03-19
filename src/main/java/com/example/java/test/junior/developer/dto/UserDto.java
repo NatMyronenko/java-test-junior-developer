@@ -9,6 +9,7 @@ import lombok.Value;
 @Builder
 @RequiredArgsConstructor
 public class UserDto {
+
   Long id;
   @NonNull String firstName;
   @NonNull String lastName;

@@ -13,6 +13,5 @@ import lombok.Value;
 public class CategoryDto {
 
   int id;
-
   @NotBlank String name;
 }
