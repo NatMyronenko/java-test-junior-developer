@@ -36,7 +36,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public CategoryDto updateCategory(int id, CategoryDto dto) {
+    public CategoryDto updateCategory(Long id, CategoryDto dto) {
         final var category = categoryMapper.toEntity(dto);
         category.setId(id);
         final var saved = categoryRepository.save(category);
@@ -44,7 +44,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public void deleteCategory(int id) {
+    public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
     }
 

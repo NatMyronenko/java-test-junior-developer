@@ -26,13 +26,13 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public CategoryDto updateCategory(@PathVariable int id,
+    public CategoryDto updateCategory(@PathVariable Long id,
                               @RequestBody @Valid CategoryDto category) {
         return categoryService.updateCategory(id, category);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable int id) {
+    public void deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
     }
 }

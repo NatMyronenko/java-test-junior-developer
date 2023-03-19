@@ -1,35 +1,36 @@
-package com.example.java.test.junior.developer.category;
+package com.example.java.test.junior.developer.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
-import com.example.java.test.junior.developer.mapper.CategoryMapper;
 import com.example.java.test.junior.developer.model.Category;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
-public class CategoryMapperJunitTest {
+class CategoryMapperTest {
 
-    @InjectMocks
     private CategoryMapper categoryMapper;
 
-    @Test
-    public void toEntity_ValidDto_ReturnsEntity() {
-        CategoryDto categoryDto = new CategoryDto(1, "SpringBoot");
-
-        Category result = categoryMapper.toEntity(categoryDto);
-
-        assertEquals(categoryDto.getName(), result.getName());
+    @BeforeEach
+    void setUp() {
+        categoryMapper = new CategoryMapper();
     }
 
     @Test
-    public void toDto_ValidEntity_ReturnsDto() {
+    void toEntity_ValidDto_ReturnsEntity() {
+        CategoryDto categoryDto = new CategoryDto(1L, "SpringBoot");
+
+        Category result = categoryMapper.toEntity(categoryDto);
+
+        assertThat(result.getId()).isNull();
+        assertThat(result.getName()).isEqualTo(categoryDto.getName());
+    }
+
+    @Test
+    void toDto_ValidEntity_ReturnsDto() {
         Category category = Category.builder()
-                .id(1)
+                .id(1L)
                 .name("SpringBoot")
                 .build();
 

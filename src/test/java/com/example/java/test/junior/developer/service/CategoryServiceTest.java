@@ -1,31 +1,29 @@
-package com.example.java.test.junior.developer.category;
-
-import com.example.java.test.junior.developer.dto.CategoryDto;
-import com.example.java.test.junior.developer.mapper.CategoryMapper;
-import com.example.java.test.junior.developer.model.Category;
-import com.example.java.test.junior.developer.repository.CategoryRepository;
-import com.example.java.test.junior.developer.service.CategoryService;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+package com.example.java.test.junior.developer.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class CategoryServiceJunitTest {
+import com.example.java.test.junior.developer.dto.CategoryDto;
+import com.example.java.test.junior.developer.mapper.CategoryMapper;
+import com.example.java.test.junior.developer.model.Category;
+import com.example.java.test.junior.developer.repository.CategoryRepository;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+public class CategoryServiceTest {
     private final CategoryRepository categoryRepository = Mockito.mock(CategoryRepository.class);
     private final CategoryMapper categoryMapper = new CategoryMapper();
     private final CategoryService categoryService = new CategoryService(categoryRepository, categoryMapper);
 
     @Test
     public void createCategory_ValidDto_ReturnsDtoWithId() {
-        CategoryDto categoryDto = new CategoryDto(1, "SpringBoot");
+        CategoryDto categoryDto = new CategoryDto(1L, "SpringBoot");
         Category category = Category.builder()
-                .id(1)
+                .id(1L)
                 .name(categoryDto.getName())
                 .build();
 
@@ -46,7 +44,7 @@ public class CategoryServiceJunitTest {
 
     @Test
     public void updateCategory_ValidIdAndDto_ReturnsDtoWithUpdatedFields() {
-        int id = 1;
+        Long id = 1L;
         CategoryDto categoryDto = new CategoryDto(id, "SpringBoot");
         Category existingCategory = Category.builder()
                 .id(id)
@@ -68,7 +66,7 @@ public class CategoryServiceJunitTest {
 
     @Test
     public void deleteCategory_ValidId_DeletesUser() {
-        int id = 1;
+        Long id = 1L;
         categoryService.deleteCategory(id);
         Mockito.verify(categoryRepository).deleteById(id);
     }
