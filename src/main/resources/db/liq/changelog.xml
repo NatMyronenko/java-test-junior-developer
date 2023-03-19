@@ -143,4 +143,46 @@
                                   referencedTableName="categories"/>
     </changeSet>
 
+    <changeSet  author="yazhevika"  id="12" runAlways="true">
+        <loadUpdateData  file="db/liq/languages.csv"
+                         separator=";"
+                         tableName="languages" primaryKey="language_id">
+            <column name="language_id" type="numeric"/>
+            <column name="language" type="String"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet  author="yazhevika"  id="13" runAlways="true">
+        <loadUpdateData  file="db/liq/categories.csv"
+                         separator=";"
+                         tableName="categories" primaryKey="category_id">
+            <column name="category_id" type="numeric"/>
+            <column name="category" type="String"/>
+            <column name="language_id" type="numeric"/>
+
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet  author="yazhevika"  id="14" runAlways="true">
+        <loadUpdateData  file="db/liq/questions.csv"
+                         separator=";"
+                         tableName="questions" primaryKey="question_id">
+            <column name="question_id" type="numeric"/>
+            <column name="question" type="String"/>
+            <column name="category_id" type="numeric"/>
+
+        </loadUpdateData>
+    </changeSet>
+
+<!--    <changeSet  author="yazhevika"  id="15" runAlways="true">
+        <loadUpdateData  file="db/liq/options.csv"
+                         separator=";"
+                         tableName="options" primaryKey="question_id">
+            <column name="option_id" type="numeric"/>
+            <column name="answer" type="String"/>
+            <column name="question_id" type="numeric"/>
+            <column name="correct" type="boolean"/>
+        </loadUpdateData>
+    </changeSet>-->
+
 </databaseChangeLog>

@@ -1,0 +1,23 @@
+question_id;question;category_id
+1;What is the scope of a variable declared with the let keyword?;1
+2;What is a higher-order function in JavaScript?;1
+3;How do you access a property of an object in JavaScript?;1
+4;What is encapsulation in object-oriented programming?;1
+5;What is the purpose of a Promise in JavaScript?;1
+6;What is the purpose of the .catch() method in a JavaScript promise?;1
+7;Which statement is TRUE?;1
+8;What is the purpose of the array slice method?;1
+9;Which statement is TRUE?;1
+10;What is the Temporal Dead Zone?;1
+11;In which case output in console will be UNDEFINED?;1
+12;What types of web storrage do you know?;1
+13;What are the three states of promise?;1
+14;What is the value of initialized, but not declared variable?;1
+15;What is the difference between window and document?;1
+16;How to create your own annotation?;2
+17;"... result(Integer num, Function<Integer, String> func) {
+return func.apply(num);
+} // Which return data type is correct ? ";2
+18;Sort method in Arrays;2
+19;How to override a static method?;2
+20;Ñan we always use try-with-resources ?;2
