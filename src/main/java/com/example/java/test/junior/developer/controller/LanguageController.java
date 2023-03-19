@@ -19,27 +19,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LanguageController {
 
-    private final LanguageService languageService;
+  private final LanguageService languageService;
 
-    @PostMapping
-    public LanguageDto createLanguage(@RequestBody @Valid LanguageDto language) {
-        return languageService.createLanguage(language);
-    }
+  @PostMapping
+  public LanguageDto createLanguage(@RequestBody @Valid LanguageDto language) {
+    return languageService.createLanguage(language);
+  }
 
-    @GetMapping
-    public List<LanguageDto> getLanguages() {
-        return languageService.getAllLanguages();
-    }
+  @GetMapping
+  public List<LanguageDto> getLanguages() {
+    return languageService.getAllLanguages();
+  }
 
-    @PutMapping("/{id}")
-    public LanguageDto updateLanguage(@PathVariable Long id,
-                                      @RequestBody @Valid LanguageDto language) {
-        return languageService.updateLanguage(id, language);
-    }
+  @PutMapping("/{id}")
+  public LanguageDto updateLanguage(@PathVariable Long id,
+      @RequestBody @Valid LanguageDto language) {
+    return languageService.updateLanguage(id, language);
+  }
 
-    @DeleteMapping("/{id}")
-    public void deleteLanguage(@PathVariable Long id) {
-        languageService.deleteLanguage(id);
-    }
-
+  @DeleteMapping("/{id}")
+  public void deleteLanguage(@PathVariable Long id) {
+    languageService.deleteLanguage(id);
+  }
 }

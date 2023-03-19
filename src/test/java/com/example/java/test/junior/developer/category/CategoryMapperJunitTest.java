@@ -8,35 +8,33 @@ import com.example.java.test.junior.developer.model.Category;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class CategoryMapperJunitTest {
 
-    @InjectMocks
-    private CategoryMapper categoryMapper;
+  @InjectMocks
+  private CategoryMapper categoryMapper;
 
-    @Test
-    public void toEntity_ValidDto_ReturnsEntity() {
-        CategoryDto categoryDto = new CategoryDto(1, "SpringBoot");
+  @Test
+  public void toEntity_ValidDto_ReturnsEntity() {
+    CategoryDto categoryDto = new CategoryDto(1, "SpringBoot");
 
-        Category result = categoryMapper.toEntity(categoryDto);
+    Category result = categoryMapper.toEntity(categoryDto);
 
-        assertEquals(categoryDto.getName(), result.getName());
-    }
+    assertEquals(categoryDto.getName(), result.getName());
+  }
 
-    @Test
-    public void toDto_ValidEntity_ReturnsDto() {
-        Category category = Category.builder()
-                .id(1)
-                .name("SpringBoot")
-                .build();
+  @Test
+  public void toDto_ValidEntity_ReturnsDto() {
+    Category category = Category.builder()
+        .id(1)
+        .name("SpringBoot")
+        .build();
 
-        CategoryDto result = categoryMapper.toDto(category);
+    CategoryDto result = categoryMapper.toDto(category);
 
-        assertEquals(category.getId(), result.getId());
-        assertEquals(category.getName(), result.getName());
-    }
+    assertEquals(category.getId(), result.getId());
+    assertEquals(category.getName(), result.getName());
+  }
 }
-

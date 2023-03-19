@@ -6,53 +6,53 @@ import com.example.java.test.junior.developer.mapper.UserMapper;
 import com.example.java.test.junior.developer.model.User;
 import com.example.java.test.junior.developer.repository.UserRepository;
 import com.example.java.test.junior.developer.security.KeycloakAdminClient;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserMapper userMapper;
-    private final UserRepository userRepository;
-    private final KeycloakAdminClient keycloakAdminClient;
 
-    @Transactional
-    public UserDto createUser(UserRequestDto userRequestDto) {
-        var user = userMapper.toUserRepresentation(userRequestDto);
-        keycloakAdminClient.createUser(user);
-        final UserDto userDto = userMapper.toDto(userRequestDto);
-        User savedUser = userRepository.save(userMapper.toModel(userDto));
-        return userMapper.toDto(savedUser);
-    }
+  private final UserMapper userMapper;
+  private final UserRepository userRepository;
+  private final KeycloakAdminClient keycloakAdminClient;
 
-    @Transactional
-    public UserDto updateUser(Long id, UserDto userDto) {
-        final User user = userMapper.toModel(userDto);
-        user.setId(id);
-        final User savedUser = userRepository.save(user);
-        return userMapper.toDto(savedUser);
-    }
+  @Transactional
+  public UserDto createUser(UserRequestDto userRequestDto) {
+    var user = userMapper.toUserRepresentation(userRequestDto);
+    keycloakAdminClient.createUser(user);
+    final UserDto userDto = userMapper.toDto(userRequestDto);
+    User savedUser = userRepository.save(userMapper.toModel(userDto));
+    return userMapper.toDto(savedUser);
+  }
 
-    @Transactional
-    public UserDto getUser(Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        return user != null ? userMapper.toDto(user) : null;
-    }
+  @Transactional
+  public UserDto updateUser(Long id, UserDto userDto) {
+    final User user = userMapper.toModel(userDto);
+    user.setId(id);
+    final User savedUser = userRepository.save(user);
+    return userMapper.toDto(savedUser);
+  }
 
-    @Transactional
-    public List<UserDto> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
-                .map(userMapper::toDto)
-                .collect(Collectors.toList());
-    }
+  @Transactional
+  public UserDto getUser(Long id) {
+    User user = userRepository.findById(id).orElse(null);
+    return user != null ? userMapper.toDto(user) : null;
+  }
 
-    @Transactional
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
-    }
+  @Transactional
+  public List<UserDto> getAllUsers() {
+    List<User> users = userRepository.findAll();
+    return users.stream()
+        .map(userMapper::toDto)
+        .collect(Collectors.toList());
+  }
+
+  @Transactional
+  public void deleteUser(Long id) {
+    userRepository.deleteById(id);
+  }
 }

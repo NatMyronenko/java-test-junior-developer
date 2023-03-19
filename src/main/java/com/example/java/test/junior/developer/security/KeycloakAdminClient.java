@@ -8,10 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class KeycloakAdminClient {
-    private final KeycloakConfiguration keycloakProperties;
-    private final Keycloak keycloak;
 
-    public void createUser(UserRepresentation user) {
-        keycloak.realm(keycloakProperties.getRealm()).users().create(user).close(); //should this be closed?
-    }
+  private final KeycloakConfiguration keycloakProperties;
+  private final Keycloak keycloak;
+
+  public void createUser(UserRepresentation user) {
+    keycloak.realm(keycloakProperties.getRealm()).users().create(user)
+        .close(); //should this be closed?
+  }
 }

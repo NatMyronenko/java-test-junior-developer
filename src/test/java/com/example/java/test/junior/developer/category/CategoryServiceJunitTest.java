@@ -1,77 +1,76 @@
 package com.example.java.test.junior.developer.category;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.mapper.CategoryMapper;
 import com.example.java.test.junior.developer.model.Category;
 import com.example.java.test.junior.developer.repository.CategoryRepository;
 import com.example.java.test.junior.developer.service.CategoryService;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class CategoryServiceJunitTest {
-    private final CategoryRepository categoryRepository = Mockito.mock(CategoryRepository.class);
-    private final CategoryMapper categoryMapper = new CategoryMapper();
-    private final CategoryService categoryService = new CategoryService(categoryRepository, categoryMapper);
 
-    @Test
-    public void createCategory_ValidDto_ReturnsDtoWithId() {
-        CategoryDto categoryDto = new CategoryDto(1, "SpringBoot");
-        Category category = Category.builder()
-                .id(1)
-                .name(categoryDto.getName())
-                .build();
+  private final CategoryRepository categoryRepository = Mockito.mock(CategoryRepository.class);
+  private final CategoryMapper categoryMapper = new CategoryMapper();
+  private final CategoryService categoryService = new CategoryService(categoryRepository,
+      categoryMapper);
 
-        when(categoryRepository.save(any(Category.class))).thenReturn(category);
+  @Test
+  public void createCategory_ValidDto_ReturnsDtoWithId() {
+    CategoryDto categoryDto = new CategoryDto(1, "SpringBoot");
+    Category category = Category.builder()
+        .id(1)
+        .name(categoryDto.getName())
+        .build();
 
-        CategoryDto result = categoryService.createCategory(categoryDto);
+    when(categoryRepository.save(any(Category.class))).thenReturn(category);
 
-        assertEquals(category.getId(), result.getId());
-        assertEquals(category.getName(), result.getName());
-    }
+    CategoryDto result = categoryService.createCategory(categoryDto);
 
-    @Test
-    public void getAllCategories_NoUsers_ReturnsEmptyList() {
-        when(categoryRepository.findAll()).thenReturn(Collections.emptyList());
-        List<CategoryDto> result = categoryService.getAllCategories();
-        assertEquals(Collections.emptyList(), result);
-    }
+    assertEquals(category.getId(), result.getId());
+    assertEquals(category.getName(), result.getName());
+  }
 
-    @Test
-    public void updateCategory_ValidIdAndDto_ReturnsDtoWithUpdatedFields() {
-        int id = 1;
-        CategoryDto categoryDto = new CategoryDto(id, "SpringBoot");
-        Category existingCategory = Category.builder()
-                .id(id)
-                .name("SpringBoot")
-                .build();
-        Category updatedCategory = Category.builder()
-                .id(id)
-                .name(categoryDto.getName())
-                .build();
+  @Test
+  public void getAllCategories_NoUsers_ReturnsEmptyList() {
+    when(categoryRepository.findAll()).thenReturn(Collections.emptyList());
+    List<CategoryDto> result = categoryService.getAllCategories();
+    assertEquals(Collections.emptyList(), result);
+  }
 
-        when(categoryRepository.findById(id)).thenReturn(Optional.of(existingCategory));
-        when(categoryRepository.save(any(Category.class))).thenReturn(updatedCategory);
+  @Test
+  public void updateCategory_ValidIdAndDto_ReturnsDtoWithUpdatedFields() {
+    int id = 1;
+    CategoryDto categoryDto = new CategoryDto(id, "SpringBoot");
+    Category existingCategory = Category.builder()
+        .id(id)
+        .name("SpringBoot")
+        .build();
+    Category updatedCategory = Category.builder()
+        .id(id)
+        .name(categoryDto.getName())
+        .build();
 
-        CategoryDto result = categoryService.updateCategory(id, categoryDto);
+    when(categoryRepository.findById(id)).thenReturn(Optional.of(existingCategory));
+    when(categoryRepository.save(any(Category.class))).thenReturn(updatedCategory);
 
-        assertEquals(id, result.getId());
-        assertEquals(categoryDto.getName(), result.getName());
-    }
+    CategoryDto result = categoryService.updateCategory(id, categoryDto);
 
-    @Test
-    public void deleteCategory_ValidId_DeletesUser() {
-        int id = 1;
-        categoryService.deleteCategory(id);
-        Mockito.verify(categoryRepository).deleteById(id);
-    }
+    assertEquals(id, result.getId());
+    assertEquals(categoryDto.getName(), result.getName());
+  }
+
+  @Test
+  public void deleteCategory_ValidId_DeletesUser() {
+    int id = 1;
+    categoryService.deleteCategory(id);
+    Mockito.verify(categoryRepository).deleteById(id);
+  }
 }
-
-

@@ -13,17 +13,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "keycloak")
 public class KeycloakConfiguration {
-    private String authServerUrl;
-    private String realm;
-    private String clientId;
-    private String clientSecret;
-    @Bean
-    public Keycloak keycloak() {
-        return KeycloakBuilder.builder()
-                .serverUrl(authServerUrl)
-                .realm(realm)
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .build();
-    }
+
+  private String authServerUrl;
+  private String realm;
+  private String clientId;
+  private String clientSecret;
+
+  @Bean
+  public Keycloak keycloak() {
+    return KeycloakBuilder.builder()
+        .serverUrl(authServerUrl)
+        .realm(realm)
+        .clientId(clientId)
+        .clientSecret(clientSecret)
+        .build();
+  }
 }
