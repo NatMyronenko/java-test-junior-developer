@@ -1,16 +1,14 @@
 package com.example.java.test.junior.developer.service;
 
-
 import com.example.java.test.junior.developer.dto.QuestionDto;
 import com.example.java.test.junior.developer.mapper.QuestionMapper;
 import com.example.java.test.junior.developer.repository.QuestionRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -36,7 +34,7 @@ public class QuestionService {
     }
 
     @Transactional
-    public QuestionDto updateQuestion(int id, QuestionDto dto) {
+    public QuestionDto updateQuestion(Long id, QuestionDto dto) {
         final var question = questionMapper.toEntity(dto);
         question.setId(id);
         final var saved = questionRepository.save(question);
@@ -44,7 +42,7 @@ public class QuestionService {
     }
 
     @Transactional
-    public void deleteQuestion(int id) {
+    public void deleteQuestion(Long id) {
         questionRepository.deleteById(id);
     }
 

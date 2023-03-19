@@ -1,12 +1,10 @@
 package com.example.java.test.junior.developer.dto;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Value;
-
-import javax.validation.constraints.NotBlank;
 
 @Value
 @Builder
@@ -14,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class QuestionDto {
 
-    int id;
+    Long id;
 
     @NotBlank String name;
 

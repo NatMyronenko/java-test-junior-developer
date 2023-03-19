@@ -1,8 +1,19 @@
 package com.example.java.test.junior.developer.controller;
 
-import com.example.java.test.junior.developer.controller.CategoryController;
+import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.service.CategoryService;
+import java.nio.charset.Charset;
+import java.util.List;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +24,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
-
-import java.nio.charset.Charset;
-import java.util.List;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @WebMvcTest(controllers = CategoryController.class,
@@ -44,7 +45,7 @@ class CategoryControllerTest {
                 .name("SpringBoot")
                 .build();
         final var response = CategoryDto.builder()
-                .id(1)
+                .id(1L)
                 .name("SpringBoot")
                 .build();
 
@@ -64,7 +65,7 @@ class CategoryControllerTest {
     @Test
     void testGetAllCategories() {
         final var response = CategoryDto.builder()
-                .id(1)
+                .id(1L)
                 .name("SpringBoot")
                 .build();
         when(categoryService.getAllCategories()).thenReturn(List.of(response));
@@ -86,11 +87,11 @@ class CategoryControllerTest {
                 .name("SpringBoot")
                 .build();
         final var response = CategoryDto.builder()
-                .id(1)
+                .id(1L)
                 .name("SpringBoot")
                 .build();
 
-        when(categoryService.updateCategory(1, dto)).thenReturn(response);
+        when(categoryService.updateCategory(1L, dto)).thenReturn(response);
 
         mockMvc.perform(put("/api/v1/categories/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -107,7 +108,7 @@ class CategoryControllerTest {
         mockMvc.perform(delete("/api/v1/categories/1"))
                 .andExpect(status().isOk());
 
-        verify(categoryService).deleteCategory(1);
+        verify(categoryService).deleteCategory(1L);
     }
 
 }

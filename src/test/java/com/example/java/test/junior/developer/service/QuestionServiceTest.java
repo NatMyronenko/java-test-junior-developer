@@ -1,21 +1,20 @@
 package com.example.java.test.junior.developer.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.example.java.test.junior.developer.dto.QuestionDto;
 import com.example.java.test.junior.developer.mapper.QuestionMapper;
 import com.example.java.test.junior.developer.model.Question;
 import com.example.java.test.junior.developer.repository.QuestionRepository;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class QuestionServiceTest {
@@ -28,10 +27,7 @@ public class QuestionServiceTest {
 
     @InjectMocks
     private QuestionService questionService;
-    @Before
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+
     @Test
     public void createQuestionTest() {
         // given
@@ -70,7 +66,7 @@ public class QuestionServiceTest {
     @Test
     public void updateQuestionTest() {
         // given
-        int id = 1;
+        Long id = 1L;
         QuestionDto questionDto = new QuestionDto();
         Question question = new Question();
         question.setId(id);
@@ -88,7 +84,7 @@ public class QuestionServiceTest {
     @Test
     public void deleteQuestionTest() {
         // given
-        int id = 1;
+        Long id = 1L;
 
         // when
         questionService.deleteQuestion(id);

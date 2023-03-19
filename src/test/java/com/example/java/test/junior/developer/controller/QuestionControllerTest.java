@@ -1,7 +1,19 @@
 package com.example.java.test.junior.developer.controller;
-import com.example.java.test.junior.developer.controller.QuestionController;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.example.java.test.junior.developer.dto.QuestionDto;
 import com.example.java.test.junior.developer.service.QuestionService;
+import java.nio.charset.Charset;
+import java.util.List;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +24,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
-
-import java.nio.charset.Charset;
-import java.util.List;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @WebMvcTest(controllers = QuestionController.class,
@@ -43,7 +45,7 @@ class QuestionControllerTest {
                 .name("What is polymorphism?")
                 .build();
         final var response = QuestionDto.builder()
-                .id(1)
+                .id(1L)
                 .name("What is polymorphism?")
                 .build();
 
@@ -63,7 +65,7 @@ class QuestionControllerTest {
     @Test
     void testGetAllQuestions() {
         final var response = QuestionDto.builder()
-                .id(1)
+                .id(1L)
                 .name("What is polymorphism?")
                 .build();
         when(questionService.getAllQuestions()).thenReturn(List.of(response));
@@ -85,11 +87,11 @@ class QuestionControllerTest {
                 .name("What is polymorphism?")
                 .build();
         final var response = QuestionDto.builder()
-                .id(1)
+                .id(1L)
                 .name("What is polymorphism?")
                 .build();
 
-        when(questionService.updateQuestion(1, dto)).thenReturn(response);
+        when(questionService.updateQuestion(1L, dto)).thenReturn(response);
 
         mockMvc.perform(put("/api/v1/questions/1")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -106,7 +108,7 @@ class QuestionControllerTest {
         mockMvc.perform(delete("/api/v1/questions/1"))
                 .andExpect(status().isOk());
 
-        verify(questionService).deleteQuestion(1);
+        verify(questionService).deleteQuestion(1L);
     }
 
 }
