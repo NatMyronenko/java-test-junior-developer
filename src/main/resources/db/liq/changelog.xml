@@ -174,15 +174,15 @@
         </loadUpdateData>
     </changeSet>
 
-<!--    <changeSet  author="yazhevika"  id="15" runAlways="true">
+    <changeSet  author="yazhevika"  id="15" runAlways="true">
         <loadUpdateData  file="db/liq/options.csv"
                          separator=";"
-                         tableName="options" primaryKey="question_id">
+                         tableName="options" primaryKey="option_id">
             <column name="option_id" type="numeric"/>
             <column name="answer" type="String"/>
             <column name="question_id" type="numeric"/>
             <column name="correct" type="boolean"/>
         </loadUpdateData>
-    </changeSet>-->
+    </changeSet>
 
 </databaseChangeLog>
