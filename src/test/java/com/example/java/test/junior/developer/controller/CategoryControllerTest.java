@@ -27,88 +27,88 @@ import org.springframework.util.StreamUtils;
 
 
 @WebMvcTest(controllers = CategoryController.class,
-        excludeAutoConfiguration = SecurityAutoConfiguration.class)
+    excludeAutoConfiguration = SecurityAutoConfiguration.class)
 class CategoryControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-    @MockBean
-    private CategoryService categoryService;
+  @Autowired
+  private MockMvc mockMvc;
+  @MockBean
+  private CategoryService categoryService;
 
-    @SneakyThrows
-    @Test
-    void testCreateCategory() {
-        final var inputStream =
-                new ClassPathResource("controller/category-request.json").getInputStream();
-        final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
-        final var dto = CategoryDto.builder()
-                .name("SpringBoot")
-                .build();
-        final var response = CategoryDto.builder()
-                .id(1L)
-                .name("SpringBoot")
-                .build();
+  @SneakyThrows
+  @Test
+  void testCreateCategory() {
+    final var inputStream =
+        new ClassPathResource("controller/category-request.json").getInputStream();
+    final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
+    final var dto = CategoryDto.builder()
+        .name("SpringBoot")
+        .build();
+    final var response = CategoryDto.builder()
+        .id(1L)
+        .name("SpringBoot")
+        .build();
 
-        when(categoryService.createCategory(dto)).thenReturn(response);
+    when(categoryService.createCategory(dto)).thenReturn(response);
 
-        mockMvc.perform(post("/api/v1/categories")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
-    }
+    mockMvc.perform(post("/api/v1/categories")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id", equalTo(1)))
+        .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
+  }
 
 
 
-    @SneakyThrows
-    @Test
-    void testGetAllCategories() {
-        final var response = CategoryDto.builder()
-                .id(1L)
-                .name("SpringBoot")
-                .build();
-        when(categoryService.getAllCategories()).thenReturn(List.of(response));
+  @SneakyThrows
+  @Test
+  void testGetAllCategories() {
+    final var response = CategoryDto.builder()
+        .id(1L)
+        .name("SpringBoot")
+        .build();
+    when(categoryService.getAllCategories()).thenReturn(List.of(response));
 
-        mockMvc.perform(get("/api/v1/categories"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()", equalTo(1)))
-                .andExpect(jsonPath("$[0].id", equalTo(1)))
-                .andExpect(jsonPath("$[0].name", equalTo("SpringBoot")));
-    }
+    mockMvc.perform(get("/api/v1/categories"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.length()", equalTo(1)))
+        .andExpect(jsonPath("$[0].id", equalTo(1)))
+        .andExpect(jsonPath("$[0].name", equalTo("SpringBoot")));
+  }
 
-    @SneakyThrows
-    @Test
-    void testUpdateCategory() {
-        final var inputStream =
-                new ClassPathResource("controller/category-request.json").getInputStream();
-        final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
-        final var dto = CategoryDto.builder()
-                .name("SpringBoot")
-                .build();
-        final var response = CategoryDto.builder()
-                .id(1L)
-                .name("SpringBoot")
-                .build();
+  @SneakyThrows
+  @Test
+  void testUpdateCategory() {
+    final var inputStream =
+        new ClassPathResource("controller/category-request.json").getInputStream();
+    final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
+    final var dto = CategoryDto.builder()
+        .name("SpringBoot")
+        .build();
+    final var response = CategoryDto.builder()
+        .id(1L)
+        .name("SpringBoot")
+        .build();
 
-        when(categoryService.updateCategory(1L, dto)).thenReturn(response);
+    when(categoryService.updateCategory(1L, dto)).thenReturn(response);
 
-        mockMvc.perform(put("/api/v1/categories/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestBody))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", equalTo(1)))
-                .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
+    mockMvc.perform(put("/api/v1/categories/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id", equalTo(1)))
+        .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
 
-    }
+  }
 
-    @SneakyThrows
-    @Test
-    void testDeleteCategory() {
-        mockMvc.perform(delete("/api/v1/categories/1"))
-                .andExpect(status().isOk());
+  @SneakyThrows
+  @Test
+  void testDeleteCategory() {
+    mockMvc.perform(delete("/api/v1/categories/1"))
+        .andExpect(status().isOk());
 
-        verify(categoryService).deleteCategory(1L);
-    }
+    verify(categoryService).deleteCategory(1L);
+  }
 
 }

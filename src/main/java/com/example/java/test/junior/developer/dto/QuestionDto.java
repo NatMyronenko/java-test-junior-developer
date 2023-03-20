@@ -12,9 +12,9 @@ import lombok.Value;
 @AllArgsConstructor
 public class QuestionDto {
 
-    Long id;
+  Long id;
 
-    @NotBlank String name;
+  @NotBlank String name;
 
 }
 

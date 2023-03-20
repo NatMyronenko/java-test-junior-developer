@@ -19,77 +19,77 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class QuestionServiceTest {
 
-    @Mock
-    private QuestionMapper questionMapper;
+  @Mock
+  private QuestionMapper questionMapper;
 
-    @Mock
-    private QuestionRepository questionRepository;
+  @Mock
+  private QuestionRepository questionRepository;
 
-    @InjectMocks
-    private QuestionService questionService;
+  @InjectMocks
+  private QuestionService questionService;
 
-    @Test
-    public void createQuestionTest() {
-        // given
-        QuestionDto questionDto = new QuestionDto();
-        Question question = new Question();
-        when(questionMapper.toEntity(questionDto)).thenReturn(question);
-        when(questionRepository.save(question)).thenReturn(question);
-        when(questionMapper.toDto(question)).thenReturn(questionDto);
+  @Test
+  public void createQuestionTest() {
+    // given
+    QuestionDto questionDto = new QuestionDto();
+    Question question = new Question();
+    when(questionMapper.toEntity(questionDto)).thenReturn(question);
+    when(questionRepository.save(question)).thenReturn(question);
+    when(questionMapper.toDto(question)).thenReturn(questionDto);
 
-        // when
-        QuestionDto createdQuestionDto = questionService.createQuestion(questionDto);
+    // when
+    QuestionDto createdQuestionDto = questionService.createQuestion(questionDto);
 
-        // then
-        assertEquals(questionDto, createdQuestionDto);
-    }
+    // then
+    assertEquals(questionDto, createdQuestionDto);
+  }
 
-    @Test
-    public void getAllQuestionsTest() {
-        // given
-        List<Question> questions = new ArrayList<>();
-        Question question = new Question();
-        questions.add(question);
-        when(questionRepository.findAll()).thenReturn(questions);
+  @Test
+  public void getAllQuestionsTest() {
+    // given
+    List<Question> questions = new ArrayList<>();
+    Question question = new Question();
+    questions.add(question);
+    when(questionRepository.findAll()).thenReturn(questions);
 
-        QuestionDto questionDto = new QuestionDto();
-        when(questionMapper.toDto(question)).thenReturn(questionDto);
+    QuestionDto questionDto = new QuestionDto();
+    when(questionMapper.toDto(question)).thenReturn(questionDto);
 
-        // when
-        List<QuestionDto> allQuestions = questionService.getAllQuestions();
+    // when
+    List<QuestionDto> allQuestions = questionService.getAllQuestions();
 
-        // then
-        assertEquals(1, allQuestions.size());
-        assertEquals(questionDto, allQuestions.get(0));
-    }
+    // then
+    assertEquals(1, allQuestions.size());
+    assertEquals(questionDto, allQuestions.get(0));
+  }
 
-    @Test
-    public void updateQuestionTest() {
-        // given
-        Long id = 1L;
-        QuestionDto questionDto = new QuestionDto();
-        Question question = new Question();
-        question.setId(id);
-        when(questionMapper.toEntity(questionDto)).thenReturn(question);
-        when(questionRepository.save(question)).thenReturn(question);
-        when(questionMapper.toDto(question)).thenReturn(questionDto);
+  @Test
+  public void updateQuestionTest() {
+    // given
+    Long id = 1L;
+    QuestionDto questionDto = new QuestionDto();
+    Question question = new Question();
+    question.setId(id);
+    when(questionMapper.toEntity(questionDto)).thenReturn(question);
+    when(questionRepository.save(question)).thenReturn(question);
+    when(questionMapper.toDto(question)).thenReturn(questionDto);
 
-        // when
-        QuestionDto updatedQuestionDto = questionService.updateQuestion(id, questionDto);
+    // when
+    QuestionDto updatedQuestionDto = questionService.updateQuestion(id, questionDto);
 
-        // then
-        assertEquals(questionDto, updatedQuestionDto);
-    }
+    // then
+    assertEquals(questionDto, updatedQuestionDto);
+  }
 
-    @Test
-    public void deleteQuestionTest() {
-        // given
-        Long id = 1L;
+  @Test
+  public void deleteQuestionTest() {
+    // given
+    Long id = 1L;
 
-        // when
-        questionService.deleteQuestion(id);
+    // when
+    questionService.deleteQuestion(id);
 
-        // then
-        verify(questionRepository).deleteById(id);
-    }
+    // then
+    verify(questionRepository).deleteById(id);
+  }
 }

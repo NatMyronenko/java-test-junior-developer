@@ -10,34 +10,34 @@ import org.junit.jupiter.api.Test;
 
 public class QuestionMapperTest {
 
-    private QuestionMapper questionMapper;
+  private QuestionMapper questionMapper;
 
-    @BeforeEach
-    public void setUp() {
-        questionMapper = new QuestionMapper();
-    }
+  @BeforeEach
+  public void setUp() {
+    questionMapper = new QuestionMapper();
+  }
 
-    @Test
-    public void toEntity_ValidDto_ReturnsEntity() {
-        QuestionDto questionDto = new QuestionDto(1L, "What is polymorphism?");
+  @Test
+  public void toEntity_ValidDto_ReturnsEntity() {
+    QuestionDto questionDto = new QuestionDto(1L, "What is polymorphism?");
 
-        Question result = questionMapper.toEntity(questionDto);
-        assertThat(result.getId()).isNull();
-        assertThat(result.getName()).isEqualTo(questionDto.getName());
+    Question result = questionMapper.toEntity(questionDto);
+    assertThat(result.getId()).isNull();
+    assertThat(result.getName()).isEqualTo(questionDto.getName());
 
-    }
+  }
 
-    @Test
-    public void toDto_ValidEntity_ReturnsDto() {
-        Question question = Question.builder()
-                .id(1L)
-                .name("What is polymorphism?")
-                .build();
+  @Test
+  public void toDto_ValidEntity_ReturnsDto() {
+    Question question = Question.builder()
+        .id(1L)
+        .name("What is polymorphism?")
+        .build();
 
-        QuestionDto result = questionMapper.toDto(question);
+    QuestionDto result = questionMapper.toDto(question);
 
-        assertEquals(question.getId(), result.getId());
-        assertEquals(question.getName(), result.getName());
-    }
+    assertEquals(question.getId(), result.getId());
+    assertEquals(question.getName(), result.getName());
+  }
 }
 

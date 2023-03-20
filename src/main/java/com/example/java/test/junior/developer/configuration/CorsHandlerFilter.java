@@ -20,14 +20,15 @@ public class CorsHandlerFilter extends OncePerRequestFilter {
 
   @Override
   protected void doFilterInternal(HttpServletRequest request,
-                                  HttpServletResponse response,
-                                  FilterChain chain) throws ServletException, IOException {
+      HttpServletResponse response,
+      FilterChain chain) throws ServletException, IOException {
     if (handleCors(request, response, true)) {
       return;
     }
     chain.doFilter(request, response);
     handleCors(request, response, false);
   }
+
   private boolean handleCors(
       HttpServletRequest request, HttpServletResponse response, boolean options) {
     response.setHeader(
