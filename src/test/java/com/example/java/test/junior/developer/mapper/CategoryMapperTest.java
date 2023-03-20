@@ -10,34 +10,34 @@ import org.junit.jupiter.api.Test;
 
 class CategoryMapperTest {
 
-    private CategoryMapper categoryMapper;
+  private CategoryMapper categoryMapper;
 
-    @BeforeEach
-    void setUp() {
-        categoryMapper = new CategoryMapper();
-    }
+  @BeforeEach
+  void setUp() {
+    categoryMapper = new CategoryMapper();
+  }
 
-    @Test
-    void toEntity_ValidDto_ReturnsEntity() {
-        CategoryDto categoryDto = new CategoryDto(1L, "SpringBoot");
+  @Test
+  void toEntity_ValidDto_ReturnsEntity() {
+    CategoryDto categoryDto = new CategoryDto(1L, "SpringBoot");
 
-        Category result = categoryMapper.toEntity(categoryDto);
+    Category result = categoryMapper.toEntity(categoryDto);
 
-        assertThat(result.getId()).isNull();
-        assertThat(result.getName()).isEqualTo(categoryDto.getName());
-    }
+    assertThat(result.getId()).isNull();
+    assertThat(result.getName()).isEqualTo(categoryDto.getName());
+  }
 
-    @Test
-    void toDto_ValidEntity_ReturnsDto() {
-        Category category = Category.builder()
-                .id(1L)
-                .name("SpringBoot")
-                .build();
+  @Test
+  void toDto_ValidEntity_ReturnsDto() {
+    Category category = Category.builder()
+        .id(1L)
+        .name("SpringBoot")
+        .build();
 
-        CategoryDto result = categoryMapper.toDto(category);
+    CategoryDto result = categoryMapper.toDto(category);
 
-        assertEquals(category.getId(), result.getId());
-        assertEquals(category.getName(), result.getName());
-    }
+    assertEquals(category.getId(), result.getId());
+    assertEquals(category.getName(), result.getName());
+  }
 }
 

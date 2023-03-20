@@ -19,26 +19,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/questions")
 public class QuestionController {
 
-    private final QuestionService questionService;
+  private final QuestionService questionService;
 
-    @PostMapping
-    public QuestionDto createQuestion(@RequestBody @Valid QuestionDto question){
-        return questionService.createQuestion(question);
-    }
+  @PostMapping
+  public QuestionDto createQuestion(@RequestBody @Valid QuestionDto question) {
+    return questionService.createQuestion(question);
+  }
 
-    @GetMapping
-    public List<QuestionDto> getAllQuestions() {
-        return questionService.getAllQuestions();
-    }
+  @GetMapping
+  public List<QuestionDto> getAllQuestions() {
+    return questionService.getAllQuestions();
+  }
 
-    @PutMapping("/{id}")
-    public QuestionDto updateQuestion(@PathVariable Long id,
-                                      @RequestBody @Valid QuestionDto question){
-        return questionService.updateQuestion(id, question);
-    }
+  @PutMapping("/{id}")
+  public QuestionDto updateQuestion(@PathVariable Long id,
+      @RequestBody @Valid QuestionDto question) {
+    return questionService.updateQuestion(id, question);
+  }
 
-    @DeleteMapping("/{id}")
-    public void deleteQuestion(@PathVariable Long id) {
-        questionService.deleteQuestion(id);
-    }
+  @DeleteMapping("/{id}")
+  public void deleteQuestion(@PathVariable Long id) {
+    questionService.deleteQuestion(id);
+  }
 }

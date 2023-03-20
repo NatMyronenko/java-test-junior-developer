@@ -34,83 +34,83 @@ import org.springframework.util.StreamUtils;
 )
 class LanguageControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-    @MockBean
-    private LanguageService languageService;
+  @Autowired
+  private MockMvc mockMvc;
+  @MockBean
+  private LanguageService languageService;
 
-    @SneakyThrows
-    @Test
-    void testCreateLanguage() {
-        final var inputStream =
-            new ClassPathResource("controller/language-request.json").getInputStream();
-        final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
-        final var dto = LanguageDto.builder()
-            .name("Java")
-            .build();
-        final var response = LanguageDto.builder()
-            .id(1L)
-            .name("Java")
-            .build();
+  @SneakyThrows
+  @Test
+  void testCreateLanguage() {
+    final var inputStream =
+        new ClassPathResource("controller/language-request.json").getInputStream();
+    final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
+    final var dto = LanguageDto.builder()
+        .name("Java")
+        .build();
+    final var response = LanguageDto.builder()
+        .id(1L)
+        .name("Java")
+        .build();
 
-        when(languageService.createLanguage(dto)).thenReturn(response);
+    when(languageService.createLanguage(dto)).thenReturn(response);
 
-        mockMvc.perform(post("/api/v1/languages")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(requestBody))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", equalTo(1)))
-            .andExpect(jsonPath("$.name",  equalTo("Java")));
-    }
+    mockMvc.perform(post("/api/v1/languages")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id", equalTo(1)))
+        .andExpect(jsonPath("$.name",  equalTo("Java")));
+  }
 
 
-    @SneakyThrows
-    @Test
-    void testGetAllLanguages() {
-        final var response = LanguageDto.builder()
-            .id(1L)
-            .name("Java")
-            .build();
-        when(languageService.getAllLanguages()).thenReturn(List.of(response));
+  @SneakyThrows
+  @Test
+  void testGetAllLanguages() {
+    final var response = LanguageDto.builder()
+        .id(1L)
+        .name("Java")
+        .build();
+    when(languageService.getAllLanguages()).thenReturn(List.of(response));
 
-        mockMvc.perform(get("/api/v1/languages"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.length()", equalTo(1)))
-            .andExpect(jsonPath("$[0].id", equalTo(1)))
-            .andExpect(jsonPath("$[0].name",  equalTo("Java")));
-    }
+    mockMvc.perform(get("/api/v1/languages"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.length()", equalTo(1)))
+        .andExpect(jsonPath("$[0].id", equalTo(1)))
+        .andExpect(jsonPath("$[0].name",  equalTo("Java")));
+  }
 
-    @SneakyThrows
-    @Test
-    void testUpdateLanguage() {
-        final var inputStream =
-            new ClassPathResource("controller/language-request.json").getInputStream();
-        final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
-        final var dto = LanguageDto.builder()
-            .name("Java")
-            .build();
-        final var response = LanguageDto.builder()
-            .id(1L)
-            .name("Java")
-            .build();
+  @SneakyThrows
+  @Test
+  void testUpdateLanguage() {
+    final var inputStream =
+        new ClassPathResource("controller/language-request.json").getInputStream();
+    final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
+    final var dto = LanguageDto.builder()
+        .name("Java")
+        .build();
+    final var response = LanguageDto.builder()
+        .id(1L)
+        .name("Java")
+        .build();
 
-        when(languageService.updateLanguage(1L, dto)).thenReturn(response);
+    when(languageService.updateLanguage(1L, dto)).thenReturn(response);
 
-        mockMvc.perform(put("/api/v1/languages/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(requestBody))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", equalTo(1)))
-            .andExpect(jsonPath("$.name",  equalTo("Java")));
-    }
+    mockMvc.perform(put("/api/v1/languages/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id", equalTo(1)))
+        .andExpect(jsonPath("$.name",  equalTo("Java")));
+  }
 
-    @SneakyThrows
-    @Test
-    void testDeleteLanguage() {
-        mockMvc.perform(delete("/api/v1/languages/1"))
-            .andExpect(status().isOk());
+  @SneakyThrows
+  @Test
+  void testDeleteLanguage() {
+    mockMvc.perform(delete("/api/v1/languages/1"))
+        .andExpect(status().isOk());
 
-        verify(languageService).deleteLanguage(1L);
-    }
+    verify(languageService).deleteLanguage(1L);
+  }
 
 }

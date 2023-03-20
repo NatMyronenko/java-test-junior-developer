@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfiguration {
 
   @Bean
-  public OpenAPI openAPI() {
+  public OpenAPI openApi() {
     return new OpenAPI()
         .info(new Info().title("Java Test Junior").description("Quiz web app").version("0.0.1"));
   }

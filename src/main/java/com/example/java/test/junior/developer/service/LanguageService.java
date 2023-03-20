@@ -13,36 +13,36 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class LanguageService {
 
-    private final LanguageMapper languageMapper;
-    private final LanguageRepository languageRepository;
+  private final LanguageMapper languageMapper;
+  private final LanguageRepository languageRepository;
 
-    @Transactional
-    public LanguageDto createLanguage(LanguageDto dto) {
-        final var language = languageMapper.toEntity(dto);
-        final var saved = languageRepository.save(language);
-        return languageMapper.toDto(saved);
-    }
+  @Transactional
+  public LanguageDto createLanguage(LanguageDto dto) {
+    final var language = languageMapper.toEntity(dto);
+    final var saved = languageRepository.save(language);
+    return languageMapper.toDto(saved);
+  }
 
-    @Transactional(readOnly = true)
-    public List<LanguageDto> getAllLanguages() {
-        final var languages = languageRepository.findAll();
-        return languages.stream()
-            .map(languageMapper::toDto)
-            .collect(Collectors.toList());
-    }
+  @Transactional(readOnly = true)
+  public List<LanguageDto> getAllLanguages() {
+    final var languages = languageRepository.findAll();
+    return languages.stream()
+        .map(languageMapper::toDto)
+        .collect(Collectors.toList());
+  }
 
-    @Transactional
-    public LanguageDto updateLanguage(Long id, LanguageDto dto) {
-        final var language = languageMapper.toEntity(dto);
-        language.setId(id);
-        final var saved = languageRepository.save(language);
-        return languageMapper.toDto(saved);
-    }
+  @Transactional
+  public LanguageDto updateLanguage(Long id, LanguageDto dto) {
+    final var language = languageMapper.toEntity(dto);
+    language.setId(id);
+    final var saved = languageRepository.save(language);
+    return languageMapper.toDto(saved);
+  }
 
-    @Transactional
-    public void deleteLanguage(Long id) {
-        languageRepository.deleteById(id);
-    }
+  @Transactional
+  public void deleteLanguage(Long id) {
+    languageRepository.deleteById(id);
+  }
 
 }
 
