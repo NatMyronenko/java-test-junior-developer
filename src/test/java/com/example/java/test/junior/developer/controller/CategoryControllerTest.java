@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
+import com.example.java.test.junior.developer.model.Language;
 import com.example.java.test.junior.developer.service.CategoryService;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -43,10 +44,12 @@ class CategoryControllerTest {
     final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
     final var dto = CategoryDto.builder()
         .name("SpringBoot")
+        .language(Language.builder().build())
         .build();
     final var response = CategoryDto.builder()
         .id(1L)
         .name("SpringBoot")
+        .language(Language.builder().build())
         .build();
 
     when(categoryService.createCategory(dto)).thenReturn(response);
@@ -56,9 +59,9 @@ class CategoryControllerTest {
             .content(requestBody))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
-        .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
+        .andExpect(jsonPath("$.name", equalTo("SpringBoot")))
+        .andExpect(jsonPath("$.language", equalTo("Java")));
   }
-
 
 
   @SneakyThrows

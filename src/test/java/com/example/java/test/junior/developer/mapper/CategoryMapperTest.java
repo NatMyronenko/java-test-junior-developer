@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.model.Category;
+import com.example.java.test.junior.developer.model.Language;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +20,13 @@ class CategoryMapperTest {
 
   @Test
   void toEntity_ValidDto_ReturnsEntity() {
-    CategoryDto categoryDto = new CategoryDto(1L, "SpringBoot");
+    CategoryDto categoryDto = new CategoryDto(1L, "SpringBoot", Language.builder().build());
 
     Category result = categoryMapper.toEntity(categoryDto);
 
     assertThat(result.getId()).isNull();
     assertThat(result.getName()).isEqualTo(categoryDto.getName());
+    assertThat(result.getLanguage()).isEqualTo(categoryDto.getLanguage());
   }
 
   @Test
@@ -32,12 +34,14 @@ class CategoryMapperTest {
     Category category = Category.builder()
         .id(1L)
         .name("SpringBoot")
+        .language(Language.builder().build())
         .build();
 
     CategoryDto result = categoryMapper.toDto(category);
 
     assertEquals(category.getId(), result.getId());
     assertEquals(category.getName(), result.getName());
+    assertEquals(category.getLanguage(), result.getLanguage());
   }
 }
 

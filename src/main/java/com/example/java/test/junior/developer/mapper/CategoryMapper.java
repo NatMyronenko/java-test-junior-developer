@@ -9,6 +9,7 @@ public class CategoryMapper {
   public Category toEntity(CategoryDto dto) {
     return Category.builder()
         .name(dto.getName())
+        .language(dto.getLanguage())
         .build();
   }
 
@@ -16,6 +17,7 @@ public class CategoryMapper {
     return CategoryDto.builder()
         .id(category.getId())
         .name(category.getName())
+        .language(category.getLanguage())
         .build();
   }
 }
