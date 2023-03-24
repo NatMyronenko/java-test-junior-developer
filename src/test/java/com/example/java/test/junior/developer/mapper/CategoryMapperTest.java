@@ -2,6 +2,7 @@ package com.example.java.test.junior.developer.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.model.Category;
@@ -14,10 +15,10 @@ class CategoryMapperTest {
 
   private CategoryMapper categoryMapper;
 
-//  @BeforeEach
-//  void setUp() {
-//    categoryMapper = new CategoryMapper(LanguageRepository la);
-//  }
+  @BeforeEach
+  void setUp() {
+    categoryMapper = new CategoryMapper();
+  }
 
   @Test
   void toEntity_ValidDto_ReturnsEntity() {
@@ -25,9 +26,10 @@ class CategoryMapperTest {
 
     Category result = categoryMapper.toEntity(categoryDto);
 
-    assertThat(result.getId()).isNull();
+    assertThat(result.getId()).isEqualTo(categoryDto.getId());
     assertThat(result.getName()).isEqualTo(categoryDto.getName());
-    assertThat(result.getLanguage()).isEqualTo(categoryDto.getIdLanguage());
+    assertThat(result.getId()).isEqualTo(categoryDto.getIdLanguage());
+
   }
 
   @Test
@@ -35,14 +37,14 @@ class CategoryMapperTest {
     Category category = Category.builder()
         .id(1L)
         .name("SpringBoot")
-        .language(Language.builder().build())
+        .language(Language.builder().id(1L).build())
         .build();
 
     CategoryDto result = categoryMapper.toDto(category);
 
     assertEquals(category.getId(), result.getId());
     assertEquals(category.getName(), result.getName());
-    assertEquals(category.getLanguage(), result.getIdLanguage());
+    assertEquals(category.getLanguage().getId(), result.getIdLanguage());
   }
 }
 

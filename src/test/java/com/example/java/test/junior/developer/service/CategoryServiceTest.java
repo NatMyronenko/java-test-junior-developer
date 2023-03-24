@@ -1,83 +1,95 @@
 package com.example.java.test.junior.developer.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.mapper.CategoryMapper;
 import com.example.java.test.junior.developer.model.Category;
-import com.example.java.test.junior.developer.model.Language;
 import com.example.java.test.junior.developer.repository.CategoryRepository;
-import com.example.java.test.junior.developer.repository.LanguageRepository;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class CategoryServiceTest {
 
-  private final CategoryRepository categoryRepository = Mockito.mock(CategoryRepository.class);
-  private final CategoryMapper categoryMapper = new CategoryMapper(LanguageRepository languageRepository);
-  private final CategoryService categoryService = new CategoryService(categoryRepository,
-      categoryMapper);
+  @Mock
+  private CategoryMapper categoryMapper;
+
+  @Mock
+  private CategoryRepository categoryRepository;
+
+  @InjectMocks
+  private CategoryService categoryService;
 
   @Test
-  public void createCategory_ValidDto_ReturnsDtoWithId() {
-    CategoryDto categoryDto = new CategoryDto(1L, "SpringBoot",1L);
-    Category category = Category.builder()
-        .id(1L)
-        .name(categoryDto.getName())
-        .idLanguage(categoryDto.getIdLanguage())
-        .build();
+  public void createCategoryTest() {
+    // given
+    CategoryDto categoryDto = new CategoryDto();
+    Category category = new Category();
+    when(categoryMapper.toEntity(categoryDto)).thenReturn(category);
+    when(categoryRepository.save(category)).thenReturn(category);
+    when(categoryMapper.toDto(category)).thenReturn(categoryDto);
 
-    when(categoryRepository.save(any(Category.class))).thenReturn(category);
+    // when
+    CategoryDto createdCategoryDto = categoryService.createCategory(categoryDto);
 
-    CategoryDto result = categoryService.createCategory(categoryDto);
-
-    assertEquals(category.getId(), result.getId());
-    assertEquals(category.getName(), result.getName());
-    assertEquals(category.getLanguage(), result.getIdLanguage());
+    // then
+    assertEquals(categoryDto, createdCategoryDto);
   }
 
   @Test
-  public void getAllCategories_NoUsers_ReturnsEmptyList() {
-    when(categoryRepository.findAll()).thenReturn(Collections.emptyList());
-    List<CategoryDto> result = categoryService.getAllCategories();
-    assertEquals(Collections.emptyList(), result);
+  public void getAllCategoriesTest() {
+    // given
+    List<Category> categories = new ArrayList<>();
+    Category category = new Category();
+    categories.add(category);
+    when(categoryRepository.findAll()).thenReturn(categories);
+
+    CategoryDto categoryDto = new CategoryDto();
+    when(categoryMapper.toDto(category)).thenReturn(categoryDto);
+
+    // when
+    List<CategoryDto> allCategories = categoryService.getAllCategories();
+    // then
+    assertEquals(1, allCategories.size());
+    assertEquals(categoryDto, allCategories.get(0));
   }
 
   @Test
-  public void updateCategory_ValidIdAndDto_ReturnsDtoWithUpdatedFields() {
+  public void updateCategoryTest() {
+    // given
     Long id = 1L;
-    CategoryDto categoryDto = new CategoryDto(id, "SpringBoot", 1L);
-    Category existingCategory = Category.builder()
-        .id(id)
-        .name("SpringBoot")
-        .language(Language.builder().build())
-        .build();
-    Category updatedCategory = Category.builder()
-        .id(id)
-        .name(categoryDto.getName())
-        .language(Language.builder().build())
-        .build();
+    CategoryDto categoryDto = new CategoryDto();
+    Category category = new Category();
+    category.setId(id);
+    when(categoryMapper.toEntity(categoryDto)).thenReturn(category);
+    when(categoryRepository.save(category)).thenReturn(category);
+    when(categoryMapper.toDto(category)).thenReturn(categoryDto);
 
-    when(categoryRepository.findById(id)).thenReturn(Optional.of(existingCategory));
-    when(categoryRepository.save(any(Category.class))).thenReturn(updatedCategory);
+    // when
+    CategoryDto createdCategoryDto = categoryService.createCategory(categoryDto);
 
-    CategoryDto result = categoryService.updateCategory(id, categoryDto);
-
-    assertEquals(id, result.getId());
-    assertEquals(categoryDto.getName(), result.getName());
-    assertEquals(categoryDto.getIdLanguage(), result.getIdLanguage());
+    // then
+    assertEquals(categoryDto, createdCategoryDto);
   }
 
   @Test
-  public void deleteCategory_ValidId_DeletesUser() {
+  public void deleteCategoryTest() {
+    // given
     Long id = 1L;
+
+    // when
     categoryService.deleteCategory(id);
-    Mockito.verify(categoryRepository).deleteById(id);
+
+    // then
+    verify(categoryRepository).deleteById(id);
   }
 }
 

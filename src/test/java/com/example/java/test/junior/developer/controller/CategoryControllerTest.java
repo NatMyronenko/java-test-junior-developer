@@ -60,7 +60,7 @@ class CategoryControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name", equalTo("SpringBoot")))
-        .andExpect(jsonPath("$.idLanguage", equalTo(1L)));
+        .andExpect(jsonPath("$.idLanguage", equalTo(1)));
   }
 
 
@@ -79,7 +79,7 @@ class CategoryControllerTest {
         .andExpect(jsonPath("$.length()", equalTo(1)))
         .andExpect(jsonPath("$[0].id", equalTo(1)))
         .andExpect(jsonPath("$[0].name", equalTo("SpringBoot")))
-        .andExpect(jsonPath("$[0].idLanguage",equalTo(1L)));
+        .andExpect(jsonPath("$[0].idLanguage",equalTo(1)));
   }
 
   @SneakyThrows
@@ -106,7 +106,7 @@ class CategoryControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name", equalTo("SpringBoot")))
-        .andExpect(jsonPath("$.idLanguage",equalTo(1L)));
+        .andExpect(jsonPath("$.idLanguage",equalTo(1)));
 
   }
 
