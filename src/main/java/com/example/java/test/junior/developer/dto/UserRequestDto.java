@@ -20,8 +20,9 @@ public class UserRequestDto {
   @Pattern(regexp = "^[a-zA-Z][-a-zA-Z\\s]{0,22}[a-zA-Z]$")
   @NonNull String lastName;
 
-  @Email(regexp = "^(?=.{10,63}$)(?!.*\\s)[a-zA-Z0-9!#$%&'*+\\-=?^_`{|}~]"
-      + "+(?:[.\\-][a-zA-Z0-9!#$%&'*+\\-=?^_`{|}~]+)*"
+  @Email(regexp = "^(?=.{10,63}$)(?!.*\\s)"
+      + "[a-zA-Z0-9!#$%&'*+\\-=?^_`{|}~]+"
+      + "(?:[.\\-][a-zA-Z0-9!#$%&'*+\\-=?^_`{|}~]+)*"
       + "@[a-z0-9](?:[a-z0-9\\-]*[a-z0-9])*"
       + "(?:\\.[a-z0-9](?:[a-z0-9\\-]*[a-z0-9])*)+",
       message = "Email should be valid")
