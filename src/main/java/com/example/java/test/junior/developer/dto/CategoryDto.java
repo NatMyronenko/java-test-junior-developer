@@ -1,7 +1,5 @@
 package com.example.java.test.junior.developer.dto;
 
-import com.example.java.test.junior.developer.model.Category;
-import com.example.java.test.junior.developer.model.Language;
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
