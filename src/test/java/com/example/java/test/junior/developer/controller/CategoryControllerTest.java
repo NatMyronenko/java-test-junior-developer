@@ -44,12 +44,12 @@ class CategoryControllerTest {
     final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
     final var dto = CategoryDto.builder()
         .name("SpringBoot")
-        .language(Language.builder().build())
+        .idLanguage(1L)
         .build();
     final var response = CategoryDto.builder()
         .id(1L)
         .name("SpringBoot")
-        .language(Language.builder().build())
+        .idLanguage(1L)
         .build();
 
     when(categoryService.createCategory(dto)).thenReturn(response);
@@ -60,7 +60,7 @@ class CategoryControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name", equalTo("SpringBoot")))
-        .andExpect(jsonPath("$.language", equalTo("Java")));
+        .andExpect(jsonPath("$.idLanguage", equalTo(1L)));
   }
 
 
@@ -70,6 +70,7 @@ class CategoryControllerTest {
     final var response = CategoryDto.builder()
         .id(1L)
         .name("SpringBoot")
+        .idLanguage(1L)
         .build();
     when(categoryService.getAllCategories()).thenReturn(List.of(response));
 
@@ -77,7 +78,8 @@ class CategoryControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.length()", equalTo(1)))
         .andExpect(jsonPath("$[0].id", equalTo(1)))
-        .andExpect(jsonPath("$[0].name", equalTo("SpringBoot")));
+        .andExpect(jsonPath("$[0].name", equalTo("SpringBoot")))
+        .andExpect(jsonPath("$[0].idLanguage",equalTo(1L)));
   }
 
   @SneakyThrows
@@ -88,10 +90,12 @@ class CategoryControllerTest {
     final var requestBody = StreamUtils.copyToString(inputStream, Charset.defaultCharset());
     final var dto = CategoryDto.builder()
         .name("SpringBoot")
+        .idLanguage(1L)
         .build();
     final var response = CategoryDto.builder()
         .id(1L)
         .name("SpringBoot")
+        .idLanguage(1L)
         .build();
 
     when(categoryService.updateCategory(1L, dto)).thenReturn(response);
@@ -101,7 +105,8 @@ class CategoryControllerTest {
             .content(requestBody))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
-        .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
+        .andExpect(jsonPath("$.name", equalTo("SpringBoot")))
+        .andExpect(jsonPath("$.idLanguage",equalTo(1L)));
 
   }
 
