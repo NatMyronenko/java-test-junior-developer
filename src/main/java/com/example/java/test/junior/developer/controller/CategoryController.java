@@ -2,6 +2,8 @@ package com.example.java.test.junior.developer.controller;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.service.CategoryService;
+import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,7 +33,7 @@ public class CategoryController {
 
   @PutMapping("/{id}")
   public CategoryDto updateCategory(@PathVariable int id,
-                                    @RequestBody @Valid CategoryDto category) {
+      @RequestBody @Valid CategoryDto category) {
     return categoryService.updateCategory(id, category);
   }
 

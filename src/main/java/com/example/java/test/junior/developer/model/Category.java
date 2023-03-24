@@ -1,5 +1,6 @@
 package com.example.java.test.junior.developer.model;
 
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +15,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+
 @Builder
+@Data
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Table(name = "categories")
@@ -34,4 +36,21 @@ public class Category {
   @JoinColumn(name = "language_id")
   private Language language;
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Category category = (Category) o;
+    return id == category.id && Objects.equals(name, category.name)
+        && Objects.equals(language, category.language);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, language);
+  }
 }
