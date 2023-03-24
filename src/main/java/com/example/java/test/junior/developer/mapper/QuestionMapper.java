@@ -7,10 +7,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class QuestionMapper {
+
   public Question toEntity(QuestionDto dto) {
+    Category category = Category.builder()
+        .id(dto.getIdCategory())
+        .build();
+
     return Question.builder()
         .name(dto.getName())
-        .category(dto.getCategory())
+        .category(category)
         .build();
   }
 
@@ -18,7 +23,7 @@ public class QuestionMapper {
     return QuestionDto.builder()
         .id(question.getId())
         .name(question.getName())
-        .category(Category.builder().build())
+        .idCategory(question.getCategory().getId())
         .build();
   }
 }

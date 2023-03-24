@@ -24,9 +24,10 @@ class CategoryMapperTest {
 
     Category result = categoryMapper.toEntity(categoryDto);
 
-    assertThat(result.getId()).isEqualTo(categoryDto.getId());
+    assertThat(result.getId()).isNull();
     assertThat(result.getName()).isEqualTo(categoryDto.getName());
-    assertThat(result.getId()).isEqualTo(categoryDto.getIdLanguage());
+    assertThat(result.getLanguage()).isNotNull();
+    assertThat(result.getLanguage().getId()).isEqualTo(categoryDto.getIdLanguage());
 
   }
 

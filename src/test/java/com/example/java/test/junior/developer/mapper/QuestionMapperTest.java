@@ -21,12 +21,14 @@ public class QuestionMapperTest {
   @Test
   public void toEntity_ValidDto_ReturnsEntity() {
     QuestionDto questionDto = new QuestionDto(1L, "What is polymorphism?",
-        Category.builder().build());
+        1L);
 
     Question result = questionMapper.toEntity(questionDto);
+
     assertThat(result.getId()).isNull();
     assertThat(result.getName()).isEqualTo(questionDto.getName());
-    assertThat(result.getCategory()).isEqualTo(questionDto.getCategory());
+    assertThat(result.getCategory()).isNotNull();
+    assertThat(result.getCategory().getId()).isEqualTo(questionDto.getIdCategory());
 
   }
 
@@ -35,13 +37,14 @@ public class QuestionMapperTest {
     Question question = Question.builder()
         .id(1L)
         .name("What is polymorphism?")
-        .category(Category.builder().build())
+        .category(Category.builder().id(1L).build())
         .build();
 
     QuestionDto result = questionMapper.toDto(question);
 
     assertEquals(question.getId(), result.getId());
     assertEquals(question.getName(), result.getName());
+    assertEquals(question.getCategory().getId(), result.getIdCategory());
   }
 }
 
