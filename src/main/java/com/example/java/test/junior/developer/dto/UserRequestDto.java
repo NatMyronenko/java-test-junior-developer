@@ -14,10 +14,10 @@ import lombok.Value;
 public class UserRequestDto {
 
   @NotEmpty
-  @Pattern(regexp = "^[a-zA-Z][-a-zA-Z\\s]{0,22}[a-zA-Z]$")
+  @Pattern(regexp = "^[a-zA-Z][\\-a-zA-Z\\s]{0,22}[a-zA-Z]$")
   @NonNull String firstName;
 
-  @Pattern(regexp = "^[a-zA-Z][-a-zA-Z\\s]{0,22}[a-zA-Z]$")
+  @Pattern(regexp = "^[a-zA-Z][\\-a-zA-Z\\s]{0,22}[a-zA-Z]$")
   @NonNull String lastName;
 
   @Email(regexp = "^(?=.{10,63}$)(?!.*\\s)"
