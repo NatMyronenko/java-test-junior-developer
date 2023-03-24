@@ -18,11 +18,13 @@ public class KeycloakConfiguration {
   private String realm;
   private String clientId;
   private String clientSecret;
+  private final String authorizationType = "client_credentials";
 
   @Bean
   public Keycloak keycloak() {
     return KeycloakBuilder.builder()
         .serverUrl(authServerUrl)
+        .grantType(authorizationType)
         .realm(realm)
         .clientId(clientId)
         .clientSecret(clientSecret)
