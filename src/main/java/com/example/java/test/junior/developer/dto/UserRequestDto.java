@@ -14,10 +14,12 @@ import lombok.Value;
 public class UserRequestDto {
 
   @NotEmpty
-  @Pattern(regexp = "^[a-zA-Z][\\-a-zA-Z\\s]{0,22}[a-zA-Z]$")
+  @Pattern(regexp = "^[a-zA-Z][\\-a-zA-Z\\s]{0,22}[a-zA-Z]$",
+      message = "firstName should be valid")
   @NonNull String firstName;
 
-  @Pattern(regexp = "^[a-zA-Z][\\-a-zA-Z\\s]{0,22}[a-zA-Z]$")
+  @Pattern(regexp = "^[a-zA-Z][\\-a-zA-Z\\s]{0,22}[a-zA-Z]$",
+      message = "lastName should be valid")
   @NonNull String lastName;
 
   @Email(regexp = "^(?=.{10,63}$)(?!.*\\s)"
@@ -31,6 +33,7 @@ public class UserRequestDto {
   @NotEmpty
   @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)"
       + "(?=.*[!\"#$%&'()*+,\\-./:;<=>?@[\\\\]^_{|}~])"
-      + "[A-Za-z\\d!\"#$%&'()*+,-./:;<=>?@[\\\\]^_`{|}~]{8,32}$")
+      + "[A-Za-z\\d!\"#$%&'()*+,\\-./:;<=>?@[\\\\]^_`{|}~]{8,32}$",
+      message = "Password should be valid")
   @NonNull String password;
 }
