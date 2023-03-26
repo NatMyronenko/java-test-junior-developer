@@ -28,8 +28,8 @@ public class UserMapper {
         .build();
   }
 
-  public UserDto toDto(UserRequestDto userRequestDto) {
-    return UserDto.builder()
+  public User toUser(UserRequestDto userRequestDto) {
+    return User.builder()
         .firstName(userRequestDto.getFirstName())
         .lastName(userRequestDto.getLastName())
         .email(userRequestDto.getEmail())

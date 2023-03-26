@@ -22,10 +22,10 @@ public class UserService {
 
   @Transactional
   public UserDto createUser(UserRequestDto userRequestDto) {
-    var user = userMapper.toUserRepresentation(userRequestDto);
-    keycloakAdminClient.createUser(user);
-    final UserDto userDto = userMapper.toDto(userRequestDto);
-    User savedUser = userRepository.save(userMapper.toModel(userDto));
+    var userKeycloak = userMapper.toUserRepresentation(userRequestDto);
+    keycloakAdminClient.createUser(userKeycloak);
+    final User user = userMapper.toUser(userRequestDto);
+    User savedUser = userRepository.save(user);
     return userMapper.toDto(savedUser);
   }
 
