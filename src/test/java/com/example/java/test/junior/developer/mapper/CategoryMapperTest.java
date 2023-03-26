@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.category;
+package com.example.java.test.junior.developer.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
