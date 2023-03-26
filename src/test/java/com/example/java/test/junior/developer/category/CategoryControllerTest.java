@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.java.test.junior.developer.controller.CategoryController;
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.service.CategoryService;
 import java.nio.charset.Charset;
@@ -25,6 +24,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
+
 
 @WebMvcTest(controllers = CategoryController.class,
     excludeAutoConfiguration = SecurityAutoConfiguration.class)
@@ -45,7 +45,7 @@ class CategoryControllerTest {
         .name("SpringBoot")
         .build();
     final var response = CategoryDto.builder()
-        .id(1)
+        .id(1L)
         .name("SpringBoot")
         .build();
 
@@ -59,11 +59,13 @@ class CategoryControllerTest {
         .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
   }
 
+
+
   @SneakyThrows
   @Test
   void testGetAllCategories() {
     final var response = CategoryDto.builder()
-        .id(1)
+        .id(1L)
         .name("SpringBoot")
         .build();
     when(categoryService.getAllCategories()).thenReturn(List.of(response));
@@ -85,11 +87,11 @@ class CategoryControllerTest {
         .name("SpringBoot")
         .build();
     final var response = CategoryDto.builder()
-        .id(1)
+        .id(1L)
         .name("SpringBoot")
         .build();
 
-    when(categoryService.updateCategory(1, dto)).thenReturn(response);
+    when(categoryService.updateCategory(1L, dto)).thenReturn(response);
 
     mockMvc.perform(put("/api/v1/categories/1")
             .contentType(MediaType.APPLICATION_JSON)
@@ -106,7 +108,7 @@ class CategoryControllerTest {
     mockMvc.perform(delete("/api/v1/categories/1"))
         .andExpect(status().isOk());
 
-    verify(categoryService).deleteCategory(1);
+    verify(categoryService).deleteCategory(1L);
   }
 
 }

@@ -31,8 +31,11 @@ public class Language {
   @Column(name = "language", nullable = false)
   public String name;
 
-  @OneToMany(cascade = CascadeType.ALL,
+  @OneToMany(cascade = CascadeType.DETACH,
       mappedBy = "language",
       fetch = FetchType.EAGER)
   private List<Category> listCategories;
+
 }
+
+

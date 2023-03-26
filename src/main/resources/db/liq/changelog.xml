@@ -47,8 +47,8 @@
     </createTable>
   </changeSet>
   <!--> <-->
-  <changeSet author="aleksdenni" id="4">
-    <addForeignKeyConstraint baseColumnNames="language_id"
+  <changeSet  author="aleksdenni"  id="4">
+    <addForeignKeyConstraint  baseColumnNames="language_id"
       baseTableName="categories"
       constraintName="fk_categories_languages"
       referencedColumnNames="language_id"
@@ -69,8 +69,8 @@
     </createTable>
   </changeSet>
   <!--> <-->
-  <changeSet author="aleksdenni" id="6">
-    <addForeignKeyConstraint baseColumnNames="category_id"
+  <changeSet  author="aleksdenni"  id="6">
+    <addForeignKeyConstraint  baseColumnNames="category_id"
       baseTableName="questions"
       constraintName="fk_questions_categories"
       referencedColumnNames="category_id"
@@ -94,8 +94,8 @@
     </createTable>
   </changeSet>
   <!--> <-->
-  <changeSet author="aleksdenni" id="8">
-    <addForeignKeyConstraint baseColumnNames="question_id"
+  <changeSet  author="aleksdenni"  id="8">
+    <addForeignKeyConstraint  baseColumnNames="question_id"
       baseTableName="options"
       constraintName="fk_options_questions"
       referencedColumnNames="question_id"
@@ -128,15 +128,15 @@
     </createTable>
   </changeSet>
   <!--> <-->
-  <changeSet author="aleksdenni" id="10">
-    <addForeignKeyConstraint baseColumnNames="user_id"
+  <changeSet  author="aleksdenni"  id="10">
+    <addForeignKeyConstraint  baseColumnNames="user_id"
       baseTableName="user_passed_test"
       constraintName="fk_user_passed_test_users"
       referencedColumnNames="user_id"
       referencedTableName="users"/>
   </changeSet>
-  <changeSet author="aleksdenni" id="11">
-    <addForeignKeyConstraint baseColumnNames="category_id"
+  <changeSet  author="aleksdenni"  id="11">
+    <addForeignKeyConstraint  baseColumnNames="category_id"
       baseTableName="user_passed_test"
       constraintName="fk_user_passed_test_categories"
       referencedColumnNames="category_id"

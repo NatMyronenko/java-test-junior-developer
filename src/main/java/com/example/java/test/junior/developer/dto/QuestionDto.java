@@ -10,11 +10,12 @@ import lombok.Value;
 @Builder
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
-public class CategoryDto {
+public class QuestionDto {
 
   Long id;
 
   @NotBlank String name;
 
 }
+
 

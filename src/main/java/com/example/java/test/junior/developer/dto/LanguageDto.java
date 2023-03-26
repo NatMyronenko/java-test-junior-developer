@@ -13,5 +13,8 @@ import lombok.Value;
 public class LanguageDto {
 
   Long id;
+
   @NotBlank String name;
+
 }
+

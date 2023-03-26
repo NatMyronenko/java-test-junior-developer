@@ -1,7 +1,7 @@
 package com.example.java.test.junior.developer.controller;
 
-import com.example.java.test.junior.developer.dto.CategoryDto;
-import com.example.java.test.junior.developer.service.CategoryService;
+import com.example.java.test.junior.developer.dto.QuestionDto;
+import com.example.java.test.junior.developer.service.QuestionService;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,34 +16,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/categories")
-public class CategoryController {
+@RequestMapping("/api/v1/questions")
+public class QuestionController {
 
-  private final CategoryService categoryService;
+  private final QuestionService questionService;
 
   @PostMapping
-  public CategoryDto createCategory(@RequestBody @Valid CategoryDto category) {
-    return categoryService.createCategory(category);
+  public QuestionDto createQuestion(@RequestBody @Valid QuestionDto question) {
+    return questionService.createQuestion(question);
   }
 
   @GetMapping
-  public List<CategoryDto> getAllCategories() {
-    return categoryService.getAllCategories();
+  public List<QuestionDto> getAllQuestions() {
+    return questionService.getAllQuestions();
   }
 
   @PutMapping("/{id}")
-  public CategoryDto updateCategory(@PathVariable Long id,
-      @RequestBody @Valid CategoryDto category) {
-    return categoryService.updateCategory(id, category);
+  public QuestionDto updateQuestion(@PathVariable Long id,
+      @RequestBody @Valid QuestionDto question) {
+    return questionService.updateQuestion(id, question);
   }
 
   @DeleteMapping("/{id}")
-  public void deleteCategory(@PathVariable Long id) {
-    categoryService.deleteCategory(id);
+  public void deleteQuestion(@PathVariable Long id) {
+    questionService.deleteQuestion(id);
   }
 }
-
-
-
-
-

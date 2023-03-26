@@ -13,4 +13,5 @@ public class SwaggerConfiguration {
     return new OpenAPI()
         .info(new Info().title("Java Test Junior").description("Quiz web app").version("0.0.1"));
   }
+
 }
