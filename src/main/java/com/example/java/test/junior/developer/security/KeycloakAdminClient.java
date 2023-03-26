@@ -13,7 +13,6 @@ public class KeycloakAdminClient {
   private final Keycloak keycloak;
 
   public void createUser(UserRepresentation user) {
-    keycloak.realm(keycloakProperties.getRealm()).users().create(user)
-        .close(); //should this be closed?
+    keycloak.realm(keycloakProperties.getRealm()).users().create(user);
   }
 }
