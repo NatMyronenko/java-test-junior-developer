@@ -2,6 +2,7 @@ package com.example.java.test.junior.developer.security;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
