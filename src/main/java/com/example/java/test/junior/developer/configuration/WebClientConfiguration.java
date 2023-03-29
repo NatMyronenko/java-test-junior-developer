@@ -1,7 +1,5 @@
 package com.example.java.test.junior.developer.configuration;
 
-import com.example.java.test.junior.developer.security.KeycloakAuthClient;
-import com.example.java.test.junior.developer.security.KeycloakConfiguration;
 import javax.ws.rs.core.HttpHeaders;
 import lombok.Value;
 import org.springframework.context.annotation.Bean;
