@@ -1,0 +1,77 @@
+option_id;answer;question_id;correct
+1;A function that takes another function as an argument or returns A function as its result;1;true
+2; A function that is defined inside another function;1;false
+3; A function that can only be called by another function;1;false
+4; A function that is used to manipulate arrays;1;false
+5;The process of hiding implementation details from The user;2;true
+6; The process of extending a class to create a new class;2;false
+7; The process of creating an instance of a class;2;false
+8; The process of modifying the behavior of a superclass in a subclass;2;false
+9; dot notation (.);3;false
+10; bracket notation ([]);3;false
+11; both A and B ;3;true
+12; neither A nor B.;3;false
+13; The process of hiding implementation details from the user ;4;true
+14; The process of extending a class to create a new class;4;false
+15; The process of creating an instance of a class;4;false
+16; The process of modifying the behavior of a superclass in a subclass;4;false
+17; To handle synchronous operations;5;false
+18; To handle asynchronous operations ;5;true
+19; To handle errors in code;5;false
+20; To handle network requests;5;false
+21; It is used to handle successful completion of a promise.;6;false
+22; It is used to handle errors that occur during promise execution.;6;false
+23; It is used to handle rejections that occur during promise execution. ;6;true
+24; It is used to handle promise chaining.;6;false
+25; call() method returns a new function, allowing you to pass any number of arguments.;7;false
+26;" apply() method invokes the function with a given ""this"" value and allows you to pass in arguments as an array. ";7;true
+27;" bind() method invokes a function with a given ""this"" value and arguments provided one by one.";7;false
+28; returns selected elements in array as a new array. First argument  start index, second argument (optional)  end index without including the last element. ;8;true
+29; modifies the original array and returns selected elements. First argument  start index, second argument (optional)  end index without including the last element.;8;false
+30; returns selected elements in array as a new array. First argument  start index, second argument (optional)  quantity of elements.;8;false
+31; modifies the original array and returns selected elements. First argument  start index, second argument (optional)  quantity of elements..;8;false
+32; [][];9;false
+33; {}{};9;false
+34; null  undefined ;9;true
+35; NaN  NaN;9;false
+36; It is a time span when accessing a let or const variable before its declaration causes an error. ;10;true
+37; It is a case when block scope variables declared with let and const can't be accessed out of its scope declaration.;10;false
+38; It is a time span when accessing a var variable before its declaration causes an error.;10;false
+39; It is a case when block scope variables declared with var and let can't be accessed out of its scope declaration.;10;false
+40;"console.log(message); 
+var message  ""The variable Has been hoisted""; ";11;true
+41;" var message; console.log(message); message  ""The variable Has been hoisted"";";11;false
+42;" message(""Good morning""); function message(name) { console.log(name); }";11;false
+43; Local storrage  stores data with no expiration date. Tab storrage  stores data till tab is open and the data is lost when the browser tab is closed. Data can be used for readonly purposes.;12;false
+44; Browser storrage  stores data with no expiration date. Tab storrage  stores data till tab is open and the data is lost when the browser tab is closed. Data can be modified.;12;false
+45; Local storrage  stores data with no expiration date. Session storrage  stores data for one session and the data is lost when the browser tab is closed. Data can be used for readonly purposes.;12;false
+46; Local storrage  stores data with no expiration date. Session storrage  stores data for one session and the data is lost when the browser tab is closed. Data can be modified. ;12;true
+47; Pending, Success, Failed;13;false
+48; Idle, Fullfilled, Rejected;13;false
+49; Idle, Resolved, Rejected;13;false
+50; Pending, Fullfilled, Rejected ;13;true
+51;"""null""";14;false
+52; '';14;false
+53; undefined ;14;true
+54; Error: variable must be declared.;14;false
+55; Window  is the root level element in any web page. Document  is the direct child of the window object. ;15;true
+56; Window  provides methods like getElementById, createElement. Document  has methods like alert(), confirm();15;false
+57; Window  is the direct child of the document object. Document  is the root level element in any web page.;15;false
+58; Window  has methods like alert(), confirm(). Document  provides methods like getElementById, createElement. ;15;true
+59; The @Inherited element is used to declare an annotation;16;true
+60; The @interface element is used to declare an annotation;16;false
+61; The @Retention element is used to declare an annotation;16;false
+62; The @Target element is used to declare an annotation;16;false
+63; String;17;true
+64; Integer;17;false
+65; boolean;17;false
+66; Function<Integer, String>;17;false
+67;Insert sort;18;false
+68; Selection sort;18;false
+69; Quick sort;18;false
+70; Merge sort;18;true
+71; Add annotation @Override;19;false
+72; Write without @Override;19;false
+73; Cannot be overridden;19;true
+74; Yes;20;false
+75; Not;20;true
