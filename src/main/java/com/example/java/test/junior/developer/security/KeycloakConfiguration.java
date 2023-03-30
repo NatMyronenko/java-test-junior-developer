@@ -30,4 +30,9 @@ public class KeycloakConfiguration {
         .clientSecret(clientSecret)
         .build();
   }
+
+  public String getTokenUrl() {
+    return "https://application/x-www-form-urlencoded";
+
+  }
 }
