@@ -32,7 +32,7 @@ public class KeycloakConfiguration {
   }
 
   public String getTokenUrl() {
-    return "https://application/x-www-form-urlencoded";
+    return "application/x-www-form-urlencoded";
 
   }
 }

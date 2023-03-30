@@ -13,7 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfiguration {
 
-  @Value("${KEYCLOAK_BASE_URL:https://example.com}")
+  @Value("${KEYCLOAK_BASE_URL:https://example.com/auth/realms/app/protocol/openid-connect/token}")
   private String tokenUrl;
 
   @Bean
