@@ -25,7 +25,7 @@ public class OptionService {
   }
 
   @Transactional(readOnly = true)
-  public OptionDto getOption(OptionDto optionDto, Long id) {
+  public OptionDto getOption(Long id) {
     final Option option = optionRepository.findById(id).orElse(null);
     return option != null ? optionMapper.toDto(option) : null;
   }
@@ -46,7 +46,7 @@ public class OptionService {
   }
 
   @Transactional
-  public void deleteOption(Long id){
+  public void deleteOption(Long id) {
     optionRepository.deleteById(id);
   }
 }
