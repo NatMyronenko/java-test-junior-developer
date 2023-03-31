@@ -8,7 +8,6 @@ import com.example.java.test.junior.developer.repository.UserRepository;
 import com.example.java.test.junior.developer.security.KeycloakAdminClient;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,7 @@ public class UserService {
   private final KeycloakAdminClient keycloakAdminClient;
 
   @Transactional
-  public UserDto createUser(@Valid UserRequestDto userRequestDto) {
+  public UserDto createUser(UserRequestDto userRequestDto) {
     var userKeycloak = userMapper.toUserRepresentation(userRequestDto);
     keycloakAdminClient.createUser(userKeycloak);
     final User user = userMapper.toUser(userRequestDto);

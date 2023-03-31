@@ -1,18 +1,23 @@
 package com.example.java.test.junior.developer.dto;
 
-import io.smallrye.common.constraint.NotNull;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+
+@Data
+@Builder
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 public class LoginRequestDto {
-  @NotNull
-  @NotBlank
+
+  @Email(message = "Invalid email format")
+  @NotBlank(message = "Email is required")
   private String email;
 
-  @NotNull
-  @NotBlank
+  @NotBlank(message = "Password is required")
   private String password;
 }
