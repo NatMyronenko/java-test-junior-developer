@@ -2,8 +2,6 @@ package com.example.java.test.junior.developer.service;
 
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
 import com.example.java.test.junior.developer.security.KeycloakAuthClient;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,18 +17,11 @@ public class AuthService {
 
   public LoginResponseDto generateLoginResponse(String email, String password) {
     try {
-      String accessToken = keycloakAuthClient.getAccessToken(email, password);
-      LoginResponseDto response = LoginResponseDto.builder()
-          .sessionState(UUID.randomUUID().toString())
-          .tokenType("Bearer")
-          .accessToken(accessToken)
-          .expiresIn(TimeUnit.MINUTES.toSeconds(30))
-          .refreshToken(UUID.randomUUID().toString())
-          .refreshExpiresIn(TimeUnit.DAYS.toSeconds(30))
-          .build();
-      return response;
+      String accessToken = String.valueOf(keycloakAuthClient.getAccessToken(email, password));
+      return new LoginResponseDto(null, null, accessToken, null, null, null);
     } catch (Exception ex) {
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials", ex);
     }
   }
 }
+

@@ -29,5 +29,6 @@ public class LoginResponseDto {
 
   @JsonProperty("refresh_expires_in")
   private Long refreshExpiresIn;
+
 }
 
