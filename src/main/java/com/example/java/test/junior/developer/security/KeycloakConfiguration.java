@@ -40,8 +40,5 @@ public class KeycloakConfiguration {
     log.info("Getting token URI from configuration: {}", tokenUri);
     return tokenUri;
   }
-
-  public void setTokenUri(String tokenUri) {
-    this.tokenUri = tokenUri;
-  }
 }
+
