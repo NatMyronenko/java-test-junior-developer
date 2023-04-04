@@ -34,9 +34,8 @@ public class KeycloakConfiguration {
         .build();
   }
 
-
   public String getTokenUri() {
-    String tokenUri = "http://localhost:8085/auth/realms/app/protocol/openid-connect/token";
+    String tokenUri = "http://localhost:8085/realms/app/protocol/openid-connect/token";
     log.info("Getting token URI from configuration: {}", tokenUri);
     return tokenUri;
   }

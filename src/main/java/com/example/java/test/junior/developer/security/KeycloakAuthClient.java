@@ -28,8 +28,10 @@ public class KeycloakAuthClient {
         .bodyValue(requestBody)
         .retrieve()
         .bodyToMono(LoginResponseDto.class)
-        .doOnSuccess(response -> logger.info("Received successful authentication response from Keycloak"))
-        .doOnError(error -> logger.error("Failed to authenticate with Keycloak due to {}", error.getMessage()))
+        .doOnSuccess(
+            response -> logger.info("Received successful authentication response from Keycloak"))
+        .doOnError(error -> logger.error("Failed to authenticate with Keycloak due to {}",
+            error.getMessage()))
         .block();
   }
 

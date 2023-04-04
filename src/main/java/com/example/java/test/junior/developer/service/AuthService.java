@@ -18,12 +18,13 @@ public class AuthService {
   public LoginResponseDto generateLoginResponse(String email, String password) {
     try {
       log.info("Generating login response for email: {}", email);
-      String accessToken = String.valueOf(keycloakAuthClient.getAccessToken(email, password));
+      LoginResponseDto responseDto = keycloakAuthClient.getAccessToken(email, password);
       log.info("Access token generated successfully for email: {}", email);
-      return new LoginResponseDto(null, null, accessToken, null, null, null);
+      return responseDto;
     } catch (Exception ex) {
       log.error("Error occurred while generating login response for email: {}", email, ex);
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials", ex);
     }
   }
 }
+
