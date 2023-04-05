@@ -30,4 +30,11 @@ public class LoginResponseDto {
 
   @JsonProperty("refresh_expires_in")
   private Long refreshExpiresIn;
+  
+
+  public LoginResponseDto(String s, String s1) {
+  }
+
+  public LoginResponseDto(String access_token) {
+  }
 }
