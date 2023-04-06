@@ -2,6 +2,7 @@ package com.example.java.test.junior.developer.service;
 
 import com.example.java.test.junior.developer.dto.LanguageDto;
 import com.example.java.test.junior.developer.mapper.LanguageMapper;
+import com.example.java.test.junior.developer.model.Language;
 import com.example.java.test.junior.developer.repository.LanguageRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,11 @@ public class LanguageService {
     final var language = languageMapper.toEntity(dto);
     final var saved = languageRepository.save(language);
     return languageMapper.toDto(saved);
+  }
+
+  @Transactional(readOnly = true)
+  public Language getLanguage(Long id) {
+    return languageRepository.findById(id).orElse(null);
   }
 
   @Transactional(readOnly = true)
