@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 public class QuestionService {
+
   private final QuestionRepository questionRepository;
 
   private final QuestionMapper questionMapper;
