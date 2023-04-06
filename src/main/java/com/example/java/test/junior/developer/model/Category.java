@@ -35,12 +35,12 @@ public class Category {
   public String name;
 
   @ManyToOne(cascade = CascadeType.DETACH)
-  @JoinColumn(name = "language_id")
+  @JoinColumn(name = "language_id", referencedColumnName = "language_id", nullable = false)
   private Language language;
 
   @OneToMany(cascade = CascadeType.DETACH,
       mappedBy = "category",
-      fetch = FetchType.LAZY)
+      fetch = FetchType.EAGER)
   private List<Question> listQuestions;
 
 }

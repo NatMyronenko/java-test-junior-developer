@@ -3,12 +3,18 @@ package com.example.java.test.junior.developer.mapper;
 import com.example.java.test.junior.developer.dto.OptionDto;
 import com.example.java.test.junior.developer.model.Option;
 import com.example.java.test.junior.developer.service.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OptionMapper {
 
-  QuestionService questionService;
+  private final QuestionService questionService;
+
+  @Autowired
+  public OptionMapper(QuestionService questionService) {
+    this.questionService = questionService;
+  }
 
   public Option toModel(OptionDto optionDto) {
     return Option.builder()

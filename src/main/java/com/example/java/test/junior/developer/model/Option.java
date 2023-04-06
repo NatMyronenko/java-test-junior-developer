@@ -31,7 +31,7 @@ public class Option {
   private String answer;
 
   @ManyToOne(cascade = CascadeType.REMOVE)
-  @JoinColumn(name = "question_id", nullable = false)
+  @JoinColumn(name = "question_id", referencedColumnName = "question_id", nullable = false)
   private Question question;
 
   @Column(name = "correct", nullable = false)
