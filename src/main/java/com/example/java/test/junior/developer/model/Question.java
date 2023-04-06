@@ -39,7 +39,7 @@ public class Question {
 
   @OneToMany(cascade = CascadeType.DETACH,
       mappedBy = "question",
-      fetch = FetchType.EAGER)
+      fetch = FetchType.LAZY)
   private List<Option> listOptions;
 
 }
