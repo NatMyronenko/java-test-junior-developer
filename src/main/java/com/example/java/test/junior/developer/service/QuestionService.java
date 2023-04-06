@@ -2,6 +2,7 @@ package com.example.java.test.junior.developer.service;
 
 import com.example.java.test.junior.developer.dto.QuestionDto;
 import com.example.java.test.junior.developer.mapper.QuestionMapper;
+import com.example.java.test.junior.developer.model.Question;
 import com.example.java.test.junior.developer.repository.QuestionRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +24,11 @@ public class QuestionService {
     final var question = questionMapper.toEntity(dto);
     final var saved = questionRepository.save(question);
     return questionMapper.toDto(saved);
+  }
+
+  @Transactional(readOnly = true)
+  public Question getQuestion(Long id) {
+    return questionRepository.findById(id).orElse(null);
   }
 
   @Transactional(readOnly = true)
