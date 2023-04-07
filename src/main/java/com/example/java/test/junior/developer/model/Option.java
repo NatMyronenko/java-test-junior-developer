@@ -11,13 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Builder
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -32,7 +30,7 @@ public class Option {
   @Column(name = "answer", nullable = false)
   private String answer;
 
-  @ManyToOne(cascade = CascadeType.REMOVE, optional = false)
+  @ManyToOne(cascade = CascadeType.REMOVE)
   @JoinColumn(name = "question_id", referencedColumnName = "question_id", nullable = false)
   private Question question;
 
