@@ -22,12 +22,12 @@ public class OptionController {
   private final OptionService optionService;
 
   @PostMapping
-  public OptionDto createOption(@RequestBody @Valid OptionDto optionDto) {
+  public OptionDto createOption(@RequestBody OptionDto optionDto) {
     return optionService.createOption(optionDto);
   }
 
   @GetMapping("/{id}")
-  public OptionDto getOption(@PathVariable @Valid Long id) {
+  public OptionDto getOption(@PathVariable Long id) {
     return optionService.getOption(id);
   }
 
@@ -37,7 +37,7 @@ public class OptionController {
   }
 
   @PutMapping("/{id}")
-  public OptionDto updateOption(@PathVariable @Valid Long id,
+  public OptionDto updateOption(@PathVariable Long id,
       @RequestBody @Valid OptionDto optionDto) {
     return optionService.updateOption(optionDto, id);
   }
