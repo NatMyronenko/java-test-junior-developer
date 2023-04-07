@@ -1,17 +1,15 @@
 package com.example.java.test.junior.developer.service;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
 import com.example.java.test.junior.developer.security.KeycloakAuthClient;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import org.junit.jupiter.api.BeforeEach;
 
 public class AuthServiceTest {
 
@@ -53,6 +51,3 @@ public class AuthServiceTest {
     });
   }
 }
-
-
-

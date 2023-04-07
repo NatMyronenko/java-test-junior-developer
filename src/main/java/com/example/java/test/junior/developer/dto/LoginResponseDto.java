@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor(force = true)
@@ -30,11 +29,8 @@ public class LoginResponseDto {
 
   @JsonProperty("refresh_expires_in")
   private Long refreshExpiresIn;
-  
 
-  public LoginResponseDto(String s, String s1) {
-  }
-
-  public LoginResponseDto(String access_token) {
+  public LoginResponseDto(String accessToken) {
+    this.accessToken = accessToken;
   }
 }
