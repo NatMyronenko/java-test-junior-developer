@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -25,6 +26,16 @@ public class AuthService {
       log.error("Error occurred while generating login response for email: {}", email, ex);
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials", ex);
     }
+
   }
+
+  public String getAccessTokenFromHeader(String authorizationHeader) {
+    String token = null;
+    if (StringUtils.hasText(authorizationHeader) && authorizationHeader.startsWith("Bearer ")) {
+      token = authorizationHeader.substring(7);
+    }
+    return token;
+  }
+
 }
 
