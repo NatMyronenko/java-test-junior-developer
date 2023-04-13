@@ -63,16 +63,6 @@ public class KeycloakAuthClient {
     return ResponseEntity.noContent().build();
   }
 
-  private MultiValueMap<String, String> buildRequestBody(String username, String password) {
-    var body = new LinkedMultiValueMap<String, String>();
-    body.add("client_id", keycloakConfiguration.getClientId());
-    body.add("client_secret", keycloakConfiguration.getClientSecret());
-    body.add("grant_type", "password");
-    body.add("username", username);
-    body.add("password", password);
-    log.debug("Built authentication request body for username: {}", username);
-    return body;
-  }
 
   private MultiValueMap<String, String> buildLogoutRequestBody(String refreshToken) {
     var body = new LinkedMultiValueMap<String, String>();
