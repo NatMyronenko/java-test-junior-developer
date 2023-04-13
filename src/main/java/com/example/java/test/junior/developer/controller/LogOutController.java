@@ -1,5 +1,6 @@
 package com.example.java.test.junior.developer.controller;
 
+import com.example.java.test.junior.developer.dto.LogOutRequestDto;
 import com.example.java.test.junior.developer.security.KeycloakAuthClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,15 +20,16 @@ public class LogOutController {
 
   private final KeycloakAuthClient keycloakAuthClient;
 
-  @PostMapping
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void logout(@RequestHeader("Authorization") String authorizationHeader,
-      @RequestBody String refreshToken) {
-    keycloakAuthClient.logout(authorizationHeader, refreshToken);
-    log.info("User logged out successfully");
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void logout(@RequestHeader("Authorization") String authorizationHeader,
+        @RequestBody LogOutRequestDto requestDto) {
+      keycloakAuthClient.logout(authorizationHeader, requestDto);
+      log.info("User logged out successfully");
+    }
   }
 
-}
 
 
 

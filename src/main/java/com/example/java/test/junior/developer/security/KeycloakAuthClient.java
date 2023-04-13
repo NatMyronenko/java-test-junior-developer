@@ -1,5 +1,6 @@
 package com.example.java.test.junior.developer.security;
 
+import com.example.java.test.junior.developer.dto.LogOutRequestDto;
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +39,8 @@ public class KeycloakAuthClient {
             error.getMessage()))
         .block();
   }
-  public ResponseEntity<Void> logout(String authorizationHeader, String refreshToken) {
-    var requestBody = buildLogoutRequestBody(refreshToken);
+  public ResponseEntity<Void> logout(String authorizationHeader, LogOutRequestDto requestDto) {
+    var requestBody = buildRequestBody(requestDto.getAccessToken(), requestDto.getRefreshToken());
 
     webClient.post()
         .uri(keycloakConfiguration.getLogoutUri())
@@ -59,19 +60,17 @@ public class KeycloakAuthClient {
         })
         .block();
 
-    log.info("Successfully logged out user with refresh token: {}", refreshToken);
+    log.info("Successfully logged out user with refresh token: {}", requestDto.getRefreshToken());
     return ResponseEntity.noContent().build();
   }
 
-
-  private MultiValueMap<String, String> buildLogoutRequestBody(String refreshToken) {
+  private MultiValueMap<String, String> buildRequestBody(String accessToken, String refreshToken) {
     var body = new LinkedMultiValueMap<String, String>();
     body.add("client_id", keycloakConfiguration.getClientId());
     body.add("client_secret", keycloakConfiguration.getClientSecret());
     body.add("refresh_token", refreshToken);
-    body.add("accessToken", ""); // Add an empty value for the accessToken field
+    body.add("accessToken", accessToken);
     log.debug("Built logout request body for refresh token: {}", refreshToken);
     return body;
   }
-
 }
