@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Getter
@@ -17,16 +16,9 @@ public class WebClientConfiguration {
   private String tokenUrl;
 
   @Bean
-  public WebClient keycloakWebClient(@Value("${keycloak.auth-server-url}") String authServerUrl) {
+  public WebClient keycloakWebClient() {
     return WebClient.builder()
-        .baseUrl(authServerUrl)
+        .baseUrl(tokenUrl)
         .build();
   }
-
-  @Bean
-  public RestTemplate restTemplate() {
-    return new RestTemplate();
-  }
 }
-
-

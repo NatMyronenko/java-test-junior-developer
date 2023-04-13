@@ -1,7 +1,6 @@
 package com.example.java.test.junior.developer.controller;
 
-import com.example.java.test.junior.developer.security.KeycloakRestClient;
-import com.example.java.test.junior.developer.service.AuthService;
+import com.example.java.test.junior.developer.security.KeycloakAuthClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,21 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LogOutController {
 
-  private final AuthService authService;
-  private final KeycloakRestClient keycloakClient;
-
+  private final KeycloakAuthClient keycloakAuthClient;
 
   @PostMapping
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void logout(@RequestHeader("Authorization") String authorizationHeader,
       @RequestBody String refreshToken) {
-    log.info("Received logout request with authorization header: {}", authorizationHeader);
-    log.info("Received logout request with refresh token: {}", refreshToken);
-    String accessToken = authService.getAccessTokenFromHeader(authorizationHeader);
-    log.info("Access token extracted from authorization header: {}", accessToken);
-
-    keycloakClient.logout(refreshToken, accessToken);
-    log.info("Logout request sent to Keycloak with refresh token: {}", refreshToken);
-
+    keycloakAuthClient.logout(authorizationHeader, refreshToken);
+    log.info("User logged out successfully");
   }
+
 }
+
+
+
