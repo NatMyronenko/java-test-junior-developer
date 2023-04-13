@@ -24,6 +24,7 @@ public class KeycloakAuthClient {
   private final WebClient webClient;
   private final KeycloakConfiguration keycloakConfiguration;
 
+
   public LoginResponseDto getAccessToken(String username, String password) {
     var requestBody = buildRequestBody(username, password);
     log.info("Sending authentication request to Keycloak with username: {}", username);
@@ -39,6 +40,17 @@ public class KeycloakAuthClient {
             error.getMessage()))
         .block();
   }
+
+  private MultiValueMap<String, String> buildRequestBody(String username, String password) {
+    var body = new LinkedMultiValueMap<String, String>();
+    body.add("client_id", keycloakConfiguration.getClientId());
+    body.add("client_secret", keycloakConfiguration.getClientSecret());
+    body.add("grant_type", "password");
+    body.add("username", username);
+    body.add("password", password);
+    return body;
+  }
+
   public ResponseEntity<Void> logout(String authorizationHeader, LogOutRequestDto requestDto) {
     var requestBody = buildRequestBody(requestDto.getAccessToken(), requestDto.getRefreshToken());
 
@@ -64,13 +76,4 @@ public class KeycloakAuthClient {
     return ResponseEntity.noContent().build();
   }
 
-  private MultiValueMap<String, String> buildRequestBody(String accessToken, String refreshToken) {
-    var body = new LinkedMultiValueMap<String, String>();
-    body.add("client_id", keycloakConfiguration.getClientId());
-    body.add("client_secret", keycloakConfiguration.getClientSecret());
-    body.add("refresh_token", refreshToken);
-    body.add("accessToken", accessToken);
-    log.debug("Built logout request body for refresh token: {}", refreshToken);
-    return body;
-  }
 }
