@@ -21,6 +21,7 @@ public class KeycloakConfiguration {
   private String clientId;
   private String clientSecret;
   private final String authorizationType = "client_credentials";
+  private String tokenUri;
 
   @Bean
   public Keycloak keycloak() {
