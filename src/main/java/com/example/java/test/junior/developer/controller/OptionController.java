@@ -22,7 +22,7 @@ public class OptionController {
   private final OptionService optionService;
 
   @PostMapping
-  public OptionDto createOption(@RequestBody OptionDto optionDto) {
+  public OptionDto createOption(@RequestBody @Valid OptionDto optionDto) {
     return optionService.createOption(optionDto);
   }
 

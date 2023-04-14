@@ -2,16 +2,17 @@ package com.example.java.test.junior.developer.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 @Value
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class OptionDto {
 
-  @NotNull Long id;
+  Long id;
   @NotBlank String answer;
   @NotNull Boolean isCorrect;
+  Long questionId;
 }
