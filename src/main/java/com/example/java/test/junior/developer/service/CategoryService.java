@@ -2,7 +2,6 @@ package com.example.java.test.junior.developer.service;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
 import com.example.java.test.junior.developer.mapper.CategoryMapper;
-import com.example.java.test.junior.developer.model.Category;
 import com.example.java.test.junior.developer.repository.CategoryRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,11 +24,6 @@ public class CategoryService {
     final var category = categoryMapper.toEntity(dto);
     final var saved = categoryRepository.save(category);
     return categoryMapper.toDto(saved);
-  }
-
-  @Transactional(readOnly = true)
-  public Category getCategory(Long id) {
-    return categoryRepository.findById(id).orElse(null);
   }
 
   @Transactional(readOnly = true)

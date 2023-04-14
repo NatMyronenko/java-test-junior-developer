@@ -17,6 +17,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @Builder
 @NoArgsConstructor(force = true)
@@ -34,7 +35,7 @@ public class Category {
   public String name;
 
   @ManyToOne(cascade = CascadeType.DETACH)
-  @JoinColumn(name = "language_id", referencedColumnName = "language_id", nullable = false)
+  @JoinColumn(name = "language_id")
   private Language language;
 
   @OneToMany(cascade = CascadeType.DETACH,
