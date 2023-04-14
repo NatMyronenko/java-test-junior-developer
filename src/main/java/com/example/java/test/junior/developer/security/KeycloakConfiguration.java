@@ -2,6 +2,7 @@ package com.example.java.test.junior.developer.security;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @Getter
 @Configuration
+@Slf4j
 @ConfigurationProperties(prefix = "keycloak")
 public class KeycloakConfiguration {
 
@@ -31,3 +33,4 @@ public class KeycloakConfiguration {
         .build();
   }
 }
+
