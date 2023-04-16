@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -24,9 +23,38 @@ public class KeycloakAuthClient {
   private final WebClient webClient;
   private final KeycloakConfiguration keycloakConfiguration;
 
+  private static final String CLIENT_ID_PARAM = "client_id";
+  private static final String CLIENT_SECRET_PARAM = "client_secret";
+  private static final String GRANT_TYPE_PARAM = "grant_type";
+
+  private static final String TOKEN_PARAM = "token";
+  private static final String REFRESH_TOKEN_PARAM = "refresh_token";
+
+  private MultiValueMap<String, String> buildCommonRequestBody() {
+    var body = new LinkedMultiValueMap<String, String>();
+    body.add(CLIENT_ID_PARAM, keycloakConfiguration.getClientId());
+    body.add(CLIENT_SECRET_PARAM, keycloakConfiguration.getClientSecret());
+    body.add(GRANT_TYPE_PARAM, "password"); // by default, grant_type = password
+    return body;
+  }
+
+  private MultiValueMap<String, String> buildLogoutRequestBody(String accessToken,
+      String refreshToken) {
+    var body = buildCommonRequestBody();
+    if (accessToken != null) {
+      body.add(TOKEN_PARAM, accessToken);
+    }
+    if (refreshToken != null) {
+      body.add(REFRESH_TOKEN_PARAM, refreshToken);
+    }
+    return body;
+  }
 
   public LoginResponseDto getAccessToken(String username, String password) {
-    var requestBody = buildRequestBody(username, password);
+    var requestBody = buildCommonRequestBody();
+    requestBody.add("username", username);
+    requestBody.add("password", password);
+
     log.info("Sending authentication request to Keycloak with username: {}", username);
     return webClient.post()
         .uri(keycloakConfiguration.getTokenUri())
@@ -41,18 +69,9 @@ public class KeycloakAuthClient {
         .block();
   }
 
-  private MultiValueMap<String, String> buildRequestBody(String username, String password) {
-    var body = new LinkedMultiValueMap<String, String>();
-    body.add("client_id", keycloakConfiguration.getClientId());
-    body.add("client_secret", keycloakConfiguration.getClientSecret());
-    body.add("grant_type", "password");
-    body.add("username", username);
-    body.add("password", password);
-    return body;
-  }
-
-  public ResponseEntity<Void> logout(String authorizationHeader, LogOutRequestDto requestDto) {
-    var requestBody = buildRequestBody(requestDto.getAccessToken(), requestDto.getRefreshToken());
+  public void logout(String authorizationHeader, LogOutRequestDto requestDto) {
+    var requestBody = buildLogoutRequestBody(requestDto.getAccessToken(),
+        requestDto.getRefreshToken());
 
     webClient.post()
         .uri(keycloakConfiguration.getLogoutUri())
@@ -73,7 +92,6 @@ public class KeycloakAuthClient {
         .block();
 
     log.info("Successfully logged out user with refresh token: {}", requestDto.getRefreshToken());
-    return ResponseEntity.noContent().build();
   }
-
 }
+
