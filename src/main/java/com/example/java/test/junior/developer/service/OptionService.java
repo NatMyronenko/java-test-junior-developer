@@ -26,8 +26,9 @@ public class OptionService {
 
   @Transactional(readOnly = true)
   public OptionDto getOption(Long id) {
-    final Option option = optionRepository.findById(id).orElse(null);
-    return option != null ? optionMapper.toDto(option) : null;
+    return optionRepository.findById(id)
+        .map(optionMapper::toDto)
+        .orElse(null);
   }
 
   @Transactional(readOnly = true)
