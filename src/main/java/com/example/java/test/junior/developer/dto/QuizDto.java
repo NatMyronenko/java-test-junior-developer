@@ -8,7 +8,7 @@ import lombok.Value;
 @Builder
 @RequiredArgsConstructor
 public class QuizDto {
-    Long quiz_id;
+    Long id;
     Long question_id;
     Long option_id;
     Long user_id;

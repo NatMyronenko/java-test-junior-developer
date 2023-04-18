@@ -9,7 +9,7 @@ public class QuizMapper {
 
     public static QuizDto toDto(Quiz quiz) {
         return QuizDto.builder()
-                .quiz_id(quiz.getId())
+                .id(quiz.getId())
                 .question_id(quiz.getQuestion().getId())
                 .option_id(quiz.getOption().getId())
                 .build();
