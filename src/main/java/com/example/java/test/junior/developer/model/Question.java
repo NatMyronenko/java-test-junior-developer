@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import liquibase.pro.packaged.S;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,8 +32,7 @@ public class Question {
   @Column(name = "question", nullable = false)
   public String name;
 
-  @ManyToOne(cascade = CascadeType.DETACH)
   @JoinColumn(name = "category_id")
-  private Category category;
+  private Long category_id;
 
 }
