@@ -16,12 +16,16 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "keycloak")
 public class KeycloakConfiguration {
 
+
+  private String tokenUri;
+
+  private String logoutUri;
   private String authServerUrl;
   private String realm;
   private String clientId;
   private String clientSecret;
   private final String authorizationType = "client_credentials";
-  private String tokenUri;
+
 
   @Bean
   public Keycloak keycloak() {
