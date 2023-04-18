@@ -41,12 +41,8 @@ public class KeycloakAuthClient {
   private MultiValueMap<String, String> buildLogoutRequestBody(String accessToken,
       String refreshToken) {
     var body = buildCommonRequestBody();
-    if (accessToken != null) {
-      body.add(TOKEN_PARAM, accessToken);
-    }
-    if (refreshToken != null) {
-      body.add(REFRESH_TOKEN_PARAM, refreshToken);
-    }
+    body.add(TOKEN_PARAM, accessToken);
+    body.add(REFRESH_TOKEN_PARAM, refreshToken);
     return body;
   }
 
