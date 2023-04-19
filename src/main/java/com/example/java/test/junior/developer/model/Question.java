@@ -32,7 +32,8 @@ public class Question {
   @Column(name = "question", nullable = false)
   public String name;
 
+  @ManyToOne
   @JoinColumn(name = "category_id")
-  private Long category_id;
+  private Category category;
 
 }

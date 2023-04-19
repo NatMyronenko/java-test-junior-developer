@@ -9,38 +9,38 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class QuizService {
+public class UserQuizAnswersService {
 
     private final QuestionRepository questionRepository;
     private final UserRepository userRepository;
-
+    private final CategoryRepository categoryRepository;
     private final UserPassedTestRepository userPassedTestRepository;
-
     private final UserQuizAnswersRepository userQuizAnswersRepository;
 
 
     public UserPassedTest initiateQuiz(Long userId, Long categoryId) {
+        UserQuizAnswers userQuizAnswers = new UserQuizAnswers();
+
         User currentUser = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
 
         UserPassedTest userPassedTest = new UserPassedTest();
         userPassedTest.setUser(currentUser);
+        Optional<Category> category = categoryRepository.findById(categoryId);
+        userPassedTest.setCategory(category.get());
         userPassedTest.setTimestamp(LocalDateTime.now());
-        userPassedTestRepository.save(userPassedTest);
-
-        Quiz quiz = new Quiz();
-        quiz.setUser(currentUser);
 
         List<Question> questions = questionRepository.findByCategoryId(categoryId);
+        userPassedTestRepository.save(userPassedTest);
 
         for (Question question : questions) {
-            UserQuizAnswers userQuizAnswers = new UserQuizAnswers();
-            userQuizAnswers.setQuiz(quiz);
+            userQuizAnswers.setUserPassedTest(userPassedTest);
             userQuizAnswers.setQuestion(question);
-            userQuizAnswers.setOption(null); // Initially all answers are null
+            userQuizAnswers.setOption(null);
             userQuizAnswersRepository.save(userQuizAnswers);
         }
 

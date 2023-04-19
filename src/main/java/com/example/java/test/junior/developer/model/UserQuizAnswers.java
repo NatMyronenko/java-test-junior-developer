@@ -21,7 +21,7 @@ public class UserQuizAnswers {
 
     @ManyToOne
     @JoinColumn(name = "quiz_id", nullable = false)
-    private Quiz quiz;
+    private UserPassedTest userPassedTest;
 
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
