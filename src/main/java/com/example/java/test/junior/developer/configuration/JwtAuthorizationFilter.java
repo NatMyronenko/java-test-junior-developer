@@ -7,6 +7,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,15 +19,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+@AllArgsConstructor
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
   private RestTemplate restTemplate;
   private String apiUrl;
-
-  public JwtAuthorizationFilter(RestTemplate restTemplate, String apiUrl) {
-    this.restTemplate = restTemplate;
-    this.apiUrl = apiUrl;
-  }
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -39,9 +36,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         HttpEntity<?> entity = new HttpEntity<>(headers);
-        ResponseEntity<UserDto> userResponse = restTemplate.exchange(apiUrl, HttpMethod.GET, entity,
-            UserDto.class);
-        UserDto user = userResponse.getBody();
+        UserDto user = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, UserDto.class).getBody();
 
         // Set fetched user details in Security Context
         if (user != null) {
