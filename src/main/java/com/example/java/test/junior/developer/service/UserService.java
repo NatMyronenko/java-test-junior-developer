@@ -20,6 +20,7 @@ public class UserService {
   private final UserRepository userRepository;
   private final KeycloakAdminClient keycloakAdminClient;
 
+
   @Transactional
   public UserDto createUser(UserRequestDto userRequestDto) {
     var userKeycloak = userMapper.toUserRepresentation(userRequestDto);
