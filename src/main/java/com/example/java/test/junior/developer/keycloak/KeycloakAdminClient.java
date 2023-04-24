@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.security;
+package com.example.java.test.junior.developer.keycloak;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Download the application jar from S3

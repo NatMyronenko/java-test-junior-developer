@@ -6,7 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
-import com.example.java.test.junior.developer.security.KeycloakAuthClient;
+import com.example.java.test.junior.developer.keycloak.KeycloakAuthClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;

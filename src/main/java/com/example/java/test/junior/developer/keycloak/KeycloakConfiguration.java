@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.security;
+package com.example.java.test.junior.developer.keycloak;
 
 import lombok.Getter;
 import lombok.Setter;

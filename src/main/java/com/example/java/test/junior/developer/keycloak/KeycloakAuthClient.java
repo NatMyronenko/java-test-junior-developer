@@ -1,4 +1,4 @@
-package com.example.java.test.junior.developer.security;
+package com.example.java.test.junior.developer.keycloak;
 
 import com.example.java.test.junior.developer.dto.LogOutRequestDto;
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
