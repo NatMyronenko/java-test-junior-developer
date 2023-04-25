@@ -2,10 +2,10 @@ package com.example.java.test.junior.developer.service;
 
 import com.example.java.test.junior.developer.dto.UserDto;
 import com.example.java.test.junior.developer.dto.UserRequestDto;
+import com.example.java.test.junior.developer.keycloak.KeycloakAdminClient;
 import com.example.java.test.junior.developer.mapper.UserMapper;
 import com.example.java.test.junior.developer.model.User;
 import com.example.java.test.junior.developer.repository.UserRepository;
-import com.example.java.test.junior.developer.keycloak.KeycloakAdminClient;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
