@@ -1,6 +1,5 @@
 package com.example.java.test.junior.developer.security;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +13,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
-@AutoConfiguration
 @EnableMethodSecurity(securedEnabled = true)
-@PropertySource(value = "classpath:application-local.properties")
+@PropertySource(value = "classpath:application.properties")
 @EnableWebSecurity
 @EnableConfigurationProperties(AuthorizationDisabledEndpoints.class)
 public class SecurityConfig {
