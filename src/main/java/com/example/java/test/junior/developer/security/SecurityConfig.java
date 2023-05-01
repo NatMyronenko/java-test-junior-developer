@@ -15,7 +15,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
-@PropertySource(value = "classpath:application-local.properties", factory = ApplicationPropertySourceFactory.class)
+@PropertySource(value = "classpath:application.properties", factory = ApplicationPropertySourceFactory.class)
 @EnableWebSecurity
 @EnableConfigurationProperties(AuthorizationDisabledEndpoints.class)
 public class SecurityConfig {
