@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.example.java.test.junior.developer.controller.LanguageController;
 import com.example.java.test.junior.developer.dto.LanguageDto;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import com.example.java.test.junior.developer.service.LanguageService;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,6 +34,7 @@ import org.springframework.util.StreamUtils;
     controllers = LanguageController.class,
     excludeAutoConfiguration = SecurityAutoConfiguration.class
 )
+@Import(SecurityConfig.class)
 class LanguageControllerTest {
 
   @Autowired

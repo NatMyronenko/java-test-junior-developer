@@ -1,5 +1,6 @@
 package com.example.java.test.junior.developer.controller;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -7,22 +8,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.example.java.test.junior.developer.dto.LoginRequestDto;
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import com.example.java.test.junior.developer.service.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 
 @WebMvcTest(AuthController.class)
-@WithMockUser
+@Import(SecurityConfig.class)
 class AuthControllerTest {
 
   @Autowired
@@ -51,7 +51,9 @@ class AuthControllerTest {
 
     mockMvc.perform(post("/api/v1/login")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(new ObjectMapper().writeValueAsString(requestDto)))
+            .content(new ObjectMapper().writeValueAsString(requestDto))
+            .header(HttpHeaders.AUTHORIZATION, "Bearer access_token")
+            .with(csrf().asHeader()))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.session_state").value(responseDto.getSessionState()))

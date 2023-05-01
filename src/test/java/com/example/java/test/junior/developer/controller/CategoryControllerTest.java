@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.java.test.junior.developer.dto.CategoryDto;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import com.example.java.test.junior.developer.service.CategoryService;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,6 +30,7 @@ import org.springframework.util.StreamUtils;
 
 @WebMvcTest(controllers = CategoryController.class,
     excludeAutoConfiguration = SecurityAutoConfiguration.class)
+@Import(SecurityConfig.class)
 class CategoryControllerTest {
 
   @Autowired
