@@ -2,6 +2,8 @@ package com.example.java.test.junior.developer.controller;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,11 +35,11 @@ class LogOutControllerTest {
 
     mockMvc.perform(post("/api/v1/logout")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(new ObjectMapper().writeValueAsString(requestDto)))
+            .content(new ObjectMapper().writeValueAsString(requestDto))
+            .with(csrf())
+            .with(user("testuser").password("testpass").roles("USER")))
         .andExpect(status().isOk());
 
     verify(authService, times(1)).logout(requestDto);
   }
 }
-
-

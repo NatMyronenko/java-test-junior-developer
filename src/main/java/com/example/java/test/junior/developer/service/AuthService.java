@@ -3,7 +3,7 @@ package com.example.java.test.junior.developer.service;
 
 import com.example.java.test.junior.developer.dto.LogOutRequestDto;
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
-import com.example.java.test.junior.developer.security.KeycloakAuthClient;
+import com.example.java.test.junior.developer.keycloak.KeycloakAuthClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
