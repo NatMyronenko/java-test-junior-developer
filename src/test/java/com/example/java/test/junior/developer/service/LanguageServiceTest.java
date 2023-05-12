@@ -30,23 +30,17 @@ public class LanguageServiceTest {
 
   @Test
   public void createLanguageTest() {
-    // given
     LanguageDto languageDto = new LanguageDto();
     Language language = new Language();
     when(languageMapper.toEntity(languageDto)).thenReturn(language);
     when(languageRepository.save(language)).thenReturn(language);
     when(languageMapper.toDto(language)).thenReturn(languageDto);
-
-    // when
     LanguageDto createdLanguageDto = languageService.createLanguage(languageDto);
-
-    // then
     assertEquals(languageDto, createdLanguageDto);
   }
 
   @Test
   public void getAllLanguagesTest() {
-    // given
     List<Language> languages = new ArrayList<>();
     Language language = new Language();
     languages.add(language);
@@ -54,18 +48,13 @@ public class LanguageServiceTest {
 
     LanguageDto languageDto = new LanguageDto();
     when(languageMapper.toDto(language)).thenReturn(languageDto);
-
-    // when
     List<LanguageDto> allLanguages = languageService.getAllLanguages();
-
-    // then
     assertEquals(1, allLanguages.size());
     assertEquals(languageDto, allLanguages.get(0));
   }
 
   @Test
   public void updateLanguageTest() {
-    // given
     Long id = 1L;
     LanguageDto languageDto = new LanguageDto();
     Language language = new Language();
@@ -73,23 +62,14 @@ public class LanguageServiceTest {
     when(languageMapper.toEntity(languageDto)).thenReturn(language);
     when(languageRepository.save(language)).thenReturn(language);
     when(languageMapper.toDto(language)).thenReturn(languageDto);
-
-    // when
     LanguageDto updatedLanguageDto = languageService.updateLanguage(id, languageDto);
-
-    // then
     assertEquals(languageDto, updatedLanguageDto);
   }
 
   @Test
   public void deleteLanguageTest() {
-    // given
     Long id = 1L;
-
-    // when
     languageService.deleteLanguage(id);
-
-    // then
     verify(languageRepository).deleteById(id);
   }
 }
