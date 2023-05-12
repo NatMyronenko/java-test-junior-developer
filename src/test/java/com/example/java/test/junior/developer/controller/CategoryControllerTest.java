@@ -62,7 +62,6 @@ class CategoryControllerTest {
   }
 
 
-
   @SneakyThrows
   @Test
   void testGetAllCategories() {
