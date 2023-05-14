@@ -45,5 +45,3 @@ public class SecurityConfig {
   public AuthorizationDisabledEndpoints authorizationDisabledEndpoints() {
     return new AuthorizationDisabledEndpoints();
   }
-
-}
