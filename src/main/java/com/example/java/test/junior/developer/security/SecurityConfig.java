@@ -45,7 +45,10 @@ public class SecurityConfig {
 
   @Bean
   public AuthorizationDisabledEndpoints authorizationDisabledEndpoints() {
-    return new AuthorizationDisabledEndpoints();
+    var authorizationDisabledEndpoints = new AuthorizationDisabledEndpoints();
+    authorizationDisabledEndpoints.getGet().add("/v3/api-docs/**");
+    authorizationDisabledEndpoints.getGet().add("/swagger-ui/**");
+    return authorizationDisabledEndpoints;
   }
 }
 
