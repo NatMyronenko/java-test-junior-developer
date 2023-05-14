@@ -12,14 +12,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 @PropertySource(value = "classpath:application.properties", factory = ApplicationPropertySourceFactory.class)
 @EnableWebSecurity
 @EnableConfigurationProperties(AuthorizationDisabledEndpoints.class)
 public class SecurityConfig {
-
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -45,10 +43,7 @@ public class SecurityConfig {
 
   @Bean
   public AuthorizationDisabledEndpoints authorizationDisabledEndpoints() {
-    var authorizationDisabledEndpoints = new AuthorizationDisabledEndpoints();
-    authorizationDisabledEndpoints.getGet().add("/v3/api-docs/**");
-    authorizationDisabledEndpoints.getGet().add("/swagger-ui/**");
-    return authorizationDisabledEndpoints;
+    return new AuthorizationDisabledEndpoints();
   }
-}
 
+}
