@@ -3,6 +3,8 @@ package com.example.java.test.junior.developer.controller;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -17,19 +19,19 @@ import java.util.List;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
 
 
-@WebMvcTest(controllers = CategoryController.class,
-    excludeAutoConfiguration = SecurityAutoConfiguration.class)
+@WebMvcTest(controllers = CategoryController.class)
 @WithMockUser
+@ActiveProfiles("test")
 class CategoryControllerTest {
 
   @Autowired
@@ -55,7 +57,9 @@ class CategoryControllerTest {
 
     mockMvc.perform(post("/api/v1/categories")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(requestBody))
+            .content(requestBody)
+            .with(csrf())
+            .with(user("testuser").password("testpass").roles("USER")))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
@@ -97,7 +101,9 @@ class CategoryControllerTest {
 
     mockMvc.perform(put("/api/v1/categories/1")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(requestBody))
+            .content(requestBody)
+            .with(csrf())
+            .with(user("testuser").password("testpass").roles("USER")))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name", equalTo("SpringBoot")));
@@ -107,7 +113,9 @@ class CategoryControllerTest {
   @SneakyThrows
   @Test
   void testDeleteCategory() {
-    mockMvc.perform(delete("/api/v1/categories/1"))
+    mockMvc.perform(delete("/api/v1/categories/1")
+            .with(csrf())
+            .with(user("testuser").password("testpass").roles("USER")))
         .andExpect(status().isOk());
 
     verify(categoryService).deleteCategory(1L);

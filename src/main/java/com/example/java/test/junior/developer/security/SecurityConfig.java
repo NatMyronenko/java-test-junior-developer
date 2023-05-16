@@ -3,7 +3,6 @@ package com.example.java.test.junior.developer.security;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,7 +13,6 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
-@PropertySource(value = "classpath:application.properties", factory = ApplicationPropertySourceFactory.class)
 @EnableWebSecurity
 @EnableConfigurationProperties(AuthorizationDisabledEndpoints.class)
 public class SecurityConfig {
@@ -40,10 +38,4 @@ public class SecurityConfig {
         .requestMatchers(authorizationDisabledEndpoints.getDelete().stream()
             .map(AntPathRequestMatcher::new).toArray(RequestMatcher[]::new));
   }
-
-  @Bean
-  public AuthorizationDisabledEndpoints authorizationDisabledEndpoints() {
-    return new AuthorizationDisabledEndpoints();
-  }
-
 }

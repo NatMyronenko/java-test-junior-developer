@@ -3,6 +3,8 @@ package com.example.java.test.junior.developer.controller;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -17,7 +19,6 @@ import java.util.List;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
@@ -26,8 +27,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
 
-
-@WebMvcTest(controllers = QuestionController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
+@WebMvcTest(controllers = QuestionController.class)
 @WithMockUser
 class QuestionControllerTest {
 
@@ -48,11 +48,14 @@ class QuestionControllerTest {
     when(questionService.createQuestion(dto)).thenReturn(response);
 
     mockMvc.perform(
-            post("/api/v1/questions").contentType(MediaType.APPLICATION_JSON).content(requestBody))
+            post("/api/v1/questions")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody)
+                .with(csrf())
+                .with(user("test-user").password("test-pass").roles("USER")))
         .andExpect(status().isOk()).andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name", equalTo("What is polymorphism?")));
   }
-
 
   @SneakyThrows
   @Test
@@ -61,7 +64,8 @@ class QuestionControllerTest {
     when(questionService.getAllQuestions()).thenReturn(List.of(response));
 
     mockMvc.perform(get("/api/v1/questions")).andExpect(status().isOk())
-        .andExpect(jsonPath("$.length()", equalTo(1))).andExpect(jsonPath("$[0].id", equalTo(1)))
+        .andExpect(jsonPath("$.length()", equalTo(1)))
+        .andExpect(jsonPath("$[0].id", equalTo(1)))
         .andExpect(jsonPath("$[0].name", equalTo("What is polymorphism?")));
   }
 
@@ -77,7 +81,10 @@ class QuestionControllerTest {
     when(questionService.updateQuestion(1L, dto)).thenReturn(response);
 
     mockMvc.perform(
-            put("/api/v1/questions/1").contentType(MediaType.APPLICATION_JSON).content(requestBody))
+            put("/api/v1/questions/1")
+                .contentType(MediaType.APPLICATION_JSON).content(requestBody)
+                .with(csrf())
+                .with(user("test-user").password("test-pass").roles("USER")))
         .andExpect(status().isOk()).andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name", equalTo("What is polymorphism?")));
 
@@ -86,8 +93,10 @@ class QuestionControllerTest {
   @SneakyThrows
   @Test
   void testDeleteQuestion() {
-    mockMvc.perform(delete("/api/v1/questions/1")).andExpect(status().isOk());
-
+    mockMvc.perform(delete("/api/v1/questions/1")
+        .with(csrf())
+        .with(user("test-user").password("test-pass").roles("USER")))
+        .andExpect(status().isOk());
     verify(questionService).deleteQuestion(1L);
   }
 

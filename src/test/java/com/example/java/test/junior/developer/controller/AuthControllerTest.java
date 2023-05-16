@@ -1,6 +1,7 @@
 package com.example.java.test.junior.developer.controller;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -15,13 +16,14 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(AuthController.class)
 @WithMockUser
+@ActiveProfiles("test")
 class AuthControllerTest {
 
   @Autowired
@@ -51,8 +53,8 @@ class AuthControllerTest {
     mockMvc.perform(post("/api/v1/login")
             .contentType(MediaType.APPLICATION_JSON)
             .content(new ObjectMapper().writeValueAsString(requestDto))
-            .header(HttpHeaders.AUTHORIZATION, "Bearer access_token")
-            .with(csrf().asHeader()))
+            .with(csrf())
+            .with(user(requestDto.getEmail()).password(requestDto.getPassword()).roles("USER")))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.session_state").value(responseDto.getSessionState()))
