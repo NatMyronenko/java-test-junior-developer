@@ -3,8 +3,6 @@ package com.example.java.test.junior.developer.controller;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -14,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.example.java.test.junior.developer.dto.UserDto;
 import com.example.java.test.junior.developer.dto.UserRequestDto;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import com.example.java.test.junior.developer.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
@@ -21,12 +20,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(controllers = UserController.class)
+@WebMvcTest(UserController.class)
 @WithMockUser
+@Import(SecurityConfig.class)
+@ActiveProfiles("test")
 class UserControllerTest {
 
   @Autowired
@@ -42,9 +45,7 @@ class UserControllerTest {
     when(userService.createUser(userRequest)).thenReturn(userDto);
     mockMvc.perform(post("/api/v1/users")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(new ObjectMapper().writeValueAsString(userRequest))
-            .with(csrf())
-            .with(user(userRequest.getEmail()).password(userRequest.getPassword()).roles("USER")))
+            .content(new ObjectMapper().writeValueAsString(userRequest)))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.firstName", equalTo("John")))
@@ -71,9 +72,7 @@ class UserControllerTest {
 
     mockMvc.perform(put("/api/v1/users/1")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(new ObjectMapper().writeValueAsString(userDto))
-            .with(csrf())
-            .with(user(userDto.getEmail()).password("test-pass").roles("USER")))
+            .content(new ObjectMapper().writeValueAsString(userDto)))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.firstName", equalTo("John")))
@@ -83,9 +82,7 @@ class UserControllerTest {
 
   @Test
   void testDeleteUser() throws Exception {
-    mockMvc.perform(delete("/api/v1/users/1")
-            .with(csrf())
-            .with(user("test-user").password("test-pass").roles("USER")))
+    mockMvc.perform(delete("/api/v1/users/1"))
         .andExpect(status().isOk());
     verify(userService).deleteUser(1L);
   }

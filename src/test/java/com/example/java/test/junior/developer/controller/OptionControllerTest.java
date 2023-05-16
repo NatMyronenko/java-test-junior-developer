@@ -3,8 +3,6 @@ package com.example.java.test.junior.developer.controller;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -13,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.java.test.junior.developer.dto.OptionDto;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import com.example.java.test.junior.developer.service.OptionService;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -21,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -30,6 +30,7 @@ import org.springframework.util.StreamUtils;
 
 @WebMvcTest(OptionController.class)
 @WithMockUser
+@Import(SecurityConfig.class)
 @ActiveProfiles("test")
 class OptionControllerTest {
 
@@ -60,9 +61,7 @@ class OptionControllerTest {
 
     mockMvc.perform(post("/api/v1/options")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(requestBody)
-            .with(csrf())
-            .with(user("test-user").password("test-pass").roles("USER")))
+            .content(requestBody))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.answer", equalTo("Option 1")))
@@ -130,9 +129,7 @@ class OptionControllerTest {
 
     mockMvc.perform(put("/api/v1/options/1")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(requestBody)
-            .with(csrf())
-            .with(user("test-user").password("test-pass").roles("USER")))
+            .content(requestBody))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.answer", equalTo("Option 2")))
@@ -142,9 +139,7 @@ class OptionControllerTest {
 
   @Test
   void testDeleteOption() throws Exception {
-    mockMvc.perform(delete("/api/v1/options/1")
-            .with(csrf())
-            .with(user("test-user").password("test-pass").roles("USER")))
+    mockMvc.perform(delete("/api/v1/options/1"))
         .andExpect(status().isOk());
 
     verify(optionService).deleteOption(1L);

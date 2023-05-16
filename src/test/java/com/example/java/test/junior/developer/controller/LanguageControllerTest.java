@@ -1,11 +1,8 @@
 package com.example.java.test.junior.developer.controller;
 
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -14,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.java.test.junior.developer.dto.LanguageDto;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import com.example.java.test.junior.developer.service.LanguageService;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -22,15 +20,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
 
-
 @WebMvcTest(LanguageController.class)
+@Import(SecurityConfig.class)
 @WithMockUser
+@ActiveProfiles("test")
 class LanguageControllerTest {
 
   @Autowired
@@ -56,14 +57,11 @@ class LanguageControllerTest {
 
     mockMvc.perform(post("/api/v1/languages")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(requestBody)
-            .with(csrf())
-            .with(user("testuser").password("testpass").roles("USER")))
+            .content(requestBody))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name",  equalTo("Java")));
   }
-
 
   @SneakyThrows
   @Test
@@ -99,9 +97,7 @@ class LanguageControllerTest {
 
     mockMvc.perform(put("/api/v1/languages/1")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(requestBody)
-            .with(csrf())
-            .with(user("testuser").password("testpass").roles("USER")))
+            .content(requestBody))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name",  equalTo("Java")));
@@ -110,9 +106,7 @@ class LanguageControllerTest {
   @SneakyThrows
   @Test
   void testDeleteLanguage() {
-    mockMvc.perform(delete("/api/v1/languages/1")
-            .with(csrf())
-            .with(user("testuser").password("testpass").roles("USER")))
+    mockMvc.perform(delete("/api/v1/languages/1"))
         .andExpect(status().isOk());
 
     verify(languageService).deleteLanguage(1L);
