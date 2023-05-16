@@ -6,12 +6,15 @@ import static org.mockito.Mockito.when;
 
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
 import com.example.java.test.junior.developer.keycloak.KeycloakAuthClient;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("test")
+@Import(SecurityConfig.class)
 @WithMockUser
 public class AuthServiceTest {
 
