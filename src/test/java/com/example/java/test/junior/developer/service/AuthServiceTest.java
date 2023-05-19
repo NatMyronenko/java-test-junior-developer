@@ -7,10 +7,17 @@ import static org.mockito.Mockito.when;
 
 import com.example.java.test.junior.developer.dto.LoginResponseDto;
 import com.example.java.test.junior.developer.keycloak.KeycloakAuthClient;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.server.ResponseStatusException;
 
+@ActiveProfiles("test")
+@Import(SecurityConfig.class)
+@WithMockUser
 public class AuthServiceTest {
 
   private AuthService authService;
@@ -46,8 +53,7 @@ public class AuthServiceTest {
         .thenThrow(new RuntimeException());
 
     // Act & Assert
-    assertThrows(ResponseStatusException.class, () -> {
-      authService.generateLoginResponse(email, password);
-    });
+    assertThrows(ResponseStatusException.class, () -> authService
+        .generateLoginResponse(email, password));
   }
 }

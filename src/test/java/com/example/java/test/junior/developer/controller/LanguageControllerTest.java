@@ -1,6 +1,5 @@
 package com.example.java.test.junior.developer.controller;
 
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,26 +11,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.java.test.junior.developer.dto.LanguageDto;
+import com.example.java.test.junior.developer.security.SecurityConfig;
 import com.example.java.test.junior.developer.service.LanguageService;
 import java.nio.charset.Charset;
 import java.util.List;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
 
-
-@WebMvcTest(
-    controllers = LanguageController.class,
-    excludeAutoConfiguration = SecurityAutoConfiguration.class)
+@WebMvcTest(LanguageController.class)
+@Import(SecurityConfig.class)
 @WithMockUser
+@ActiveProfiles("test")
 class LanguageControllerTest {
 
   @Autowired
@@ -62,7 +62,6 @@ class LanguageControllerTest {
         .andExpect(jsonPath("$.id", equalTo(1)))
         .andExpect(jsonPath("$.name",  equalTo("Java")));
   }
-
 
   @SneakyThrows
   @Test
