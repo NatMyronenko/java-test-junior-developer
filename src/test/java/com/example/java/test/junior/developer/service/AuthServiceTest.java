@@ -1,6 +1,7 @@
 package com.example.java.test.junior.developer.service;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.web.server.ResponseStatusException;
 
 @ActiveProfiles("test")
 @Import(SecurityConfig.class)
@@ -42,4 +44,16 @@ public class AuthServiceTest {
     assertSame(responseDto, result);
   }
 
+  @Test
+  public void testGenerateLoginResponse_InvalidCredentials() {
+    // Arrange
+    String email = "test@test.com";
+    String password = "Test123!";
+    when(keycloakAuthClient.getAccessToken(email, password))
+        .thenThrow(new RuntimeException());
+
+    // Act & Assert
+    assertThrows(ResponseStatusException.class, () -> authService.
+        generateLoginResponse(email, password));
+  }
 }
