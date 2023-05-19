@@ -53,7 +53,7 @@ public class AuthServiceTest {
         .thenThrow(new RuntimeException());
 
     // Act & Assert
-    assertThrows(ResponseStatusException.class, () -> authService.
-        generateLoginResponse(email, password));
+    assertThrows(ResponseStatusException.class, () -> authService
+        .generateLoginResponse(email, password));
   }
 }
