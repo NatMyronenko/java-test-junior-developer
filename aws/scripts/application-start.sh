@@ -45,7 +45,20 @@ export KEYCLOAK_URL=$KEYCLOAK_URL
 
 
 # Start the Java process in the background
-nohup java -jar java-test-junior-developer-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
+#nohup java -jar java-test-junior-developer-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
+
+log_dir="/home/ec2-user/logs"
+mkdir -p "$log_dir"
+chmod 777 "$log_dir"
+
+log_file="$log_dir/java-test-junior-developer-$(date +'%Y-%m-%d_%H-%M-%S').log"
+
+java -jar java-test-junior-developer-0.0.1-SNAPSHOT.jar > "$log_file" 2>&1 &
+
+sleep 10s # wait for the process to start
+
+
+echo "Application started successfully"
 
 # Wait for the Java process to start up
 sleep 10
