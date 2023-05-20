@@ -80,10 +80,6 @@
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-client-java -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
       <version>5.2.5.Final</version>
