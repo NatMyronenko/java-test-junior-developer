@@ -25,11 +25,7 @@ public class KeycloakAdminClient {
       log.info("User created successfully with status code: {}", statusCode);
     } else {
       log.error("User creation failed with status code: {}", statusCode);
-      try {
-        throw new RuntimeException("User creation failed");
-      } catch (RuntimeException e) {
-        throw new ResponseStatusException(HttpStatus.valueOf(statusCode));
-      }
+      throw new ResponseStatusException(HttpStatus.valueOf(statusCode));
     }
   }
 }
